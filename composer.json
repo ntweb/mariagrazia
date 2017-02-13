@@ -6,6 +6,9 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "approached/laravel-image-optimizer": "^2.2",
+        "dimsav/laravel-translatable": "^7.0",
+        "jildertmiedema/laravel-plupload": "^0.4.1",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0"
     },
@@ -22,7 +25,10 @@
         ],
         "psr-4": {
             "App\\": "app/"
-        }
+        },
+        "files": [
+            "app/Support/Helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

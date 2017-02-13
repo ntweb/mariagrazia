@@ -14,6 +14,10 @@ class DashboardController extends Controller
 	}
 	
     public function index () {
-    	return view()->make('lab.dashboard.default');
+
+   		// Parameters 2nmodule
+   		$data['arrParameters'] = \App\Parameter::select('module2nd')->where('module', '=', 'parameter')->groupBy('module2nd')->get();
+
+    	return view()->make('lab.dashboard.default', $data);
     }
 }

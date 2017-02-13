@@ -16,7 +16,8 @@ class AddActiveToUserTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('name', 50)->nullable()->after('password');
             $table->string('lastname', 50)->nullable()->after('name');
-            $table->enum('administrator', [0,1])->after('lastname');
+            $table->enum('editor', [0,1])->after('lastname');
+            $table->enum('administrator', [0,1])->after('editor');
             $table->enum('active', [0,1])->after('administrator');
         });
     }
@@ -31,6 +32,8 @@ class AddActiveToUserTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('name');
             $table->dropColumn('lastname');
+            $table->dropColumn('editor');
+            $table->dropColumn('administrator');
             $table->dropColumn('active');
         });
     }

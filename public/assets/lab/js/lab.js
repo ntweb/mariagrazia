@@ -40,7 +40,7 @@ var maincontainer = '#rpc-container'; // containe rprincipale per risultati RPC
 			var btnOldValue = btn.html();
 			btn.attr('disabled', 'disabled');
 			btn.html('Wait..');
-			waitButton(btn, true);
+			waitButton(btn, false);
 
 			var dataType = 'json';
 
@@ -62,7 +62,6 @@ var maincontainer = '#rpc-container'; // containe rprincipale per risultati RPC
 				  }
 	            },
 	            beforeSend: function() {
-
 					hideErrorsSuccess();
 	            },
 	            success: function(data){
@@ -147,6 +146,23 @@ var maincontainer = '#rpc-container'; // containe rprincipale per risultati RPC
 			getJson(route, btn, callback);
 		});
 
+		$(document).on( "click", ".delete-json", function(e) {
+			e.preventDefault();
+			var btn = $(this);
+			var route = btn.data('route');
+			var callback = btn.data('callback');
+			var token = btn.data('token');
+			if (typeof callback === 'undefined') callback = null;
+
+			if (typeof btn.data('confirm') !== 'undefined') {
+				if (confirm(btn.data('confirm'))) 
+					deleteJson(route, token, btn, callback);
+			}
+			else {
+				deleteJson(route, token, btn, callback);	
+			}
+		});
+
 	   $(document).on( "change", "._ismodified input, ._ismodified select, ._ismodified textarea", function(){
 	   		var frm = $(this).closest('form');
 	   		$(this).addClass('warning');
@@ -161,67 +177,34 @@ var maincontainer = '#rpc-container'; // containe rprincipale per risultati RPC
 
 	});
 
-	$(document).on('keyup', '.format-code', function(){
-
-		var precode = $(".format-code[name='precode']").first().val().trim();
-		var postcode = $(".format-code[name='postcode']").first().val().trim();
-		var code = $("input[name='code']").first();
-
-
-		var str = "" + postcode;
-		var pad = "00000";
-		var ans = pad.substring(0, pad.length - str.length) + str;
-		var formattedcode = precode+"-"+ans;
-		
-		code.val(formattedcode.toUpperCase());
-		$(".format-code[name='precode']").first().val(precode); // trim
-		$(".format-code[name='postcode']").first().val(postcode); // trim
-
-	});
-
-	$(document).on('click', "input[name='fl_reminder']", function(){				
-		if ($(this).is(':checked'))
-			$(this).closest('form').find("textarea[name='reminder']").first().show(100);
-		else
-			$(this).closest('form').find("textarea[name='reminder']").first().hide(100);
-	});
-
-	$(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
-	  	// console.log(e.target) // newly activated tab
-	  	// console.log(e.relatedTarget) // previous active tab
-
-	  	// controllo se esiste un form e se è stato modificato
-	  	var prevTab = $($(e.relatedTarget).attr('href'));
-	  	if (prevTab.length) {
-	  		// console.log(prevTab);
-	  		var frm = prevTab.find('form').first();
-	  		if (frm.length) {
-	  			// console.log(frm);
-	  			var _ismodified = frm.find("input[name='_ismodified']").first();
-	  			if (_ismodified.length) {
-	  				// console.log(_ismodified);
-	  				if (_ismodified.val() == 1) {
-	  					// alert ('Has been modified!!!!!!');	 
-	  					simpleError(frm, 'Please, save modified form.')
-	  					$(e.relatedTarget).tab('show');	  					
-	  				}
-	  			}
-	  		}
-	  	}
-	});
-
-	$(document).on('click', '.edit-allegato', function(e){
-		var frm = $('#frm-allegato');
-		frm.find("input[name='num']").first().val($(this).data('num'));
-		frm.find("input[name='label']").first().val($(this).data('label'));
-		frm.find("input[name='id']").first().val($(this).data('id'));
-		frm.find("input[name='brand']").first().val($(this).data('brand'));		
-		frm.find("input[name='code']").first().val($(this).data('code'));		
-	});
-
 	$(document).on('click', '.callback', function(e){
 		var callback = $(this).data('callback');
 		eval(callback+";");
+	});
+
+	$(document).on('click', ".close-upload-meta", function(){
+		$('#upload-meta').html('');				
+		$('#upload-plugin').show(0);				
+	});
+
+	$(document).on('click', ".change-flag", function(){
+		var btn = $(this);
+		var route = $(this).data('route');
+		var html = btn.html();
+		$(btn).removeClass('colorRed');
+		$(btn).removeClass('colorGreen');
+		btn.html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>'); // spinner
+
+		$.get(route, function(data){
+			if (data.success) {
+
+				var result = JSON.parse(data.result);
+				if (parseInt(result['flag']) == 1) $(btn).addClass('colorGreen');
+				else $(btn).addClass('colorRed');
+
+				btn.html(html);
+			}
+		}, 'json');	
 	});
 
 })(jQuery);
@@ -237,7 +220,7 @@ function getHtml(route, container, callback, confirmmsg) {
 
 		spinner(container);
 
-		$.get(route, function(data){							
+		$.get(route, function(data){
 			$(container).html(data);
 
 			if (typeof callback !== 'undefined')
@@ -288,6 +271,39 @@ function getJson(route, btn, callback) {
 	})(jQuery);
 }
 
+function deleteJson(route, token, btn, callback) {
+	(function($) {
+		var txt = btn.html();
+		btn.html('wait...');
+		$.ajax({
+		    url: route,
+		    type: 'DELETE',
+		    dataType: 'json',
+			headers: {
+					"x-csrf-token" : token
+			},
+		    success: function(data) {
+				btn.html(txt);
+
+				if (data.error) {
+					popUpError (data.error);
+					return;
+				}
+
+				if (callback) {
+					if (data.result)
+						callback = callback.replace("param", data.result);
+									
+					eval(callback+";");
+				}
+
+				if (data.success)
+					popUpSuccess (data.success);
+		    }
+		});		
+	})(jQuery);
+}
+
 function spinner (container) {
 	(function($) {
 		data = '<div style="margin-left: 10px; margin-top: 5px;"><i class="fa fa-circle-o-notch fa-spin spinner" aria-hidden="true"></i> wait...</div>';
@@ -299,7 +315,7 @@ function waitButton(btn, bool) {
 	(function($) {
 		if (bool) {
 			btn.hide(0);
-			var loader = $('<i class="fa fa-circle-o-notch fa-spin spinner" aria-hidden="true"></i>');
+			var loader = $('<div style="margin-left: 10px; margin-top: 5px;"><i class="fa fa-circle-o-notch fa-spin spinner" aria-hidden="true"></i> wait...</div>');
 			loader.insertBefore(btn);
 		}
 		else {
@@ -336,11 +352,10 @@ function fieldsError (frm, errorFields) {
 }
 
 function popUpError (message) {		
-	swal({
-        title: "Error",
-        text: message,
-        confirmButtonColor: "#DD6B55"
-    });		
+    jQuery.alerts.dialogClass = 'alert-danger';
+	jAlert(message, 'Error', function(){
+                   jQuery.alerts.dialogClass = null; // reset to default
+                });    
 }
 
 function simpleSuccess (frm, message) {
@@ -355,29 +370,7 @@ function simpleSuccess (frm, message) {
 }
 
 function popUpSuccess (message) {
-
-    text = '<div class="activity-item"> <i class="fa fa-thumbs-o-up text-alert"></i> <div class="activity"> '+message+' </div> </div>';
-    layout = 'topRight';
-    type = 'success';
-
-	var n = noty({
-                text: text,
-                type: type,
-                dismissQueue: true,
-                layout: layout,
-                closeWith: ['click'],
-                theme: 'MatMixNoty',
-                maxVisible: 10,                
-                animation: {
-                    open: 'noty_animated bounceInRight',
-                    close: 'noty_animated bounceOutRight',
-                    easing: 'swing',
-                    speed: 500
-                }
-            });
-            setTimeout(function () {
-                n.close();
-            }, 3000);    
+	jQuery.jGrowl(message);    
 }
 
 function hideErrorsSuccess () {
@@ -416,5 +409,128 @@ function refreshCalendar() {
 }
 
 function initUI() {
-	jQuery('.tabbedwidget').tabs();	
+	(function($) {
+		$('.tabbedwidget').tabs();
+		
+		$('.summernote').summernote({
+	  		height: 400,   
+	  		codemirror: { 
+	    		theme: 'monokai'
+	  		}
+		});
+
+		// tag input
+		$("textarea[name='mkeys']").each(function(i, el){
+			var attr = $(el).attr('id');
+			if (typeof attr === 'undefined' || attr === false) {
+				$(el).tagsInput();
+			}			
+		});
+
+		$('.preview').anarchytip();
+
+		// sortable
+		$(".sortable").sortable({ 
+			handle: '.handle',
+			helper: fixWidthHelper,
+			placeholder: "sortable-highlight",
+		    update: function(event, ui) {
+		        var order = $(this).sortable("serialize");
+		        var route = $(this).data('route');
+		        var token = $(this).data('token');
+
+				$.ajax({
+				    url: route,
+				    type: 'POST',
+				    data: order,
+				    dataType: 'json',
+					headers: {
+							"x-csrf-token" : token
+					},
+				    success: function(data) {
+						if (data.success)
+							popUpSuccess (data.success);
+						
+						if (data.error)
+							popUpError (data.error);
+				    }
+				});	
+		    }
+		});		
+
+		function fixWidthHelper(e, ui) {
+		    ui.children().each(function() {
+		        $(this).width($(this).width());
+		    });
+		    return ui;
+		}
+
+		// plupload
+		if ($('#filelist').length > 0) {
+
+			var empty = $('#filelist').html();			
+			var route = $('#filelist').data('route');
+			var token = $('#filelist').data('token');
+			var uploader = new plupload.Uploader({
+								browse_button: 'browse', // this can be an id of a DOM element or the DOM element itself
+  								url: route,
+        						max_file_size : '2mb',
+        						chunk_size: '1mb',
+        						headers: {
+        							"x-csrf-token" : token
+    							}
+							});
+			uploader.init();
+
+			uploader.bind('FilesAdded', function(up, files) {
+				
+				$('#filelist').html('');
+
+			  	plupload.each(files, function(file) {
+			  		tr = $('<tr>').attr('id', file.id);
+			    	td_delete = $('<td><button class="btn btn-xs btn-primary remove-upload" data-v="'+file.id+'"><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>');
+			  		td_name = $('<td>').html(file.name);
+			  		td_size = $('<td>').html(plupload.formatSize(file.size));
+					td_progress = $('<td><div class="progress"><div id="p_'+file.id+'" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div></div></td>');
+
+			    	td_delete.appendTo(tr);
+			    	td_name.appendTo(tr);
+			    	td_size.appendTo(tr);
+			    	td_progress.appendTo(tr);
+
+			    	tr.appendTo($('#filelist'));
+			  	});
+			});
+			 
+			uploader.bind('UploadProgress', function(up, file) {
+				$('#p_'+file.id).attr('aria-valuenow', file.percent).css('width', file.percent+'%');
+			});
+
+			uploader.bind('UploadComplete', function(up, file) {
+				setTimeout(function(){
+					$('#refresh-tabs-attachments').trigger('click');
+				}, 2000);
+			});
+			 
+			uploader.bind('Error', function(up, err) {
+				popUpSuccess ("Error #" + err.code + ": " + err.message)
+			});
+			 
+			document.getElementById('start-upload').onclick = function() {
+			  	uploader.start();
+			};
+
+			$(document).on('click', '.remove-upload', function(){
+				var id = $(this).data('v');
+        		var tr = $(this).closest('tr');
+				$.each(uploader.files, function (i, file) {
+				    if (file && file.id == id) {
+				        uploader.removeFile(file);
+				        tr.remove();
+				    }
+				});				
+			});
+		}
+
+	})(jQuery);
 }

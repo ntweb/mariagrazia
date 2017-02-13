@@ -1,45 +1,69 @@
-<form class="stdform stdform2" method="post" action="forms.html">
+<form class="stdform stdform2 ns" 
+    data-route="{{$route}}" 
+        @if(isset($el)) 
+            data-method='PUT' 
+        @else 
+            data-callback="getHtml(param)" 
+        @endif
+>
+
+{!! csrf_field() !!}    {{-- token --}}
+@if (isset($l))         {{-- locale --}}
+<input type="hidden" name="lang" value="{{$l->lang}}">
+@endif
+<input type="hidden" name="uploadfolder" value="{{$uploadfolder}}"> {{-- upload folder --}}
+
+    @if(!isset($el))
+        
+        {{-- creation --}}
         <p>
-            <label>First Name</label>
+            <label>{{trans('labels.title')}}</label>
             <span class="field">
-                <input type="text" name="firstname" id="firstname2" class="form-control" />
+                <input type="text" name="title" class="form-control" />
             </span>
         </p>
-        
+
+    @else
+
+        {{-- editing --}}
         <p>
-            <label>Last Name</label>
+            <label>{{trans('labels.title')}}</label>
             <span class="field">
-                <input type="text" name="lastname" id="lastname2" class="form-control" />
+                <input type="text" name="title" class="form-control" value="{{@$el->translate($l->lang)->title}}" />
             </span>
         </p>
-        
+
         <p>
-            <label>Email</label>
+            <label>{{trans('labels.description')}}</label>
             <span class="field">
-                <input type="text" name="email" id="email2" class="form-control" />
+                <textarea name="description" class="summernote">{{@$el->translate($l->lang)->description}}</textarea>
             </span>
         </p>
-        
+
         <p>
-            <label>Location <small>You can put your own description for this field here.</small></label>
+            <label>{{trans('labels.mtitle')}}</label>
             <span class="field">
-                <textarea cols="80" rows="5" name="location" id="location2" class="form-control"></textarea>
+                <input type="text" name="mtitle" class="form-control" value="{{@$el->translate($l->lang)->mtitle}}" />
             </span>
         </p>
-        
+
         <p>
-            <label>Select</label>
-            <span class="field"><select name="selection" id="selection2" class="uniformselect">
-                <option value="">Choose One</option>
-                <option value="1">Selection One</option>
-                <option value="2">Selection Two</option>
-                <option value="3">Selection Three</option>
-                <option value="4">Selection Four</option>
-            </select></span>
+            <label>{{trans('labels.mdescription')}}</label>
+            <span class="field">
+                <textarea name="mdescription" class="form-control" rows="5" >{{@$el->translate($l->lang)->mdescription}}</textarea>
+            </span>
         </p>
-                                
-        <p class="stdformbutton">
-            <button class="btn btn-primary">Submit Button</button>
-            <button type="reset" class="btn btn-default">Reset Button</button>
+
+        <p>
+            <label>{{trans('labels.mkeys')}}</label>
+            <span class="field">
+                <textarea name="mkeys" class="form-control" rows="2" >{{@$el->translate($l->lang)->mkeys}}</textarea>
+            </span>
         </p>
+
+    @endif
+                                    
+    <p class="stdformbutton">
+        <button type="submit" class="btn btn-primary">{{trans('labels.save')}}</button>
+    </p>
 </form>

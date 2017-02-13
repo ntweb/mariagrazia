@@ -12,12 +12,21 @@
 <link rel="stylesheet" href="{{url('assets/lab/css/style.default.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/responsive-tables.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/font-awesome.min.css')}}" />
+<link rel="stylesheet" href="{{url('assets/lab/js/summernote/codemirror.css')}}" />
+<link rel="stylesheet" href="{{url('assets/lab/js/summernote/monokai.css')}}" />
+<link rel="stylesheet" href="{{url('assets/lab/js/summernote/summernote.css')}}" />
+<link rel="stylesheet" href="{{url('assets/lab/js/plupload/js/jquery.ui.plupload/css/jquery.ui.plupload.css')}}" />
+<link rel="stylesheet" href="{{url('assets/lab/css/style.css')}}" />
     
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
 <script src="js/html5shiv.js"></script>
 <script src="js/respond.min.js"></script>
 <![endif]-->
+
+<script>
+    var labassets = '{{url('/assets/lab/')}}';
+</script>
 
 <script src="{{url('assets/lab/js/jquery-1.10.2.min.js')}}"></script>
 <script src="{{url('assets/lab/js/jquery-migrate-1.2.1.min.js')}}"></script>
@@ -30,6 +39,16 @@
 <script src="{{url('assets/lab/js/flot/jquery.flot.resize.min.js')}}"></script>
 <script src="{{url('assets/lab/js/responsive-tables.js')}}"></script>
 <script src="{{url('assets/lab/js/jquery.slimscroll.js')}}"></script>
+<script src="{{url('assets/lab/js/jquery.alerts.js')}}"></script>
+<script src="{{url('assets/lab/js/jquery.jgrowl.js')}}"></script>
+<script src="{{url('assets/lab/js/jquery.tagsinput.min.js')}}"></script>
+<script src="{{url('assets/lab/js/summernote/codemirror.js')}}"></script>
+<script src="{{url('assets/lab/js/summernote/xml.js')}}"></script>
+<script src="{{url('assets/lab/js/summernote/formatting.js')}}"></script>
+<script src="{{url('assets/lab/js/summernote/summernote.min.js')}}"></script>
+<script src="{{url('assets/lab/js/plupload/js/plupload.min.js')}}"></script>
+<script src="{{url('assets/lab/js/plupload/js/jquery.ui.plupload/jquery.ui.plupload.min.js')}}"></script>
+<script src="{{url('assets/lab/js/imagepreview.min.js')}}"></script>
 <script src="{{url('assets/lab/js/custom.js')}}"></script>
 <script src="{{url('assets/lab/js/lab.js')}}"></script>
 
@@ -148,23 +167,27 @@
         <div class="leftmenu">        
             <ul class="nav nav-tabs nav-stacked">
                 <li class="nav-header">Navigation</li>
+
                 <li><a href="{{action('Lab\DashboardController@index')}}"><i class="fa fa-fw fa-laptop" aria-hidden="true"></i> Dashboard</a></li>
-                <li class="dropdown"><a href=""><i class="fa fa-fw fa-pencil" aria-hidden="true"></i>Pagine</a>
+                <li class="dropdown"><a href=""><i class="fa fa-fw fa-pencil" aria-hidden="true"></i> Pagine</a>
                     <ul>
                         <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\PageController@index')}}">Lista</a></li>
                         <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\PageController@create')}}">Crea nuova</a></li>
                     </ul>
                 </li>
                 
-                <li><a href="buttons.html"><span class="iconfa-hand-up"></span> Buttons &amp; Icons</a></li>
-                <li class="dropdown"><a href=""><span class="iconfa-pencil"></span> Forms</a>
+                <li class="dropdown"><a href=""><i class="fa fa-fw fa-cog" aria-hidden="true"></i> Parametri</a>
                     <ul>
-                        <li><a href="forms.html">Form Styles</a></li>
-                        <li><a href="wizards.html">Wizard Form</a></li>
-                        <li><a href="wysiwyg.html">WYSIWYG</a></li>
-                        <li><a href="registration.html">Registration Page</a></li>
+                        @foreach ($arrParameters as $el)                        
+                        <li>
+                            <a href="javascript:void(0);" class="get-html" data-route="{{action('Lab\ParameterController@edit', array($el->module2nd))}}">{{$el->module2nd}}
+                            </a>
+                        </li>
+                        @endforeach
                     </ul>
                 </li>
+
+                <li><a href="buttons.html"><span class="iconfa-hand-up"></span> Buttons &amp; Icons</a></li>
                 <li class="dropdown"><a href=""><span class="iconfa-briefcase"></span> UI Elements &amp; Widgets</a>
                     <ul>
                         <li><a href="elements.html">Theme Components</a></li>

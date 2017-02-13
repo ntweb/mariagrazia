@@ -1,0 +1,35 @@
+.colorGreen {color: #00c91a !important;}
+.colorRed {color: #f20000 !important;}
+
+.center {text-align: center !important;}
+.left {text-align: left !important;}
+.right {text-align: right !important;}
+
+span.label.label-danger {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.progress {background: rgba(245, 245, 245, 1); border: 0px solid rgba(245, 245, 245, 1); border-radius: 25px; height: 5px; margin-top: 2px; margin-bottom: 2px;}
+.progress-bar-custom {background: rgba(66, 139, 202, 1);}
+
+#preview {
+  position: absolute;
+  border: 1px solid #ccc;
+  background: #333;
+  padding: 5px;
+  display: none;
+  color: #fff
+}
+
+#preview img {
+	width: 200px;
+}
+
+a.preview {
+	border-bottom-style: dashed 1px #000;
+}
+
+.sortable-highlight {
+    background-color: #f6f7be;
+}
