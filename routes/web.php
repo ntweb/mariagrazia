@@ -59,17 +59,24 @@ Route::get($cms_folder.'partner/change/flag/{id}/{field}', 'Lab\PartnerControlle
 Route::put($cms_folder.'partner/registry/{id}', 'Lab\PartnerController@registry');
 Route::put($cms_folder.'partner/settings/{id}', 'Lab\PartnerController@settings');
 
-// Photogllery
+// Photogallery
 Route::resource($cms_folder.'photo', 'Lab\PhotogalleryController');
 Route::get($cms_folder.'photo/delete/img/{id}/{img}', 'Lab\PhotogalleryController@deleteImg');
 Route::get($cms_folder.'photo/change/flag/{id}/{field}', 'Lab\PhotogalleryController@changeFlag');
 Route::put($cms_folder.'photo/settings/{id}', 'Lab\PhotogalleryController@settings');
 
-// Videogllery
+// Videogallery
 Route::resource($cms_folder.'video', 'Lab\VideogalleryController');
 Route::get($cms_folder.'video/delete/img/{id}/{img}', 'Lab\VideogalleryController@deleteImg');
 Route::get($cms_folder.'video/change/flag/{id}/{field}', 'Lab\VideogalleryController@changeFlag');
 Route::put($cms_folder.'video/settings/{id}', 'Lab\VideogalleryController@settings');
+
+// Portfolio
+Route::resource($cms_folder.'portfolio', 'Lab\PortfolioController');
+Route::get($cms_folder.'portfolio/delete/img/{id}/{img}', 'Lab\PortfolioController@deleteImg');
+Route::get($cms_folder.'portfolio/change/flag/{id}/{field}', 'Lab\PortfolioController@changeFlag');
+Route::put($cms_folder.'portfolio/registry/{id}', 'Lab\PortfolioController@registry');
+Route::put($cms_folder.'portfolio/settings/{id}', 'Lab\PortfolioController@settings');
 
 // Upload
 Route::get($cms_folder.'upload/{id}/{folder}', 'Lab\UploadController@index');

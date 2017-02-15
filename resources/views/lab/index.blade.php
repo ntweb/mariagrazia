@@ -217,6 +217,13 @@
                         <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\VideogalleryController@index')}}">Lista</a></li>
                         <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\VideogalleryController@create')}}">Crea nuovo elemento</a></li>
                     </ul>
+                </li>                
+
+                <li class="dropdown"><a href=""><i class="fa fa-fw fa-id-card-o" aria-hidden="true"></i> Portfolio</a>
+                    <ul>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\PortfolioController@index')}}">Lista</a></li>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\PortfolioController@create')}}">Crea nuovo elemento</a></li>
+                    </ul>
                 </li>
 
                 <li class="dropdown"><a href=""><i class="fa fa-fw fa-cog" aria-hidden="true"></i> Parametri</a>

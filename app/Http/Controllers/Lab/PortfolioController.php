@@ -11,10 +11,10 @@ use Log;
 use Session;
 use Storage;
 
-class StaffController extends Controller
+class PortfolioController extends Controller
 {
 
-    protected $uploadfolder = 'staff';
+    protected $uploadfolder = 'portfolio';
     protected $arrType;
     protected $default_lang;
 
@@ -23,17 +23,17 @@ class StaffController extends Controller
         parent::__construct();
         $this->middleware('auth');
 
-        view()->share('table', 'lab_staff');
+        view()->share('table', 'lab_portfolios');
         view()->share('uploadfolder', $this->uploadfolder);
         $this->default_lang = \App\Languages::first();
         view()->share('default_lang', $this->default_lang);
 
-        view()->share('mod_name', 'Staff');
+        view()->share('mod_name', 'Portfolio');
         view()->share('mod_action', 'Lista');
-        view()->share('mod_object', 'Staff');
+        view()->share('mod_object', 'Portfolio');
 
         // Tipologie
-        $el = \App\Parameter::where('module', '=', 'type')->where('label', '=', 'staff')->first();
+        $el = \App\Parameter::where('module', '=', 'type')->where('label', '=', 'portfolio')->first();
         $this->arrType = explode(',', $el->value);
         view()->share('arrType', $this->arrType);
     }
@@ -48,14 +48,13 @@ class StaffController extends Controller
             
         // for back button
         Session::put('backurl', $request->fullUrl());
-        $data['route_search'] = action('Lab\StaffController@index');
+        $data['route_search'] = action('Lab\PortfolioController@index');
 
         if ($request->has('key'))
-            $query = \App\Staff::where('name', 'LIKE', '%'.$request->get('key').'%')
-                                ->orWhere('lastname', 'LIKE', '%'.$request->get('key').'%')
-                                ->orWhere('id', '=', $request->get('key'));
+            $query = \App\Portfolio::where('businessname', 'LIKE', '%'.$request->get('key').'%')
+                                    ->orWhere('id', '=', $request->get('key'));
         else
-            $query = \App\Staff::orderBy('order')->orderBy('id', 'desc');
+            $query = \App\Portfolio::orderBy('order')->orderBy('id', 'desc');
 
 
         // filter type
@@ -63,7 +62,7 @@ class StaffController extends Controller
             $query->where('type', '=', $request->get('type'));
 
         $data['arrElements'] = $query->paginate(50);
-        return view()->make('lab.staff.index', $data);
+        return view()->make('lab.portfolio.index', $data);
     }
 
     /**
@@ -74,12 +73,12 @@ class StaffController extends Controller
     public function create()
     {
         $data['mod_action'] = 'Crea nuovo elemento';
-        $data['mod_object'] = 'Staff';
+        $data['mod_object'] = 'Portfolio';
 
-        $data['back'] = action('Lab\StaffController@index');
-        $data['route'] = action('Lab\StaffController@store');
+        $data['back'] = action('Lab\PortfolioController@index');
+        $data['route'] = action('Lab\PortfolioController@store');
 
-        return view()->make('lab.staff.create', $data);
+        return view()->make('lab.portfolio.create', $data);
     }
 
     /**
@@ -91,13 +90,13 @@ class StaffController extends Controller
     public function store(Request $request)
     {
         // validator
-        $fieldsToValidate["name"] = "required";
-        $fieldsToValidate["lastname"] = "required";
+        $fieldsToValidate["businessname"] = "required";
+        $fieldsToValidate['site'] = 'sometimes|nullable|url';
 
         $fields = $request->except('_token');
         $validator = Validator::make($fields, $fieldsToValidate);
         if (!$validator->fails()) {
-            $el = new \App\Staff;
+            $el = new \App\Portfolio;
             foreach ($fields as $key => $value) {
                 $el->$key = $value;
             }
@@ -105,7 +104,7 @@ class StaffController extends Controller
             // default 
             $el->uploadfolder = $this->uploadfolder;
             $el->type = $this->arrType[0];
-            $el->title = $el->name." ".$el->lastname;
+            $el->title = $el->businessname;
 
             $el->id_created_by = Auth::user()->id;
             if (!$el->save()){
@@ -113,7 +112,7 @@ class StaffController extends Controller
             }            
 
             $result['id'] = $el->id;
-            $result['route'] = action('Lab\StaffController@edit', array($el->id));
+            $result['route'] = action('Lab\PortfolioController@edit', array($el->id));
 
             return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result['route'])));
         }
@@ -147,15 +146,15 @@ class StaffController extends Controller
     {
 
         $data['mod_action'] = 'Modifica';
-        $data['mod_object'] = 'Staff : ID '.$id;
+        $data['mod_object'] = 'Portfolio : ID '.$id;
 
-        $data['route'] = action('Lab\StaffController@update', array($id));
-        $data['route_settings'] = action('Lab\StaffController@settings', array($id));
-        $data['route_registry'] = action('Lab\StaffController@registry', array($id));
-        $data['back'] = Session::get('backurl', action('Lab\StaffController@index'));
-        $data['el'] = \App\Staff::find($id);
+        $data['route'] = action('Lab\PortfolioController@update', array($id));
+        $data['route_settings'] = action('Lab\PortfolioController@settings', array($id));
+        $data['route_registry'] = action('Lab\PortfolioController@registry', array($id));
+        $data['back'] = Session::get('backurl', action('Lab\PortfolioController@index'));
+        $data['el'] = \App\Portfolio::find($id);
 
-        return view()->make('lab.staff.edit', $data);
+        return view()->make('lab.portfolio.edit', $data);
     }
 
     /**
@@ -167,12 +166,12 @@ class StaffController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fieldsToValidate['title'] = 'required'; 
+        $fieldsToValidate["title"] = "required";
 
         $fields = $request->except('_token', 'lang');
         $validator = Validator::make($fields, $fieldsToValidate);
         if (!$validator->fails()) {
-            $el = \App\Staff::find($id);
+            $el = \App\Portfolio::find($id);
             foreach ($fields as $key => $value) {
                 $el->translateOrNew($request->get('lang'))->$key = $value;
 
@@ -206,7 +205,7 @@ class StaffController extends Controller
      */
     public function destroy($id)
     {
-        $el = \App\Staff::find($id);
+        $el = \App\Portfolio::find($id);
 
         Storage::disk('docs')->deleteDirectory($el->uploadfolder.'/'.$el->id);
 
@@ -217,13 +216,8 @@ class StaffController extends Controller
 
     public function registry(Request $request, $id)
     {
-        $fieldsToValidate['name'] = 'required';
-        $fieldsToValidate['lastname'] = 'required';
-        $fieldsToValidate['email'] = 'sometimes|nullable|email';
-        $fieldsToValidate['fb'] = 'sometimes|nullable|url';
-        $fieldsToValidate['tw'] = 'sometimes|nullable|url';
-        $fieldsToValidate['gp'] = 'sometimes|nullable|url';
-        $fieldsToValidate['ln'] = 'sometimes|nullable|url';
+        $fieldsToValidate['businessname'] = 'required';
+        $fieldsToValidate['site'] = 'sometimes|nullable|url';
 
         $fields = $request->except('_token');
         $validator = Validator::make($fields, $fieldsToValidate);
@@ -252,14 +246,17 @@ class StaffController extends Controller
 
     public function settings(Request $request, $id)
     {
+
         $fieldsToValidate = array();
 
         $fields = $request->except('_token');
         $validator = Validator::make($fields, $fieldsToValidate);
         if (!$validator->fails()) {
-            $el = \App\Staff::find($id);
+            $el = \App\Portfolio::find($id);
             foreach ($fields as $key => $value) {
                 $el->$key = $value;
+
+                if ($key == 'begin' && $value) $el->$key = \Carbon\Carbon::createFromFormat($this->default_lang->date, $value)->toDateString();
             }
 
             $el->id_updated_by = Auth::user()->id;
@@ -280,7 +277,7 @@ class StaffController extends Controller
     }
 
     public function deleteImg($id,$img) {
-        $el = \App\Staff::find($id);
+        $el = \App\Portfolio::find($id);
 
         $storage = $el->uploadfolder.'/'.$el->id.'/';
         $filename = $el->$img;
@@ -295,7 +292,7 @@ class StaffController extends Controller
     }
 
     public function changeFlag($id, $field) {
-        $el = \App\Staff::find($id);
+        $el = \App\Portfolio::find($id);
 
         if ($el->$field) $el->$field = '0';
         else $el->$field = '1';
