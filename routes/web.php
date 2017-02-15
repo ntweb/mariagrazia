@@ -49,8 +49,15 @@ Route::put($cms_folder.'service/settings/{id}', 'Lab\ServiceController@settings'
 Route::resource($cms_folder.'staff', 'Lab\StaffController');
 Route::get($cms_folder.'staff/delete/img/{id}/{img}', 'Lab\StaffController@deleteImg');
 Route::get($cms_folder.'staff/change/flag/{id}/{field}', 'Lab\StaffController@changeFlag');
-Route::put($cms_folder.'service/registry/{id}', 'Lab\StaffController@registry');
+Route::put($cms_folder.'staff/registry/{id}', 'Lab\StaffController@registry');
 Route::put($cms_folder.'staff/settings/{id}', 'Lab\StaffController@settings');
+
+// Staff
+Route::resource($cms_folder.'partner', 'Lab\PartnerController');
+Route::get($cms_folder.'partner/delete/img/{id}/{img}', 'Lab\PartnerController@deleteImg');
+Route::get($cms_folder.'partner/change/flag/{id}/{field}', 'Lab\PartnerController@changeFlag');
+Route::put($cms_folder.'partner/registry/{id}', 'Lab\PartnerController@registry');
+Route::put($cms_folder.'partner/settings/{id}', 'Lab\PartnerController@settings');
 
 // Upload
 Route::get($cms_folder.'upload/{id}/{folder}', 'Lab\UploadController@index');

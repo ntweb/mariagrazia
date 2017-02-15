@@ -191,10 +191,17 @@
                     </ul>
                 </li>
                 
-                <li class="dropdown"><a href=""><i class="fa fa-fw fa-briefcase" aria-hidden="true"></i> Staff</a>
+                <li class="dropdown"><a href=""><i class="fa fa-fw fa-users" aria-hidden="true"></i> Staff</a>
                     <ul>
                         <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\StaffController@index')}}">Lista</a></li>
                         <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\StaffController@create')}}">Crea nuovo elemento</a></li>
+                    </ul>
+                </li>
+                
+                <li class="dropdown"><a href=""><i class="fa fa-fw fa-smile-o" aria-hidden="true"></i> Partner</a>
+                    <ul>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\PartnerController@index')}}">Lista</a></li>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\PartnerController@create')}}">Crea nuovo elemento</a></li>
                     </ul>
                 </li>
                 

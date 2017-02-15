@@ -173,7 +173,7 @@ var maincontainer = '#rpc-container'; // containe rprincipale per risultati RPC
 	  				_ismodified.val(1);
 	  			}
 	   		}
-	   }); 		
+	   }); 	
 
 	});
 
