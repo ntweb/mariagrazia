@@ -204,6 +204,13 @@
                         <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\PartnerController@create')}}">Crea nuovo elemento</a></li>
                     </ul>
                 </li>
+
+                <li class="dropdown"><a href=""><i class="fa fa-fw fa-picture-o" aria-hidden="true"></i> Photogallery</a>
+                    <ul>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\PhotogalleryController@index')}}">Lista</a></li>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\PhotogalleryController@create')}}">Crea nuovo elemento</a></li>
+                    </ul>
+                </li>
                 
                 <li class="dropdown"><a href=""><i class="fa fa-fw fa-cog" aria-hidden="true"></i> Parametri</a>
                     <ul>

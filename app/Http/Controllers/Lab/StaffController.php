@@ -51,11 +51,9 @@ class StaffController extends Controller
         $data['route_search'] = action('Lab\StaffController@index');
 
         if ($request->has('key'))
-            $query = \App\Staff::whereHas('translations', function ($query) use ($request) {
-                                $query->where('locale', 'it')
-                                ->where('title', 'LIKE', '%'.$request->get('key').'%')
+            $query = \App\Staff::where('name', 'LIKE', '%'.$request->get('key').'%')
+                                ->orWhere('lastname', 'LIKE', '%'.$request->get('key').'%')
                                 ->orWhere('lab_staff.id', '=', $request->get('key'));
-                            });
         else
             $query = \App\Staff::orderBy('order')->orderBy('id', 'desc');
 

@@ -54,7 +54,7 @@ class PartnerController extends Controller
             $query = \App\Partner::whereHas('translations', function ($query) use ($request) {
                                 $query->where('locale', 'it')
                                 ->where('title', 'LIKE', '%'.$request->get('key').'%')
-                                ->orWhere('lab_partner.id', '=', $request->get('key'));
+                                ->orWhere('partner_id', '=', $request->get('key'));
                             });
         else
             $query = \App\Partner::orderBy('order')->orderBy('id', 'desc');

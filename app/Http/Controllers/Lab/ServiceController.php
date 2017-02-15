@@ -54,7 +54,7 @@ class ServiceController extends Controller
             $query = \App\Service::whereHas('translations', function ($query) use ($request) {
                                 $query->where('locale', 'it')
                                 ->where('title', 'LIKE', '%'.$request->get('key').'%')
-                                ->orWhere('lab_service.id', '=', $request->get('key'));
+                                ->orWhere('service_id', '=', $request->get('key'));
                             });
         else
             $query = \App\Service::orderBy('order')->orderBy('id', 'desc');

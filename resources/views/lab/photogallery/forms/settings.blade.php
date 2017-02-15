@@ -10,7 +10,7 @@
                 @endforeach
             </select>
         </span>
-    </p>
+    </p> 
 
     <p>
         <label>{{trans('labels.begin')}}</label>
