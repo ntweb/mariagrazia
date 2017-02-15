@@ -20,6 +20,8 @@ class CreateLanguageTable extends Migration
             $table->string('ico', 10)->nullable();
             $table->string('datetime', 20)->nullable();
             $table->string('date', 10)->nullable();
+            $table->string('datetime_ui', 20)->nullable();
+            $table->string('date_ui', 10)->nullable();
             $table->timestamps();
         });
     }

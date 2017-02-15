@@ -419,6 +419,11 @@ function initUI() {
 	  		}
 		});
 
+		$('.datepicker').each(function(i, el){
+			var format = $(el).data('format');
+			$(el).datepicker({ dateFormat: format });			
+		});
+
 		// tag input
 		$("textarea[name='mkeys']").each(function(i, el){
 			var attr = $(el).attr('id');

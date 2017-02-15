@@ -169,10 +169,18 @@
                 <li class="nav-header">Navigation</li>
 
                 <li><a href="{{action('Lab\DashboardController@index')}}"><i class="fa fa-fw fa-laptop" aria-hidden="true"></i> Dashboard</a></li>
-                <li class="dropdown"><a href=""><i class="fa fa-fw fa-pencil" aria-hidden="true"></i> Pagine</a>
+
+                <li class="dropdown"><a href=""><i class="fa fa-fw fa-files-o" aria-hidden="true"></i> Pagine</a>
                     <ul>
                         <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\PageController@index')}}">Lista</a></li>
-                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\PageController@create')}}">Crea nuova</a></li>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\PageController@create')}}">Crea nuovo elemento</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown"><a href=""><i class="fa fa-fw fa-newspaper-o" aria-hidden="true"></i> News / Articoli / Blog</a>
+                    <ul>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\NewsController@index')}}">Lista</a></li>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\NewsController@create')}}">Crea nuovo elemento</a></li>
                     </ul>
                 </li>
                 

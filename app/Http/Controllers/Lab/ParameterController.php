@@ -36,8 +36,6 @@ class ParameterController extends Controller
     		$field = $xxx[0];
     		$label = $xxx[1];
 
-    		Log::info($field." - ".$label);
-
     		$el = \App\Parameter::where('label', '=', $label)->first();
     		if ($el) {
     			$el->$field = $v;

@@ -11,23 +11,31 @@ use Log;
 use Session;
 use Storage;
 
-class PageController extends Controller
+class NewsController extends Controller
 {
 
-    protected $uploadfolder = 'pages';
+    protected $uploadfolder = 'news';
+    protected $arrType;
+    protected $default_lang;
 
     public function __construct()
     {
         parent::__construct();
         $this->middleware('auth');
 
-        view()->share('table', 'lab_pages');
+        view()->share('table', 'lab_news');
         view()->share('uploadfolder', $this->uploadfolder);
-        view()->share('default_lang', \App\Languages::first());
+        $this->default_lang = \App\Languages::first();
+        view()->share('default_lang', $this->default_lang);
 
-        view()->share('mod_name', 'Pagine');
+        view()->share('mod_name', 'News / Articoli / Blog');
         view()->share('mod_action', 'Lista');
-        view()->share('mod_object', 'Pagine');
+        view()->share('mod_object', 'News');
+
+        // Tipologie
+        $el = \App\Parameter::where('module', '=', 'type')->where('label', '=', 'news')->first();
+        $this->arrType = explode(',', $el->value);
+        view()->share('arrType', $this->arrType);
     }
 
     /**
@@ -37,23 +45,27 @@ class PageController extends Controller
      */
     public function index(Request $request)
     {
+            
         // for back button
         Session::put('backurl', $request->fullUrl());
-        $data['route_search'] = action('Lab\PageController@index');
+        $data['route_search'] = action('Lab\NewsController@index');
 
         if ($request->has('key'))
-            // $data['arrElements'] = \App\Page::leftJoin('lab_pages_translations as t', 't.page_id', '=', 'lab_pages.id')
-            //                         ->where('title', 'LIKE', '%'.$request->get('key').'%')
-            //                         ->paginate(50);
-
-            $data['arrElements'] = \App\Page::whereHas('translations', function ($query) use ($request) {
+            $query = \App\News::whereHas('translations', function ($query) use ($request) {
                                 $query->where('locale', 'it')
                                 ->where('title', 'LIKE', '%'.$request->get('key').'%')
-                                ->orWhere('lab_pages.id', '=', $request->get('key'));
-                            })->paginate(50);
+                                ->orWhere('lab_news.id', '=', $request->get('key'));
+                            });
         else
-            $data['arrElements'] = \App\Page::orderBy('id')->paginate(50);
-        return view()->make('lab.page.index', $data);
+            $query = \App\News::orderBy('order')->orderBy('id', 'desc');
+
+
+        // filter type
+        if ($request->has('type'))
+            $query->where('type', '=', $request->get('type'));
+
+        $data['arrElements'] = $query->paginate(50);
+        return view()->make('lab.news.index', $data);
     }
 
     /**
@@ -63,12 +75,13 @@ class PageController extends Controller
      */
     public function create()
     {
-        $data['mod_action'] = 'Crea nuova';
-        $data['mod_object'] = 'Pagina';
+        $data['mod_action'] = 'Crea nuovo elemento';
+        $data['mod_object'] = 'News / Articolo / Blog';
 
-        $data['back'] = action('Lab\PageController@index');
-        $data['route'] = action('Lab\PageController@store');
-        return view()->make('lab.page.create', $data);
+        $data['back'] = action('Lab\NewsController@index');
+        $data['route'] = action('Lab\NewsController@store');
+
+        return view()->make('lab.news.create', $data);
     }
 
     /**
@@ -85,12 +98,14 @@ class PageController extends Controller
         $fields = $request->except('_token');
         $validator = Validator::make($fields, $fieldsToValidate);
         if (!$validator->fails()) {
-            $el = new \App\Page;
+            $el = new \App\News;
             foreach ($fields as $key => $value) {
                 $el->$key = $value;
             }
 
+            // default 
             $el->uploadfolder = $this->uploadfolder;
+            $el->type = $this->arrType[0];
 
             $el->id_created_by = Auth::user()->id;
             if (!$el->save()){
@@ -98,7 +113,7 @@ class PageController extends Controller
             }            
 
             $result['id'] = $el->id;
-            $result['route'] = action('Lab\PageController@edit', array($el->id));
+            $result['route'] = action('Lab\NewsController@edit', array($el->id));
 
             return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result['route'])));
         }
@@ -132,14 +147,14 @@ class PageController extends Controller
     {
 
         $data['mod_action'] = 'Modifica';
-        $data['mod_object'] = 'Pagina : ID '.$id;
+        $data['mod_object'] = 'News : ID '.$id;
 
-        $data['route'] = action('Lab\PageController@update', array($id));
-        $data['route_settings'] = action('Lab\PageController@settings', array($id));
-        $data['back'] = Session::get('backurl', action('Lab\PageController@index'));
-        $data['el'] = \App\Page::find($id);
+        $data['route'] = action('Lab\NewsController@update', array($id));
+        $data['route_settings'] = action('Lab\NewsController@settings', array($id));
+        $data['back'] = Session::get('backurl', action('Lab\NewsController@index'));
+        $data['el'] = \App\News::find($id);
 
-        return view()->make('lab.page.edit', $data);
+        return view()->make('lab.news.edit', $data);
     }
 
     /**
@@ -156,12 +171,12 @@ class PageController extends Controller
         $fields = $request->except('_token', 'lang');
         $validator = Validator::make($fields, $fieldsToValidate);
         if (!$validator->fails()) {
-            $el = \App\Page::find($id);
+            $el = \App\News::find($id);
             foreach ($fields as $key => $value) {
                 $el->translateOrNew($request->get('lang'))->$key = $value;
 
                 // murl
-                if ($key == 'title') $el->translateOrNew($request->get('lang'))->murl = str_slug($value);                
+                if ($key == 'title') $el->translateOrNew($request->get('lang'))->murl = str_slug($value);
             }
 
             $el->id_updated_by = Auth::user()->id;
@@ -190,7 +205,7 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        $el = \App\Page::find($id);
+        $el = \App\News::find($id);
 
         Storage::disk('docs')->deleteDirectory($el->uploadfolder.'/'.$el->id);
 
@@ -206,9 +221,11 @@ class PageController extends Controller
         $fields = $request->except('_token');
         $validator = Validator::make($fields, $fieldsToValidate);
         if (!$validator->fails()) {
-            $el = \App\Page::find($id);
+            $el = \App\News::find($id);
             foreach ($fields as $key => $value) {
                 $el->$key = $value;
+
+                if ($key == 'begin') $el->$key = \Carbon\Carbon::createFromFormat($this->default_lang->date, $value)->toDateString();
             }
 
             $el->id_updated_by = Auth::user()->id;
@@ -229,7 +246,7 @@ class PageController extends Controller
     }
 
     public function deleteImg($id,$img) {
-        $el = \App\Page::find($id);
+        $el = \App\News::find($id);
 
         $storage = $el->uploadfolder.'/'.$el->id.'/';
         $filename = $el->$img;
@@ -244,7 +261,7 @@ class PageController extends Controller
     }
 
     public function changeFlag($id, $field) {
-        $el = \App\Page::find($id);
+        $el = \App\News::find($id);
 
         if ($el->$field) $el->$field = '0';
         else $el->$field = '1';

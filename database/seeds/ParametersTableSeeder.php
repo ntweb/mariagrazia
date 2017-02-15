@@ -38,7 +38,13 @@ class ParametersTableSeeder extends Seeder
         	['module' => 'parameter',	'module2nd' => 'site',			'label' => 'site_fb',					'value' => 'http://www.facebook.com', 'extras' => null],
         	['module' => 'parameter',	'module2nd' => 'site',			'label' => 'site_tw',					'value' => 'http://www.twitter.com', 'extras' => null],
         	['module' => 'parameter',	'module2nd' => 'site',			'label' => 'site_gp',					'value' => 'http://www.google.com', 'extras' => null],
-        	['module' => 'parameter',	'module2nd' => 'site',			'label' => 'site_ln',					'value' => 'http://www.linkedin.com', 'extras' => null],
+            ['module' => 'parameter',   'module2nd' => 'site',          'label' => 'site_ln',                   'value' => 'http://www.linkedin.com', 'extras' => null],
+            ['module' => 'type', 'module2nd' => null, 'label' => 'news', 'value' => 'standard', 'extras' => null],
+            ['module' => 'type', 'module2nd' => null, 'label' => 'services', 'value' => 'standard', 'extras' => null],
+            ['module' => 'type', 'module2nd' => null, 'label' => 'staff', 'value' => 'standard', 'extras' => null],
+            ['module' => 'type', 'module2nd' => null, 'label' => 'partners', 'value' => 'standard', 'extras' => null],
+            ['module' => 'type', 'module2nd' => null, 'label' => 'photogallery', 'value' => 'standard', 'extras' => null],
+            ['module' => 'type', 'module2nd' => null, 'label' => 'videogallery', 'value' => 'standard', 'extras' => null],
         ]);
     }
 }

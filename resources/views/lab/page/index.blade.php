@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h4 class="widgettitle">Table Bordered</h4>
+    <h4 class="widgettitle">{{trans('labels.list')}}</h4>
     @if(count($arrElements))
 
     <table class="table table-striped responsive">
@@ -12,6 +12,7 @@
                 <th>ID</th>
                 <th>{{trans('labels.title')}}</th>
                 <th>{{trans('labels.module')}}</th>
+                <th>{{trans('labels.created_by')}}</th>
                 <th>{{trans('labels.created_at')}}</th>
                 <th>{{trans('labels.updated_at')}}</th>
                 <th></th>
@@ -28,6 +29,7 @@
                 <td>{{$el->id}}</td>
                 <td>{{$el->title}}</td>
                 <td>{{$el->module}}</td>
+                <td>{{$el->created_by->name}}</td>
                 <td>{{date($default_lang->datetime, strtotime($el->created_at))}}</td>
                 <td>{{date($default_lang->datetime, strtotime($el->updated_at))}}</td>
                 <td class="right">

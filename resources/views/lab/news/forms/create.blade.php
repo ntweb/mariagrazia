@@ -33,6 +33,13 @@
         </p>
 
         <p>
+            <label>{{trans('labels.abstract')}}</label>
+            <span class="field">
+                <textarea name="abstract" class="form-control" rows="5" >{{@$el->translate($l->lang)->abstract}}</textarea>
+            </span>
+        </p>        
+
+        <p>
             <label>{{trans('labels.description')}}</label>
             <span class="field">
                 <textarea name="description" class="summernote">{{@$el->translate($l->lang)->description}}</textarea>

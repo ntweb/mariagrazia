@@ -17,6 +17,8 @@ class LanguagesTableSeeder extends Seeder
             'ico' => null,
             'datetime' => 'd/m/Y H:i',
             'date' => 'd/m/Y',
+            'datetime_ui' => 'dd/mm/yy H:i',
+            'date_ui' => 'dd/mm/yy',
         ]);
     }
 }
