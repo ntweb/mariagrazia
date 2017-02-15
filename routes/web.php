@@ -39,6 +39,12 @@ Route::get($cms_folder.'news/delete/img/{id}/{img}', 'Lab\NewsController@deleteI
 Route::get($cms_folder.'news/change/flag/{id}/{field}', 'Lab\NewsController@changeFlag');
 Route::put($cms_folder.'news/settings/{id}', 'Lab\NewsController@settings');
 
+// News
+Route::resource($cms_folder.'service', 'Lab\ServiceController');
+Route::get($cms_folder.'service/delete/img/{id}/{img}', 'Lab\ServiceController@deleteImg');
+Route::get($cms_folder.'service/change/flag/{id}/{field}', 'Lab\ServiceController@changeFlag');
+Route::put($cms_folder.'service/settings/{id}', 'Lab\ServiceController@settings');
+
 // Upload
 Route::get($cms_folder.'upload/{id}/{folder}', 'Lab\UploadController@index');
 Route::get($cms_folder.'upload/{id}/edit/', 'Lab\UploadController@edit');

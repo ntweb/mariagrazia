@@ -183,6 +183,13 @@
                         <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\NewsController@create')}}">Crea nuovo elemento</a></li>
                     </ul>
                 </li>
+
+                <li class="dropdown"><a href=""><i class="fa fa-fw fa-briefcase" aria-hidden="true"></i> Servizi</a>
+                    <ul>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\ServiceController@index')}}">Lista</a></li>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\ServiceController@create')}}">Crea nuovo elemento</a></li>
+                    </ul>
+                </li>
                 
                 <li class="dropdown"><a href=""><i class="fa fa-fw fa-cog" aria-hidden="true"></i> Parametri</a>
                     <ul>
