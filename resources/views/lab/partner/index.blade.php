@@ -53,7 +53,7 @@
                     </a>
                 </td>
                 <td>{{$el->id}}</td>
-                <td>{{$el->name}} {{$el->lastname}}</td>
+                <td>{{$el->businessname}}</td>
                 <td>{{$el->role}}</td>
                 <td>{{$el->type}}</td>
                 <td>{{$el->created_by->name}}</td>

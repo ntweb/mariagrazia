@@ -23,7 +23,7 @@ class PartnerController extends Controller
         parent::__construct();
         $this->middleware('auth');
 
-        view()->share('table', 'lab_partner');
+        view()->share('table', 'lab_partners');
         view()->share('uploadfolder', $this->uploadfolder);
         $this->default_lang = \App\Languages::first();
         view()->share('default_lang', $this->default_lang);
@@ -218,7 +218,7 @@ class PartnerController extends Controller
 
     public function registry(Request $request, $id)
     {
-        $fieldsToValidate['business'] = 'required';
+        $fieldsToValidate['businessname'] = 'required';
         $fieldsToValidate['email'] = 'sometimes|nullable|email';
         $fieldsToValidate['site'] = 'sometimes|nullable|url';
 

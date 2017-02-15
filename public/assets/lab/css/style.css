@@ -33,3 +33,7 @@ a.preview {
 .sortable-highlight {
     background-color: #f6f7be;
 }
+
+.handle {
+  cursor:move;
+}
