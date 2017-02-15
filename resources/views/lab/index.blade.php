@@ -191,6 +191,13 @@
                     </ul>
                 </li>
                 
+                <li class="dropdown"><a href=""><i class="fa fa-fw fa-briefcase" aria-hidden="true"></i> Staff</a>
+                    <ul>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\StaffController@index')}}">Lista</a></li>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\StaffController@create')}}">Crea nuovo elemento</a></li>
+                    </ul>
+                </li>
+                
                 <li class="dropdown"><a href=""><i class="fa fa-fw fa-cog" aria-hidden="true"></i> Parametri</a>
                     <ul>
                         @foreach ($arrParameters as $el)                        
