@@ -59,11 +59,17 @@ Route::get($cms_folder.'partner/change/flag/{id}/{field}', 'Lab\PartnerControlle
 Route::put($cms_folder.'partner/registry/{id}', 'Lab\PartnerController@registry');
 Route::put($cms_folder.'partner/settings/{id}', 'Lab\PartnerController@settings');
 
-// Photoglley
+// Photogllery
 Route::resource($cms_folder.'photo', 'Lab\PhotogalleryController');
 Route::get($cms_folder.'photo/delete/img/{id}/{img}', 'Lab\PhotogalleryController@deleteImg');
 Route::get($cms_folder.'photo/change/flag/{id}/{field}', 'Lab\PhotogalleryController@changeFlag');
 Route::put($cms_folder.'photo/settings/{id}', 'Lab\PhotogalleryController@settings');
+
+// Videogllery
+Route::resource($cms_folder.'video', 'Lab\VideogalleryController');
+Route::get($cms_folder.'video/delete/img/{id}/{img}', 'Lab\VideogalleryController@deleteImg');
+Route::get($cms_folder.'video/change/flag/{id}/{field}', 'Lab\VideogalleryController@changeFlag');
+Route::put($cms_folder.'video/settings/{id}', 'Lab\VideogalleryController@settings');
 
 // Upload
 Route::get($cms_folder.'upload/{id}/{folder}', 'Lab\UploadController@index');

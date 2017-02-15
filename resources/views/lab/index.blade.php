@@ -211,7 +211,14 @@
                         <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\PhotogalleryController@create')}}">Crea nuovo elemento</a></li>
                     </ul>
                 </li>
-                
+
+                <li class="dropdown"><a href=""><i class="fa fa-fw fa-video-camera" aria-hidden="true"></i> Videogallery</a>
+                    <ul>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\VideogalleryController@index')}}">Lista</a></li>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\VideogalleryController@create')}}">Crea nuovo elemento</a></li>
+                    </ul>
+                </li>
+
                 <li class="dropdown"><a href=""><i class="fa fa-fw fa-cog" aria-hidden="true"></i> Parametri</a>
                     <ul>
                         @foreach ($arrParameters as $el)                        

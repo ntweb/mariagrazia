@@ -11,10 +11,10 @@ use Log;
 use Session;
 use Storage;
 
-class NewsController extends Controller
+class VideogalleryController extends Controller
 {
 
-    protected $uploadfolder = 'news';
+    protected $uploadfolder = 'videogallery';
     protected $arrType;
     protected $default_lang;
 
@@ -23,17 +23,17 @@ class NewsController extends Controller
         parent::__construct();
         $this->middleware('auth');
 
-        view()->share('table', 'lab_news');
+        view()->share('table', 'lab_videogalleries');
         view()->share('uploadfolder', $this->uploadfolder);
         $this->default_lang = \App\Languages::first();
         view()->share('default_lang', $this->default_lang);
 
-        view()->share('mod_name', 'News / Articoli / Blog');
+        view()->share('mod_name', 'Videogallery');
         view()->share('mod_action', 'Lista');
-        view()->share('mod_object', 'News');
+        view()->share('mod_object', 'Videogallery');
 
         // Tipologie
-        $el = \App\Parameter::where('module', '=', 'type')->where('label', '=', 'news')->first();
+        $el = \App\Parameter::where('module', '=', 'type')->where('label', '=', 'videogallery')->first();
         $this->arrType = explode(',', $el->value);
         view()->share('arrType', $this->arrType);
     }
@@ -48,16 +48,16 @@ class NewsController extends Controller
             
         // for back button
         Session::put('backurl', $request->fullUrl());
-        $data['route_search'] = action('Lab\NewsController@index');
+        $data['route_search'] = action('Lab\VideogalleryController@index');
 
         if ($request->has('key'))
-            $query = \App\News::whereHas('translations', function ($query) use ($request) {
+            $query = \App\Videogallery::whereHas('translations', function ($query) use ($request) {
                                 $query->where('locale', 'it')
                                 ->where('title', 'LIKE', '%'.$request->get('key').'%')
-                                ->orWhere('lab_news.id', '=', $request->get('key'));
+                                ->orWhere('videogallery_id', '=', $request->get('key'));
                             });
         else
-            $query = \App\News::orderBy('order')->orderBy('id', 'desc');
+            $query = \App\Videogallery::orderBy('order')->orderBy('id', 'desc');
 
 
         // filter type
@@ -65,7 +65,7 @@ class NewsController extends Controller
             $query->where('type', '=', $request->get('type'));
 
         $data['arrElements'] = $query->paginate(50);
-        return view()->make('lab.news.index', $data);
+        return view()->make('lab.videogallery.index', $data);
     }
 
     /**
@@ -76,12 +76,12 @@ class NewsController extends Controller
     public function create()
     {
         $data['mod_action'] = 'Crea nuovo elemento';
-        $data['mod_object'] = 'News / Articolo / Blog';
+        $data['mod_object'] = 'Videogallery';
 
-        $data['back'] = action('Lab\NewsController@index');
-        $data['route'] = action('Lab\NewsController@store');
+        $data['back'] = action('Lab\VideogalleryController@index');
+        $data['route'] = action('Lab\VideogalleryController@store');
 
-        return view()->make('lab.news.create', $data);
+        return view()->make('lab.videogallery.create', $data);
     }
 
     /**
@@ -94,11 +94,12 @@ class NewsController extends Controller
     {
         // validator
         $fieldsToValidate["title"] = "required";
+        $fieldsToValidate["url"] = "required|url";
 
         $fields = $request->except('_token');
         $validator = Validator::make($fields, $fieldsToValidate);
         if (!$validator->fails()) {
-            $el = new \App\News;
+            $el = new \App\Videogallery;
             foreach ($fields as $key => $value) {
                 $el->$key = $value;
             }
@@ -113,7 +114,7 @@ class NewsController extends Controller
             }            
 
             $result['id'] = $el->id;
-            $result['route'] = action('Lab\NewsController@edit', array($el->id));
+            $result['route'] = action('Lab\VideogalleryController@edit', array($el->id));
 
             return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result['route'])));
         }
@@ -147,14 +148,14 @@ class NewsController extends Controller
     {
 
         $data['mod_action'] = 'Modifica';
-        $data['mod_object'] = 'News : ID '.$id;
+        $data['mod_object'] = 'Videogallery : ID '.$id;
 
-        $data['route'] = action('Lab\NewsController@update', array($id));
-        $data['route_settings'] = action('Lab\NewsController@settings', array($id));
-        $data['back'] = Session::get('backurl', action('Lab\NewsController@index'));
-        $data['el'] = \App\News::find($id);
+        $data['route'] = action('Lab\VideogalleryController@update', array($id));
+        $data['route_settings'] = action('Lab\VideogalleryController@settings', array($id));
+        $data['back'] = Session::get('backurl', action('Lab\VideogalleryController@index'));
+        $data['el'] = \App\Videogallery::find($id);
 
-        return view()->make('lab.news.edit', $data);
+        return view()->make('lab.videogallery.edit', $data);
     }
 
     /**
@@ -171,7 +172,7 @@ class NewsController extends Controller
         $fields = $request->except('_token', 'lang');
         $validator = Validator::make($fields, $fieldsToValidate);
         if (!$validator->fails()) {
-            $el = \App\News::find($id);
+            $el = \App\Videogallery::find($id);
             foreach ($fields as $key => $value) {
                 $el->translateOrNew($request->get('lang'))->$key = $value;
 
@@ -205,7 +206,7 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        $el = \App\News::find($id);
+        $el = \App\Videogallery::find($id);
 
         Storage::disk('docs')->deleteDirectory($el->uploadfolder.'/'.$el->id);
 
@@ -216,12 +217,13 @@ class NewsController extends Controller
 
     public function settings(Request $request, $id)
     {
-        $fieldsToValidate = array();
+
+        $fieldsToValidate["url"] = "required|url";
 
         $fields = $request->except('_token');
         $validator = Validator::make($fields, $fieldsToValidate);
         if (!$validator->fails()) {
-            $el = \App\News::find($id);
+            $el = \App\Videogallery::find($id);
             foreach ($fields as $key => $value) {
                 $el->$key = $value;
 
@@ -246,7 +248,7 @@ class NewsController extends Controller
     }
 
     public function deleteImg($id,$img) {
-        $el = \App\News::find($id);
+        $el = \App\Videogallery::find($id);
 
         $storage = $el->uploadfolder.'/'.$el->id.'/';
         $filename = $el->$img;
@@ -261,7 +263,7 @@ class NewsController extends Controller
     }
 
     public function changeFlag($id, $field) {
-        $el = \App\News::find($id);
+        $el = \App\Videogallery::find($id);
 
         if ($el->$field) $el->$field = '0';
         else $el->$field = '1';
@@ -272,5 +274,4 @@ class NewsController extends Controller
         $result['flag'] = $el->$field;
         return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
     }
-
 }

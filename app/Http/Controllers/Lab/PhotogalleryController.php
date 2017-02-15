@@ -54,7 +54,7 @@ class PhotogalleryController extends Controller
             $query = \App\Photogallery::whereHas('translations', function ($query) use ($request) {
                                 $query->where('locale', 'it')
                                 ->where('title', 'LIKE', '%'.$request->get('key').'%')
-                                ->orWhere('lab_photogalleries.id', '=', $request->get('key'));
+                                ->orWhere('photogallery_id', '=', $request->get('key'));
                             });
         else
             $query = \App\Photogallery::orderBy('order')->orderBy('id', 'desc');
@@ -217,6 +217,8 @@ class PhotogalleryController extends Controller
     public function settings(Request $request, $id)
     {
 
+        $fieldsToValidate = array();
+
         $fields = $request->except('_token');
         $validator = Validator::make($fields, $fieldsToValidate);
         if (!$validator->fails()) {
@@ -224,7 +226,7 @@ class PhotogalleryController extends Controller
             foreach ($fields as $key => $value) {
                 $el->$key = $value;
 
-                if ($key == 'begin') $el->$key = \Carbon\Carbon::createFromFormat($this->default_lang->date, $value)->toDateString();
+                if ($key == 'begin' && $value) $el->$key = \Carbon\Carbon::createFromFormat($this->default_lang->date, $value)->toDateString();
             }
 
             $el->id_updated_by = Auth::user()->id;
