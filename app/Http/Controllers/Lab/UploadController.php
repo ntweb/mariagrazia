@@ -113,8 +113,8 @@ class UploadController extends Controller
 
     public function edit ($id) {
         $data['route'] = action('Lab\UploadController@update', array($id));
-        $data['route_settings'] = action('Lab\UploadController@settings', array($id));    	
-    	$data['el'] = \App\Upload::find($id);
+        $data['route_settings'] = action('Lab\UploadController@settings', array($id));      
+        $data['el'] = \App\Upload::find($id);
 
     	return view()->make('lab.upload.edit', $data);
     }

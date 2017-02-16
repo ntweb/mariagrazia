@@ -40,7 +40,6 @@ class CreateLabUploadsTable extends Migration
             $table->unique(['upload_id','locale']);
             $table->foreign('upload_id')->references('id')->on('lab_uploads')->onDelete('cascade');
         });
-
     }
 
     /**

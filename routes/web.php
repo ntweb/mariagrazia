@@ -53,7 +53,7 @@ Route::get($cms_folder.'staff/change/flag/{id}/{field}', 'Lab\StaffController@ch
 Route::put($cms_folder.'staff/registry/{id}', 'Lab\StaffController@registry');
 Route::put($cms_folder.'staff/settings/{id}', 'Lab\StaffController@settings');
 
-// Staff
+// Partners
 Route::resource($cms_folder.'partner', 'Lab\PartnerController');
 Route::get($cms_folder.'partner/delete/img/{id}/{img}', 'Lab\PartnerController@deleteImg');
 Route::get($cms_folder.'partner/change/flag/{id}/{field}', 'Lab\PartnerController@changeFlag');
@@ -79,20 +79,45 @@ Route::get($cms_folder.'portfolio/change/flag/{id}/{field}', 'Lab\PortfolioContr
 Route::put($cms_folder.'portfolio/registry/{id}', 'Lab\PortfolioController@registry');
 Route::put($cms_folder.'portfolio/settings/{id}', 'Lab\PortfolioController@settings');
 
+// Category
+Route::resource($cms_folder.'category', 'Lab\CategoryController');
+Route::get($cms_folder.'category/delete/img/{id}/{img}', 'Lab\CategoryController@deleteImg');
+Route::get($cms_folder.'category/change/flag/{id}/{field}', 'Lab\CategoryController@changeFlag');
+Route::put($cms_folder.'category/settings/{id}', 'Lab\CategoryController@settings');
+
+// Subcategory
+Route::resource($cms_folder.'subcategory', 'Lab\SubcategoryController');
+Route::get($cms_folder.'subcategory/delete/img/{id}/{img}', 'Lab\SubcategoryController@deleteImg');
+Route::get($cms_folder.'subcategory/change/flag/{id}/{field}', 'Lab\SubcategoryController@changeFlag');
+Route::put($cms_folder.'subcategory/settings/{id}', 'Lab\SubcategoryController@settings');
+
+// Products
+Route::resource($cms_folder.'products', 'Lab\ProductController');
+Route::get($cms_folder.'products/delete/img/{id}/{img}', 'Lab\ProductController@deleteImg');
+Route::get($cms_folder.'products/change/flag/{id}/{field}', 'Lab\ProductController@changeFlag');
+Route::put($cms_folder.'products/settings/{id}', 'Lab\ProductController@settings');
+
 // User
 Route::resource($cms_folder.'user', 'Lab\UserController');
 Route::get($cms_folder.'user/change/flag/{id}/{field}', 'Lab\UserController@changeFlag');
 Route::put($cms_folder.'user/password/{id}', 'Lab\UserController@password');
 
 // Upload
-Route::get($cms_folder.'upload/{id}/{folder}', 'Lab\UploadController@index');
 Route::get($cms_folder.'upload/{id}/edit/', 'Lab\UploadController@edit');
+Route::get($cms_folder.'upload/{id}/{folder}', 'Lab\UploadController@index');
 Route::get($cms_folder.'upload/change/flag/{id}/{field}', 'Lab\UploadController@changeFlag');
 Route::delete($cms_folder.'upload/{id}', 'Lab\UploadController@delete');
 Route::post($cms_folder.'upload/image/{id}/{table}/{folder}', 'Lab\UploadController@image');
 Route::post($cms_folder.'upload/multiupload/{id}/{folder}', 'Lab\UploadController@multiupload');
 Route::put($cms_folder.'upload/{id}', 'Lab\UploadController@update');
 Route::put($cms_folder.'upload/settings/{id}', 'Lab\UploadController@settings');
+
+// Product options
+Route::resource($cms_folder.'po', 'Lab\ProductoptionController');
+Route::get($cms_folder.'po/delete/img/{id}/{img}', 'Lab\ProductoptionController@deleteImg');
+Route::get($cms_folder.'po/change/flag/{id}/{field}', 'Lab\ProductoptionController@changeFlag');
+Route::put($cms_folder.'po/settings/{id}', 'Lab\ProductoptionController@settings');
+
 
 // Order
 Route::post($cms_folder.'order/{table}', 'Lab\OrderController@update');

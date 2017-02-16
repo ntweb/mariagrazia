@@ -79,6 +79,7 @@ var maincontainer = '#rpc-container'; // containe rprincipale per risultati RPC
 						if (data.result)
 							callback = callback.replace("param", data.result);
 						
+						console.log(callback);
 						eval(callback+";");
 					}
 
@@ -203,6 +204,10 @@ var maincontainer = '#rpc-container'; // containe rprincipale per risultati RPC
 				else $(btn).addClass('colorRed');
 
 				btn.html(html);
+
+				// delete tootip
+				$('div.tooltip').remove();
+				$('.tip').tooltip();
 			}
 		}, 'json');	
 	});
@@ -436,6 +441,27 @@ function initUI() {
 		});
 
 		$('.preview').anarchytip();
+
+		// color picker
+		if(jQuery('#colorpicker').length > 0) {
+			var color = $('#colorpicker').val();			
+			jQuery('#colorSelector').ColorPicker({
+				color: color,
+				onShow: function (colpkr) {
+					jQuery(colpkr).fadeIn(500);
+					return false;
+				},
+				onHide: function (colpkr) {
+					jQuery(colpkr).fadeOut(500);
+					return false;
+				},
+				onChange: function (hsb, hex, rgb) {
+					jQuery('#colorSelector span').css('backgroundColor', '#' + hex);
+					jQuery('#colorpicker').val('#'+hex);
+				}
+			});
+			jQuery('#colorSelector span').css('backgroundColor', color);
+		}		
 
 		// sortable
 		$(".sortable").sortable({ 

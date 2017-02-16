@@ -46,6 +46,8 @@ class ParametersTableSeeder extends Seeder
             ['module' => 'type', 'module2nd' => null, 'label' => 'photogallery', 'value' => 'standard', 'extras' => null],
             ['module' => 'type', 'module2nd' => null, 'label' => 'videogallery', 'value' => 'standard', 'extras' => null],
             ['module' => 'type', 'module2nd' => null, 'label' => 'portfolio', 'value' => 'standard', 'extras' => null],
+            ['module' => 'type', 'module2nd' => null, 'label' => 'category', 'value' => 'standard', 'extras' => null],
+            ['module' => 'type', 'module2nd' => null, 'label' => 'productoptions', 'value' => 'color,size', 'extras' => null],
         ]);
     }
 }

@@ -49,6 +49,7 @@
 <script src="{{url('assets/lab/js/plupload/js/plupload.min.js')}}"></script>
 <script src="{{url('assets/lab/js/plupload/js/jquery.ui.plupload/jquery.ui.plupload.min.js')}}"></script>
 <script src="{{url('assets/lab/js/imagepreview.min.js')}}"></script>
+<script src="{{url('assets/lab/js/colorpicker.js')}}"></script>
 <script src="{{url('assets/lab/js/custom.js')}}"></script>
 <script src="{{url('assets/lab/js/lab.js')}}"></script>
 
@@ -200,6 +201,27 @@
                         <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\PortfolioController@create')}}">Crea nuovo elemento</a></li>
                     </ul>
                 </li>
+
+                <li class="dropdown"><a href=""><i class="fa fa-fw fa-book" aria-hidden="true"></i> Catalogo</a>
+                    <ul>
+                        <li class="dropdown" style="background-color: #c1bfbf;"><a href="#"><b>Categorie</b></a>
+                        <ul>
+                            <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\CategoryController@index')}}">Lista</a></li>
+                            <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\CategoryController@create')}}">Crea nuovo elemento</a></li>
+                        </ul>
+                        <li class="dropdown" style="background-color: #c1bfbf;"><a href="#"><b>Sotto categorie</b></a>
+                        <ul>
+                            <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\SubcategoryController@index')}}">Lista</a></li>
+                            <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\SubcategoryController@create')}}">Crea nuovo elemento</a></li>
+                        </ul>
+                        <li class="dropdown" style="background-color: #c1bfbf;"><a href="#"><b>Prodotti</b></a>
+                        <ul>
+                            <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\ProductController@index')}}">Lista</a></li>
+                            <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\ProductController@create')}}">Crea nuovo elemento</a></li>
+                        </ul>
+                     </li>
+                    </ul>
+                </li>                
 
                 <li class="dropdown"><a href=""><i class="fa fa-fw fa-cog" aria-hidden="true"></i> Parametri</a>
                     <ul>
