@@ -11,23 +11,25 @@ use Log;
 use Session;
 use Storage;
 
-class PageController extends Controller
+class UserController extends Controller
 {
 
-    protected $uploadfolder = 'pages';
+    protected $uploadfolder = 'users';
+    protected $arrType;
+    protected $default_lang;
 
     public function __construct()
     {
         parent::__construct();
         $this->middleware('auth');
 
-        view()->share('table', 'lab_pages');
+        view()->share('table', 'users');
         view()->share('uploadfolder', $this->uploadfolder);
         view()->share('default_lang', \App\Languages::first());
 
-        view()->share('mod_name', 'Pagine');
+        view()->share('mod_name', 'User');
         view()->share('mod_action', 'Lista');
-        view()->share('mod_object', 'Pagine');
+        view()->share('mod_object', 'User');
     }
 
     /**
@@ -39,19 +41,18 @@ class PageController extends Controller
     {
         // for back button
         Session::put('backurl', $request->fullUrl());
-        $data['route_search'] = action('Lab\PageController@index');
+        $data['route_search'] = action('Lab\UserController@index');
 
         if ($request->has('key'))
-            $data['arrElements'] = \App\Page::whereHas('translations', function ($query) use ($request) {
-                                $query->where('locale', 'it')
-                                ->where('title', 'LIKE', '%'.$request->get('key').'%')
-                                ->orWhere('page_id', '=', $request->get('key'));
-                            })->paginate(50);
+            $data['arrElements'] = \App\user::where('name', 'LIKE', '%'.$request->get('key').'%')
+                                                ->orWhere('name', 'LIKE', '%'.$request->get('key').'%')
+                                                ->orWhere('email', 'LIKE', '%'.$request->get('key').'%')
+                                                ->orWhere('id', '=', $request->get('key'))
+                                                ->paginate(50);
         else
-            $data['arrElements'] = \App\Page::orderBy('id')->paginate(50);
+            $data['arrElements'] = \App\user::where('business', '=', '0')->orderBy('id')->paginate(50);
         
-        return view()->make('lab.page.index', $data);
-    }
+        return view()->make('lab.user.index', $data);    }
 
     /**
      * Show the form for creating a new resource.
@@ -60,12 +61,13 @@ class PageController extends Controller
      */
     public function create()
     {
-        $data['mod_action'] = 'Crea nuova';
-        $data['mod_object'] = 'Pagina';
+        $data['mod_action'] = 'Crea nuovo';
+        $data['mod_object'] = 'Utente';
 
-        $data['back'] = action('Lab\PageController@index');
-        $data['route'] = action('Lab\PageController@store');
-        return view()->make('lab.page.create', $data);
+        $data['back'] = action('Lab\UserController@index');
+        $data['route'] = action('Lab\UserController@store');
+
+        return view()->make('lab.user.create', $data);
     }
 
     /**
@@ -76,26 +78,26 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        // validator
-        $fieldsToValidate["title"] = "required";
+        $fieldsToValidate['name'] = 'required';
+        $fieldsToValidate['email'] = 'required|email';
+        $fieldsToValidate['password'] = 'required|min:6';
 
         $fields = $request->except('_token');
         $validator = Validator::make($fields, $fieldsToValidate);
         if (!$validator->fails()) {
-            $el = new \App\Page;
+            $el = new \App\User;
             foreach ($fields as $key => $value) {
                 $el->$key = $value;
+
+                if ($key == 'password' && $value) $el->$key = bcrypt($value);
             }
 
-            $el->uploadfolder = $this->uploadfolder;
-
-            $el->id_created_by = Auth::user()->id;
             if (!$el->save()){
                 return response()->json(array('error' => trans('labels.errore-sql')));
             }            
 
             $result['id'] = $el->id;
-            $result['route'] = action('Lab\PageController@edit', array($el->id));
+            $result['route'] = action('Lab\UserController@edit', array($el->id));
 
             return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result['route'])));
         }
@@ -105,7 +107,7 @@ class PageController extends Controller
                                     'error' => trans('labels.compilare_campi_obbligatori'),
                                     'errorfields' => $validator->messages()
                                 )
-                            );
+                            ); 
     }
 
     /**
@@ -127,16 +129,8 @@ class PageController extends Controller
      */
     public function edit($id)
     {
-
-        $data['mod_action'] = 'Modifica';
-        $data['mod_object'] = 'Pagina : ID '.$id;
-
-        $data['route'] = action('Lab\PageController@update', array($id));
-        $data['route_settings'] = action('Lab\PageController@settings', array($id));
-        $data['back'] = Session::get('backurl', action('Lab\PageController@index'));
-        $data['el'] = \App\Page::find($id);
-
-        return view()->make('lab.page.edit', $data);
+        $data['el'] = \App\user::find($id);
+        return view()->make('lab.user.edit', $data);
     }
 
     /**
@@ -148,20 +142,16 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fieldsToValidate["title"] = "required";
+        $fieldsToValidate = array();
 
-        $fields = $request->except('_token', 'lang');
+        $fields = $request->except('_token');
         $validator = Validator::make($fields, $fieldsToValidate);
         if (!$validator->fails()) {
-            $el = \App\Page::find($id);
+            $el = \App\User::find($id);
             foreach ($fields as $key => $value) {
-                $el->translateOrNew($request->get('lang'))->$key = $value;
-
-                // murl
-                if ($key == 'title') $el->translateOrNew($request->get('lang'))->murl = str_slug($value);                
+                $el->$key = $value;
             }
 
-            $el->id_updated_by = Auth::user()->id;
             if (!$el->save()){
                 return response()->json(array('error' => trans('labels.errore-sql')));
             }            
@@ -175,8 +165,37 @@ class PageController extends Controller
                                     'error' => trans('labels.compilare_campi_obbligatori'),
                                     'errorfields' => $validator->messages()
                                 )
-                            );        
-    
+                            );    
+    }
+
+    public function password(Request $request, $id)
+    {
+        $fieldsToValidate['password'] = 'required|min:6';
+
+        $fields = $request->except('_token');
+        $validator = Validator::make($fields, $fieldsToValidate);
+        if (!$validator->fails()) {
+            $el = \App\User::find($id);
+            foreach ($fields as $key => $value) {
+                $el->$key = $value;
+
+                if ($key == 'password' && $value) $el->$key = bcrypt($value);
+            }
+
+            if (!$el->save()){
+                return response()->json(array('error' => trans('labels.errore-sql')));
+            }            
+
+            $result['id'] = $el->id;
+            return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
+        }
+        
+        return response()->json(
+                                array(
+                                    'error' => trans('labels.compilare_campi_obbligatori'),
+                                    'errorfields' => $validator->messages()
+                                )
+                            );    
     }
 
     /**
@@ -187,61 +206,11 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        $el = \App\Page::find($id);
-
-        Storage::disk('docs')->deleteDirectory($el->uploadfolder.'/'.$el->id);
-
-        $el->delete();
-        $result['id'] = $id;
-        return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));                
-    }
-
-    public function settings(Request $request, $id)
-    {
-        $fieldsToValidate = array();
-
-        $fields = $request->except('_token');
-        $validator = Validator::make($fields, $fieldsToValidate);
-        if (!$validator->fails()) {
-            $el = \App\Page::find($id);
-            foreach ($fields as $key => $value) {
-                $el->$key = $value;
-            }
-
-            $el->id_updated_by = Auth::user()->id;
-            if (!$el->save()){
-                return response()->json(array('error' => trans('labels.errore-sql')));
-            }            
-
-            $result['id'] = $el->id;
-            return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
-        }
-        
-        return response()->json(
-                                array(
-                                    'error' => trans('labels.compilare_campi_obbligatori'),
-                                    'errorfields' => $validator->messages()
-                                )
-                            );        
-    }
-
-    public function deleteImg($id,$img) {
-        $el = \App\Page::find($id);
-
-        $storage = $el->uploadfolder.'/'.$el->id.'/';
-        $filename = $el->$img;
-
-        Storage::disk('docs')->delete($storage.$filename);
-
-        $el->$img = null;
-        $el->save();
-
-        $result['id'] = $el->id;
-        return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));        
+        //
     }
 
     public function changeFlag($id, $field) {
-        $el = \App\Page::find($id);
+        $el = \App\User::find($id);
 
         if ($el->$field) $el->$field = '0';
         else $el->$field = '1';
@@ -251,6 +220,5 @@ class PageController extends Controller
         $result['id'] = $el->id;
         $result['flag'] = $el->$field;
         return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
-    }
-
+    }    
 }

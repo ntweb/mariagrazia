@@ -424,6 +424,9 @@ function initUI() {
 			$(el).datepicker({ dateFormat: format });			
 		});
 
+		// tooltip
+		$('.tip').tooltip();
+
 		// tag input
 		$("textarea[name='mkeys']").each(function(i, el){
 			var attr = $(el).attr('id');

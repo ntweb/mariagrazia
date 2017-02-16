@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Lab;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class LoginController extends Controller
 {
@@ -19,6 +20,12 @@ class LoginController extends Controller
             return redirect()->intended(action('Lab\DashboardController@index'));
         }
         return redirect()->action('Lab\LoginController@login')->with('error', true);;
+    }
+
+    public function logout() {
+        Auth::logout();
+        Session::flush();
+        return redirect()->action('Lab\LoginController@login');        
     }
 
 }

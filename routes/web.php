@@ -22,6 +22,7 @@ $cms_folder = '_lab/';
 
 // Login
 Route::get($cms_folder, 'Lab\LoginController@login');
+Route::get($cms_folder.'logout', 'Lab\LoginController@logout');
 Route::post($cms_folder, 'Lab\LoginController@authenticate');
 
 // Dashbosrd
@@ -77,6 +78,11 @@ Route::get($cms_folder.'portfolio/delete/img/{id}/{img}', 'Lab\PortfolioControll
 Route::get($cms_folder.'portfolio/change/flag/{id}/{field}', 'Lab\PortfolioController@changeFlag');
 Route::put($cms_folder.'portfolio/registry/{id}', 'Lab\PortfolioController@registry');
 Route::put($cms_folder.'portfolio/settings/{id}', 'Lab\PortfolioController@settings');
+
+// User
+Route::resource($cms_folder.'user', 'Lab\UserController');
+Route::get($cms_folder.'user/change/flag/{id}/{field}', 'Lab\UserController@changeFlag');
+Route::put($cms_folder.'user/password/{id}', 'Lab\UserController@password');
 
 // Upload
 Route::get($cms_folder.'upload/{id}/{folder}', 'Lab\UploadController@index');

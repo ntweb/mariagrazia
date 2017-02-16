@@ -8,7 +8,7 @@
     <table class="table table-striped responsive">
         <thead>
             <tr>
-                <th class="center">{{trans('labels.active')}}</th>
+                <th class="center"><i class="fa fa-power-off" aria-hidden="true"></i></th>
                 <th>ID</th>
                 <th>{{trans('labels.title')}}</th>
                 <th>{{trans('labels.module')}}</th>
@@ -23,7 +23,7 @@
             <tr>
                 <td class="center">
                     <a href="javascript:void(0);" class="change-flag {{$active = $el->active ? 'colorGreen' : 'colorRed'}}" data-route="{{action('Lab\PageController@changeFlag', array($el->id, 'active'))}}">                        
-                        <i class="fa fa-circle" aria-hidden="true"></i>
+                        <i class="fa fa-circle tip" aria-hidden="true" data-placement="top" data-original-title="{{trans('labels.active')}} ?"></i>
                     </a>
                 </td>
                 <td>{{$el->id}}</td>

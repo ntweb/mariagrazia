@@ -24,8 +24,8 @@
             @if(request('type') || count($arrType) == 1)
                 <th></th>
             @endif
-                <th class="center">{{trans('labels.active')}}</th>
-                <th class="center">{{trans('labels.homepage')}}</th>
+                <th class="center"><i class="fa fa-power-off" aria-hidden="true"></i></th>
+                <th class="center"><i class="fa fa-home" aria-hidden="true"></i></th>
                 <th>ID</th>
                 <th>{{trans('labels.title')}}</th>
                 <th>{{trans('labels.type')}}</th>
@@ -43,13 +43,13 @@
                 <td class="handle"><i class="fa fa-sort" aria-hidden="true"></i></td>
             @endif
                 <td class="center">
-                    <a href="javascript:void(0);" class="change-flag {{$active = $el->active ? 'colorGreen' : 'colorRed'}}" data-route="{{action('Lab\PortfolioController@changeFlag', array($el->id, 'active'))}}">                        
-                        <i class="fa fa-circle" aria-hidden="true"></i>
+                    <a href="javascript:void(0);" class="change-flag {{$active = $el->active ? 'colorGreen' : 'colorRed'}}" data-route="{{action('Lab\NewsController@changeFlag', array($el->id, 'active'))}}">                        
+                        <i class="fa fa-circle tip" aria-hidden="true" data-placement="top" data-original-title="{{trans('labels.active')}} ?"></i>
                     </a>
                 </td>
                 <td class="center">
-                    <a href="javascript:void(0);" class="change-flag {{$homepage = $el->homepage ? 'colorGreen' : 'colorRed'}}" data-route="{{action('Lab\PortfolioController@changeFlag', array($el->id, 'homepage'))}}">                        
-                        <i class="fa fa-circle" aria-hidden="true"></i>
+                    <a href="javascript:void(0);" class="change-flag {{$homepage = $el->homepage ? 'colorGreen' : 'colorRed'}}" data-route="{{action('Lab\NewsController@changeFlag', array($el->id, 'homepage'))}}">                        
+                        <i class="fa fa-circle tip" aria-hidden="true" data-placement="top" data-original-title="{{trans('labels.homepage')}} ?"></i>
                     </a>
                 </td>
                 <td>{{$el->id}}</td>
