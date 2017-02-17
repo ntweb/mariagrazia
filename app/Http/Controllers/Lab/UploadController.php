@@ -28,7 +28,11 @@ class UploadController extends Controller
 
 		$fieldsToValidate = array();
     	foreach ($request->all() as $key => $v) {
-    		$pos = strpos($key, 'img');
+            $pos = strpos($key, 'img');
+            if ($pos !== false)
+                $fieldsToValidate[$key] = 'required|image|max:1000';
+
+    		$pos = strpos($key, 'background');
     		if ($pos !== false)
         		$fieldsToValidate[$key] = 'required|image|max:1000';
     	}

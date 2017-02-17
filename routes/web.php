@@ -118,6 +118,17 @@ Route::get($cms_folder.'po/delete/img/{id}/{img}', 'Lab\ProductoptionController@
 Route::get($cms_folder.'po/change/flag/{id}/{field}', 'Lab\ProductoptionController@changeFlag');
 Route::put($cms_folder.'po/settings/{id}', 'Lab\ProductoptionController@settings');
 
+// Banner
+Route::resource($cms_folder.'banner', 'Lab\BannerController');
+Route::get($cms_folder.'banner/delete/img/{id}/{img}', 'Lab\BannerController@deleteImg');
+Route::get($cms_folder.'banner/change/flag/{id}/{field}', 'Lab\BannerController@changeFlag');
+Route::put($cms_folder.'banner/settings/{id}', 'Lab\BannerController@settings');
+
+// Review
+Route::resource($cms_folder.'review', 'Lab\ReviewController');
+Route::get($cms_folder.'review/delete/img/{id}/{img}', 'Lab\ReviewController@deleteImg');
+Route::get($cms_folder.'review/change/flag/{id}/{field}', 'Lab\ReviewController@changeFlag');
+Route::put($cms_folder.'review/settings/{id}', 'Lab\ReviewController@settings');
 
 // Order
 Route::post($cms_folder.'order/{table}', 'Lab\OrderController@update');

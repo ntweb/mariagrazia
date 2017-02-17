@@ -225,6 +225,20 @@
                     </ul>
                 </li>                
 
+                <li class="dropdown"><a href=""><i class="fa fa-fw fa-bullhorn" aria-hidden="true"></i> Banner</a>
+                    <ul>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\BannerController@index')}}">Lista</a></li>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\BannerController@create')}}">Crea nuovo elemento</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown"><a href=""><i class="fa fa-fw fa-comments-o" aria-hidden="true"></i> Review</a>
+                    <ul>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\ReviewController@index')}}">Lista</a></li>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\ReviewController@create')}}">Crea nuovo elemento</a></li>
+                    </ul>
+                </li>
+
                 <li class="dropdown"><a href=""><i class="fa fa-fw fa-cog" aria-hidden="true"></i> Parametri</a>
                     <ul>
                         @foreach ($arrParameters as $el)                        

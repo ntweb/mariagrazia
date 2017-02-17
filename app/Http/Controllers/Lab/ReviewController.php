@@ -11,10 +11,10 @@ use Log;
 use Session;
 use Storage;
 
-class NewsController extends Controller
+class ReviewController extends Controller
 {
 
-    protected $uploadfolder = 'news';
+    protected $uploadfolder = 'reviews';
     protected $arrType;
     protected $default_lang;
 
@@ -23,17 +23,17 @@ class NewsController extends Controller
         parent::__construct();
         $this->middleware('auth');
 
-        view()->share('table', 'lab_news');
+        view()->share('table', 'lab_reviews');
         view()->share('uploadfolder', $this->uploadfolder);
         $this->default_lang = \App\Languages::first();
         view()->share('default_lang', $this->default_lang);
 
-        view()->share('mod_name', 'News / Articoli / Blog');
+        view()->share('mod_name', 'Review');
         view()->share('mod_action', 'Lista');
-        view()->share('mod_object', 'News');
+        view()->share('mod_object', 'Review');
 
         // Tipologie
-        $el = \App\Parameter::where('module', '=', 'type')->where('label', '=', 'news')->first();
+        $el = \App\Parameter::where('module', '=', 'type')->where('label', '=', 'review')->first();
         $this->arrType = explode(',', $el->value);
         view()->share('arrType', $this->arrType);
     }
@@ -48,24 +48,21 @@ class NewsController extends Controller
             
         // for back button
         Session::put('backurl', $request->fullUrl());
-        $data['route_search'] = action('Lab\NewsController@index');
+        $data['route_search'] = action('Lab\ReviewController@index');
 
         if ($request->has('key'))
-            $query = \App\News::whereHas('translations', function ($query) use ($request) {
-                                $query->where('locale', 'it')
-                                ->where('title', 'LIKE', '%'.$request->get('key').'%')
-                                ->orWhere('news_id', '=', $request->get('key'));
-                            });
+            $query = \App\Review::where('id', '=', $request->get('key'))
+                                    ->orWhere('name', 'LIKE', '%'.$request->get('key').'%')
+                                    ->orWhere('title', 'LIKE', '%'.$request->get('key').'%');
         else
-            $query = \App\News::orderBy('order')->orderBy('id', 'desc');
-
+            $query = \App\Review::orderBy('order')->orderBy('id', 'desc');
 
         // filter type
         if ($request->has('type'))
             $query->where('type', '=', $request->get('type'));
 
         $data['arrElements'] = $query->paginate(50);
-        return view()->make('lab.news.index', $data);
+        return view()->make('lab.review.index', $data);
     }
 
     /**
@@ -76,12 +73,12 @@ class NewsController extends Controller
     public function create()
     {
         $data['mod_action'] = 'Crea nuovo elemento';
-        $data['mod_object'] = 'News / Articolo / Blog';
+        $data['mod_object'] = 'Review';
 
-        $data['back'] = action('Lab\NewsController@index');
-        $data['route'] = action('Lab\NewsController@store');
+        $data['back'] = action('Lab\ReviewController@index');
+        $data['route'] = action('Lab\ReviewController@store');
 
-        return view()->make('lab.news.create', $data);
+        return view()->make('lab.review.create', $data);
     }
 
     /**
@@ -98,16 +95,9 @@ class NewsController extends Controller
         $fields = $request->except('_token');
         $validator = Validator::make($fields, $fieldsToValidate);
         if (!$validator->fails()) {
-            $el = new \App\News;
+            $el = new \App\Review;
             foreach ($fields as $key => $value) {
                 $el->$key = $value;
-
-                // mtitle and murl
-                if ($key == 'title') {
-                    $el->translateOrNew($request->get('lang'))->mtitle = $value;                
-                    $el->translateOrNew($request->get('lang'))->murl = str_slug($value);                
-                }
-              
             }
 
             // default 
@@ -120,7 +110,7 @@ class NewsController extends Controller
             }            
 
             $result['id'] = $el->id;
-            $result['route'] = action('Lab\NewsController@edit', array($el->id));
+            $result['route'] = action('Lab\ReviewController@edit', array($el->id));
 
             return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result['route'])));
         }
@@ -154,14 +144,14 @@ class NewsController extends Controller
     {
 
         $data['mod_action'] = 'Modifica';
-        $data['mod_object'] = 'News : ID '.$id;
+        $data['mod_object'] = 'Review : ID '.$id;
 
-        $data['route'] = action('Lab\NewsController@update', array($id));
-        $data['route_settings'] = action('Lab\NewsController@settings', array($id));
-        $data['back'] = Session::get('backurl', action('Lab\NewsController@index'));
-        $data['el'] = \App\News::find($id);
+        $data['route'] = action('Lab\ReviewController@update', array($id));
+        $data['route_settings'] = action('Lab\ReviewController@settings', array($id));
+        $data['back'] = Session::get('backurl', action('Lab\ReviewController@index'));
+        $data['el'] = \App\Review::find($id);
 
-        return view()->make('lab.news.edit', $data);
+        return view()->make('lab.review.edit', $data);
     }
 
     /**
@@ -174,16 +164,16 @@ class NewsController extends Controller
     public function update(Request $request, $id)
     {
         $fieldsToValidate["title"] = "required";
+        $fieldsToValidate["name"] = "required";
+        $fieldsToValidate['email'] = 'sometimes|nullable|email';
+        $fieldsToValidate['site'] = 'sometimes|nullable|url';
 
         $fields = $request->except('_token', 'lang');
         $validator = Validator::make($fields, $fieldsToValidate);
         if (!$validator->fails()) {
-            $el = \App\News::find($id);
+            $el = \App\Review::find($id);
             foreach ($fields as $key => $value) {
-                $el->translateOrNew($request->get('lang'))->$key = $value;
-
-                // murl
-                if ($key == 'murl') $el->translateOrNew($request->get('lang'))->murl = str_slug($value);
+                $el->$key = $value;
             }
 
             $el->id_updated_by = Auth::user()->id;
@@ -212,7 +202,7 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        $el = \App\News::find($id);
+        $el = \App\Review::find($id);
 
         Storage::disk('docs')->deleteDirectory($el->uploadfolder.'/'.$el->id);
 
@@ -228,7 +218,7 @@ class NewsController extends Controller
         $fields = $request->except('_token');
         $validator = Validator::make($fields, $fieldsToValidate);
         if (!$validator->fails()) {
-            $el = \App\News::find($id);
+            $el = \App\Review::find($id);
             foreach ($fields as $key => $value) {
                 $el->$key = $value;
 
@@ -253,7 +243,7 @@ class NewsController extends Controller
     }
 
     public function deleteImg($id,$img) {
-        $el = \App\News::find($id);
+        $el = \App\Review::find($id);
 
         $storage = $el->uploadfolder.'/'.$el->id.'/';
         $filename = $el->$img;
@@ -268,7 +258,7 @@ class NewsController extends Controller
     }
 
     public function changeFlag($id, $field) {
-        $el = \App\News::find($id);
+        $el = \App\Review::find($id);
 
         if ($el->$field) $el->$field = '0';
         else $el->$field = '1';
@@ -279,5 +269,4 @@ class NewsController extends Controller
         $result['flag'] = $el->$field;
         return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
     }
-
 }
