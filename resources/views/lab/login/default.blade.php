@@ -22,6 +22,7 @@
 <script src="{{url('assets/lab/js/modernizr.min.js')}}"></script>
 <script src="{{url('assets/lab/js/jquery.cookies.js')}}"></script>
 <script src="{{url('assets/lab/js/custom.js')}}"></script>
+<link rel="stylesheet" href="{{url('assets/lab/css/style.navyblue.css')}}" />
 
 </head>
 

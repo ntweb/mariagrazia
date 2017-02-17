@@ -8,6 +8,7 @@
 <title>Artisan Lab - Admin CMS - 2.0</title>
 <link rel="stylesheet" href="{{url('assets/lab/css/style.default.css')}}" type="text/css" />
 
+<link rel="shortcut icon" href="{{url('assets/imgages/favicon.png')}}">
 
 <link rel="stylesheet" href="{{url('assets/lab/css/style.default.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/responsive-tables.css')}}" />
@@ -18,6 +19,7 @@
 <link rel="stylesheet" href="{{url('assets/lab/js/plupload/js/jquery.ui.plupload/css/jquery.ui.plupload.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/jquery.googlePreviewSnippet.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/style.css')}}" />
+<link rel="stylesheet" href="{{url('assets/lab/css/style.navyblue.css')}}" />
     
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
