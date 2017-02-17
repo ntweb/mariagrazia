@@ -130,6 +130,12 @@ Route::get($cms_folder.'review/delete/img/{id}/{img}', 'Lab\ReviewController@del
 Route::get($cms_folder.'review/change/flag/{id}/{field}', 'Lab\ReviewController@changeFlag');
 Route::put($cms_folder.'review/settings/{id}', 'Lab\ReviewController@settings');
 
+// Coupon
+Route::resource($cms_folder.'coupon', 'Lab\CouponController');
+Route::get($cms_folder.'coupon/delete/img/{id}/{img}', 'Lab\CouponController@deleteImg');
+Route::get($cms_folder.'coupon/change/flag/{id}/{field}', 'Lab\CouponController@changeFlag');
+Route::put($cms_folder.'coupon/settings/{id}', 'Lab\CouponController@settings');
+
 // Order
 Route::post($cms_folder.'order/{table}', 'Lab\OrderController@update');
 

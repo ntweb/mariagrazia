@@ -6,11 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <title>Artisan Lab - Admin CMS - 2.0</title>
-<link rel="stylesheet" href="{{url('assets/lab/css/style.default.css')}}" type="text/css" />
 
-<link rel="shortcut icon" href="{{url('assets/imgages/favicon.png')}}">
+<link rel="shortcut icon" type="image/x-icon" href="{{url('assets/lab/images/favicon.png')}}">
 
+<link rel="stylesheet" href="{{url('assets/lab/css/style.navyblue.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/style.default.css')}}" />
+
 <link rel="stylesheet" href="{{url('assets/lab/css/responsive-tables.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/font-awesome.min.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/js/summernote/codemirror.css')}}" />
@@ -19,7 +20,6 @@
 <link rel="stylesheet" href="{{url('assets/lab/js/plupload/js/jquery.ui.plupload/css/jquery.ui.plupload.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/jquery.googlePreviewSnippet.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/style.css')}}" />
-<link rel="stylesheet" href="{{url('assets/lab/css/style.navyblue.css')}}" />
     
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -241,6 +241,15 @@
                     </ul>
                 </li>
 
+                <li class="dropdown"><a href=""><i class="fa fa-fw fa-shopping-cart" aria-hidden="true"></i> Ecommerce</a>
+                    <ul>
+                        <li class="dropdown" style="background-color: #c1bfbf;"><a href="#"><b>Coupon</b></a>
+                        <ul>
+                            <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\CouponController@index')}}">Lista</a></li>
+                            <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\CouponController@create')}}">Crea nuovo elemento</a></li>
+                        </ul>
+                    </ul>
+                </li> 
                 <li class="dropdown"><a href=""><i class="fa fa-fw fa-cog" aria-hidden="true"></i> Parametri</a>
                     <ul>
                         @foreach ($arrParameters as $el)                        
