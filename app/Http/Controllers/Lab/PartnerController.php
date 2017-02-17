@@ -182,7 +182,7 @@ class PartnerController extends Controller
                 $el->translateOrNew($request->get('lang'))->$key = $value;
 
                 // murl
-                if ($key == 'title') $el->translateOrNew($request->get('lang'))->murl = str_slug($value);
+                if ($key == 'murl') $el->translateOrNew($request->get('lang'))->murl = str_slug($value);
             }
 
             $el->id_updated_by = Auth::user()->id;

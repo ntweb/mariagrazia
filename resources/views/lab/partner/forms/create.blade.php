@@ -60,10 +60,10 @@
             </span>
         </p>
 
-        <p style="display: none;">
+        <p>
             <label>{{trans('labels.murl')}}</label>
             <span class="field">
-                <input type="text" class="form-control google-snippet" id="murl-{{$l->lang}}" data-v="{{$l->lang}}" value="{{@$el->translate($l->lang)->murl}}" />
+                <input type="text" name="murl" class="form-control google-snippet" id="murl-{{$l->lang}}" data-v="{{$l->lang}}" value="{{@$el->translate($l->lang)->murl}}" />
             </span>
         </p>
 

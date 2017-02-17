@@ -217,7 +217,7 @@ var maincontainer = '#rpc-container'; // containe rprincipale per risultati RPC
 		var snippet = $('#snippet-' + lang);
 		var title = $('#mtitle-' + lang).val();
 		var description = $('#mdescription-' + lang).val();
-		var murl = 'www.domain.com/' + $('#murl-' + lang).val();
+		var murl = 'www.domain.com/' + slugify($('#murl-' + lang).val());
 
 		$(snippet).serpSnippet({
 			title: title,
@@ -426,6 +426,16 @@ function refreshCalendar() {
 	(function($) {
 	$('#event-calendar').fullCalendar('refetchEvents');
 	})(jQuery);
+}
+
+function slugify(text)
+{
+  return text.toString().toLowerCase()
+    .replace(/\s+/g, '-')           // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+    .replace(/^-+/, '')             // Trim - from start of text
+    .replace(/-+$/, '');            // Trim - from end of text
 }
 
 function initUI() {
