@@ -107,6 +107,10 @@ class StaffController extends Controller
             $el->type = $this->arrType[0];
             $el->title = $el->name." ".$el->lastname;
 
+            // mtitle and murl
+            $el->translateOrNew($request->get('lang'))->mtitle = $el->title;
+            $el->translateOrNew($request->get('lang'))->murl = str_slug($el->title);
+
             $el->id_created_by = Auth::user()->id;
             if (!$el->save()){
                 return response()->json(array('error' => trans('labels.errore-sql')));

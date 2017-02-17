@@ -212,6 +212,21 @@ var maincontainer = '#rpc-container'; // containe rprincipale per risultati RPC
 		}, 'json');	
 	});
 
+	$(document).on('keyup','.google-snippet', function(){
+		var lang = $(this).data('v');
+		var snippet = $('#snippet-' + lang);
+		var title = $('#mtitle-' + lang).val();
+		var description = $('#mdescription-' + lang).val();
+		var murl = 'www.domain.com/' + $('#murl-' + lang).val();
+
+		$(snippet).serpSnippet({
+			title: title,
+			url: murl,
+		    description: description,
+		    search: ""
+		});		
+	});
+
 })(jQuery);
 
 function getHtml(route, container, callback, confirmmsg) {
@@ -441,6 +456,9 @@ function initUI() {
 		});
 
 		$('.preview').anarchytip();
+
+		// Google Serp snippet 
+		$("input.google-snippet[name='mtitle']").trigger('keyup');
 
 		// color picker
 		if(jQuery('#colorpicker').length > 0) {

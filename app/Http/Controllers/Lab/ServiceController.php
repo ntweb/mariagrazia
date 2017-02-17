@@ -101,6 +101,13 @@ class ServiceController extends Controller
             $el = new \App\Service;
             foreach ($fields as $key => $value) {
                 $el->$key = $value;
+
+                // mtitle and murl
+                if ($key == 'title') {
+                    $el->translateOrNew($request->get('lang'))->mtitle = $value;                
+                    $el->translateOrNew($request->get('lang'))->murl = str_slug($value);                
+                }
+              
             }
 
             // default 

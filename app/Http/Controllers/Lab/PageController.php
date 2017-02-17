@@ -85,6 +85,13 @@ class PageController extends Controller
             $el = new \App\Page;
             foreach ($fields as $key => $value) {
                 $el->$key = $value;
+
+                // mtitle and murl
+                if ($key == 'title') {
+                    $el->translateOrNew($request->get('lang'))->mtitle = $value;                
+                    $el->translateOrNew($request->get('lang'))->murl = str_slug($value);                
+                }
+
             }
 
             $el->uploadfolder = $this->uploadfolder;
@@ -158,7 +165,7 @@ class PageController extends Controller
                 $el->translateOrNew($request->get('lang'))->$key = $value;
 
                 // murl
-                if ($key == 'title') $el->translateOrNew($request->get('lang'))->murl = str_slug($value);                
+                if ($key == 'title') $el->translateOrNew($request->get('lang'))->murl = str_slug($value);
             }
 
             $el->id_updated_by = Auth::user()->id;
