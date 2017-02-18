@@ -42,8 +42,8 @@ class LoginController extends Controller
 
     protected function redirectTo()
     {
-        Log::info(URL::previous());
-        Log::info(action('Lab\LoginController@login'));
+        // Log::info(URL::previous());
+        // Log::info(action('Lab\LoginController@login'));
         if (URL::previous() == action('Lab\LoginController@login'))
             return '/lab/home';
         

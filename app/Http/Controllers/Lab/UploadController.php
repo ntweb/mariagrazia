@@ -20,7 +20,7 @@ class UploadController extends Controller
         $this->middleware('auth');
 
         view()->share('table', 'lab_uploads');
-        view()->share('default_lang', \App\Languages::first());
+        view()->share('default_lang', \App\Language::first());
     }
 
     // upload cms images
@@ -182,7 +182,6 @@ class UploadController extends Controller
     }
 
     public function delete($id) {
-        Log::info('entroooo');
     	$el = \App\Upload::find($id);
     	if ($el->delete()) {
 

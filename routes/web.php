@@ -10,13 +10,53 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
+Route::group(
+[
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => [ 'localize', 'localeSessionRedirect', 'localizationRedirect' ]
+],
+function()
+{
+
+	Route::get('/', 'Web\HomepageController@index');
+
+	// Page	
+	Route::get('/'.LaravelLocalization::transRoute('routes.page_show'), 'Web\PageController@show');
+
+	// News
+	Route::get('/'.LaravelLocalization::transRoute('routes.news'), 'Web\NewsController@index');
+	Route::get('/'.LaravelLocalization::transRoute('routes.news_show'), 'Web\NewsController@show');
+
+	// Blog
+	Route::get('/'.LaravelLocalization::transRoute('routes.blog'), 'Web\BlogController@index');
+	Route::get('/'.LaravelLocalization::transRoute('routes.blog_show'), 'Web\BlogController@show');
+
+	// Service
+	Route::get('/'.LaravelLocalization::transRoute('routes.service'), 'Web\ServiceController@index');
+	Route::get('/'.LaravelLocalization::transRoute('routes.service_show'), 'Web\ServiceController@show');
+
+	// Staff	
+	Route::get('/'.LaravelLocalization::transRoute('routes.staff_show'), 'Web\StaffController@show');
+
+	// Photogallery
+	Route::get('/'.LaravelLocalization::transRoute('routes.photogallery'), 'Web\PhotogalleryController@index');
+	Route::get('/'.LaravelLocalization::transRoute('routes.photogallery_show'), 'Web\PhotogalleryController@show');
+
+	// Videogallery
+	Route::get('/'.LaravelLocalization::transRoute('routes.videogallery'), 'Web\VideogalleryController@index');
+	Route::get('/'.LaravelLocalization::transRoute('routes.videogallery_show'), 'Web\VideogalleryController@show');
+
+	// Portfolio
+	Route::get('/'.LaravelLocalization::transRoute('routes.portfolio'), 'Web\PortfolioController@index');
+	Route::get('/'.LaravelLocalization::transRoute('routes.portfolio_show'), 'Web\PortfolioController@show');
+
+});
+
+Route::post('/review', 'Web\ReviewController@store');
+
+// ******************************************************************************* //
 // CMS Route
 $cms_folder = '_lab/';
 

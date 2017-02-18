@@ -12,8 +12,11 @@ class Review extends Model
     	if ($this->type == 'news')
 			return $this->belongsTo('\App\News','id_el');
 
-    	if ($this->type == 'product')
-			return $this->belongsTo('\App\Product','id_el');
+        if ($this->type == 'product')
+            return $this->belongsTo('\App\Product','id_el');
+
+    	if ($this->type == 'pages')
+			return $this->belongsTo('\App\Page','id_el');
     }
 
     public function created_by(){
@@ -23,4 +26,11 @@ class Review extends Model
     public function updated_by(){
 		return $this->belongsTo('\App\User','id_updated_by');
     }
+
+    public function scopeActive ($query, $active = '1') {
+        if ($active)
+            return $query->where('active','=',$active);
+
+        return $query;
+    }       
 }

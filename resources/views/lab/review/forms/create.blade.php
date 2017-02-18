@@ -62,9 +62,11 @@
 
         <p>
             <label>{{trans('labels.description')}}</label>
-            <span class="field">
-                <textarea name="description" class="summernote">{{@$el->description}}</textarea>
-            </span>
+            <div class="field">
+                <div class="alert alert-info">                    
+                    {!! @$el->description !!}
+                </div>
+            </div>
         </p>
 
         <p>

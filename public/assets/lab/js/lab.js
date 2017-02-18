@@ -1,4 +1,4 @@
-var maincontainer = '#rpc-container'; // containe rprincipale per risultati RPC
+var maincontainer = '#rpc-container'; // container rprincipale per risultati RPC
 
 (function($) {
 

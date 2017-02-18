@@ -25,9 +25,11 @@
                 <th class="center"><i class="fa fa-home" aria-hidden="true"></i></th>
                 <th>ID</th>
                 <th>{{trans('labels.title')}}</th>
-                <th>{{trans('labels.name')}}</th>                                
-                <th>{{trans('labels.type')}}</th>                                
-                <th>{{trans('labels.element')}}</th>                                
+                <th>{{trans('labels.name')}}</th>
+                <th>{{trans('labels.type')}}</th>
+                <th>{{trans('labels.vote')}}</th>
+                <th class="right">ID EL:</th>
+                <th>{{trans('labels.element')}}</th>
                 <th>{{trans('labels.created_at')}}</th>
                 <th>{{trans('labels.updated_at')}}</th>
                 <th></th>
@@ -50,6 +52,12 @@
                 <td>{{$el->title}}</td>
                 <td>{{$el->name}}</td>
                 <td>{{$el->type}}</td>
+                <td>
+                @for ($i = 0; $i < 5; $i++)
+                    <i class="fa fa-star @if($i < $el->vote) colorYellow @else colorGrey @endif" aria-hidden="true"></i>
+                @endfor
+                </td>
+                <td class="right">{{$el->id_el}}</td>
                 <td>{{$el->el->title}}</td>
                 <td>{{date($default_lang->datetime, strtotime($el->created_at))}}</td>
                 <td>{{date($default_lang->datetime, strtotime($el->updated_at))}}</td>

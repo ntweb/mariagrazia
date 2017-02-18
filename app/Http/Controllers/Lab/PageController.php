@@ -23,7 +23,7 @@ class PageController extends Controller
 
         view()->share('table', 'lab_pages');
         view()->share('uploadfolder', $this->uploadfolder);
-        view()->share('default_lang', \App\Languages::first());
+        view()->share('default_lang', \App\Language::first());
 
         view()->share('mod_name', 'Pagine');
         view()->share('mod_action', 'Lista');

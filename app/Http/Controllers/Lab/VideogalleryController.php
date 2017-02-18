@@ -25,7 +25,7 @@ class VideogalleryController extends Controller
 
         view()->share('table', 'lab_videogalleries');
         view()->share('uploadfolder', $this->uploadfolder);
-        $this->default_lang = \App\Languages::first();
+        $this->default_lang = \App\Language::first();
         view()->share('default_lang', $this->default_lang);
 
         view()->share('mod_name', 'Videogallery');

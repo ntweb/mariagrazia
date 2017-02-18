@@ -25,7 +25,7 @@ class UserController extends Controller
 
         view()->share('table', 'users');
         view()->share('uploadfolder', $this->uploadfolder);
-        view()->share('default_lang', \App\Languages::first());
+        view()->share('default_lang', \App\Language::first());
 
         view()->share('mod_name', 'User');
         view()->share('mod_action', 'Lista');

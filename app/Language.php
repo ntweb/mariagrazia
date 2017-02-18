@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Languages extends Model
+class Language extends Model
 {
     protected $table = 'lab_languages';
 }

@@ -14,7 +14,7 @@ class Controller extends BaseController
    public function __construct() {
 
    		// Languages   		
-   		view()->share ('languages', \App\Languages::all());
+   		view()->share ('languages', \App\Language::all());
     }
      
 }
