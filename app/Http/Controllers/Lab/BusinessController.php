@@ -11,10 +11,10 @@ use Log;
 use Session;
 use Storage;
 
-class UserController extends Controller
+class BusinessController extends Controller
 {
 
-    protected $uploadfolder = 'users';
+    protected $uploadfolder = 'business';
     protected $arrType;
     protected $default_lang;
 
@@ -23,13 +23,14 @@ class UserController extends Controller
         parent::__construct();
         $this->middleware('auth');
 
-        view()->share('table', 'users');
+        view()->share('table', 'lab_business');
         view()->share('uploadfolder', $this->uploadfolder);
-        view()->share('default_lang', \App\Language::first());
+        $this->default_lang = \App\Language::first();
+        view()->share('default_lang', $this->default_lang);
 
-        view()->share('mod_name', 'User');
+        view()->share('mod_name', 'Business');
         view()->share('mod_action', 'Lista');
-        view()->share('mod_object', 'User');
+        view()->share('mod_object', 'Business');
     }
 
     /**
@@ -39,20 +40,26 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+            
         // for back button
         Session::put('backurl', $request->fullUrl());
-        $data['route_search'] = action('Lab\UserController@index');
+        $data['route_search'] = action('Lab\BusinessController@index');
 
         if ($request->has('key'))
-            $data['arrElements'] = \App\user::where('name', 'LIKE', '%'.$request->get('key').'%')
-                                                ->orWhere('name', 'LIKE', '%'.$request->get('key').'%')
-                                                ->orWhere('email', 'LIKE', '%'.$request->get('key').'%')
-                                                ->orWhere('id', '=', $request->get('key'))
-                                                ->paginate(50);
+            $query = \App\User::where('business', '=', '1')
+                                ->where(function ($query) use ($request) {
+                                    $query->where('id', '=', $request->get('key'))
+                                    ->orWhere('name', 'LIKE', '%'.$request->get('key').'%')
+                                    ->orWhere('lastname', 'LIKE', '%'.$request->get('key').'%')
+                                    ->orWhere('email', 'LIKE', '%'.$request->get('key').'%');
+                                });
+
         else
-            $data['arrElements'] = \App\user::where('business', '=', '0')->orderBy('id')->paginate(50);
-        
-        return view()->make('lab.user.index', $data);    }
+            $query = \App\User::where('business', '=', '1')->orderBy('id', 'desc');
+
+        $data['arrElements'] = $query->paginate(50);
+        return view()->make('lab.business.index', $data);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -61,13 +68,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $data['mod_action'] = 'Crea nuovo';
-        $data['mod_object'] = 'Utente';
-
-        $data['back'] = action('Lab\UserController@index');
-        $data['route'] = action('Lab\UserController@store');
-
-        return view()->make('lab.user.create', $data);
+        //
     }
 
     /**
@@ -78,42 +79,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $fieldsToValidate['name'] = 'required';
-        $fieldsToValidate['email'] = 'required|email';
-        $fieldsToValidate['password'] = 'required|min:6';
-
-        $fields = $request->except('_token');
-        $validator = Validator::make($fields, $fieldsToValidate);
-        if (!$validator->fails()) {
-            $el = new \App\User;
-            foreach ($fields as $key => $value) {
-                $el->$key = $value;
-
-                if ($key == 'password' && $value) $el->$key = bcrypt($value);
-            }
-
-            if (!$el->save()){
-                return response()->json(array('error' => trans('labels.errore-sql')));
-            }            
-
-            $result['id'] = $el->id;
-            $result['route'] = action('Lab\UserController@edit', array($el->id));
-
-            // make business
-            $b = new \App\Business;
-            $b->businessname = $request->get('name').' '.$request->get('lastname');
-            $b->id_user = $el->id;
-            $b->save();
-
-            return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result['route'])));
-        }
-        
-        return response()->json(
-                                array(
-                                    'error' => trans('labels.compilare_campi_obbligatori'),
-                                    'errorfields' => $validator->messages()
-                                )
-                            ); 
+        //
     }
 
     /**
@@ -135,8 +101,16 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $data['el'] = \App\user::find($id);
-        return view()->make('lab.user.edit', $data);
+        $data['el'] = \App\User::find($id);
+
+        $data['mod_action'] = 'Modifica';
+        $data['mod_object'] = 'Business : ID '.$id;
+
+        $data['route'] = action('Lab\BusinessController@update', array($data['el']->b->id));
+        $data['route_settings'] = action('Lab\BusinessController@settings', array($id));
+        $data['back'] = Session::get('backurl', action('Lab\BusinessController@index'));
+
+        return view()->make('lab.business.edit', $data);
     }
 
     /**
@@ -147,6 +121,47 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
+    {
+        $fieldsToValidate["businessname"] = "required";
+
+        $fields = $request->except('_token', 'lang');
+        $validator = Validator::make($fields, $fieldsToValidate);
+        if (!$validator->fails()) {
+            $el = \App\Business::find($id);
+            foreach ($fields as $key => $value) {
+                $el->$key = $value;
+            }
+
+            $el->id_updated_by = Auth::user()->id;
+            if (!$el->save()){
+                return response()->json(array('error' => trans('labels.errore-sql')));
+            }            
+
+            $result['id'] = $el->id;
+            return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
+        }
+        
+        return response()->json(
+                                array(
+                                    'error' => trans('labels.compilare_campi_obbligatori'),
+                                    'errorfields' => $validator->messages()
+                                )
+                            );        
+    
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //                
+    }
+
+    public function settings(Request $request, $id)
     {
         $fieldsToValidate = array();
 
@@ -171,48 +186,7 @@ class UserController extends Controller
                                     'error' => trans('labels.compilare_campi_obbligatori'),
                                     'errorfields' => $validator->messages()
                                 )
-                            );    
-    }
-
-    public function password(Request $request, $id)
-    {
-        $fieldsToValidate['password'] = 'required|min:6';
-
-        $fields = $request->except('_token');
-        $validator = Validator::make($fields, $fieldsToValidate);
-        if (!$validator->fails()) {
-            $el = \App\User::find($id);
-            foreach ($fields as $key => $value) {
-                $el->$key = $value;
-
-                if ($key == 'password' && $value) $el->$key = bcrypt($value);
-            }
-
-            if (!$el->save()){
-                return response()->json(array('error' => trans('labels.errore-sql')));
-            }            
-
-            $result['id'] = $el->id;
-            return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
-        }
-        
-        return response()->json(
-                                array(
-                                    'error' => trans('labels.compilare_campi_obbligatori'),
-                                    'errorfields' => $validator->messages()
-                                )
-                            );    
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+                            );        
     }
 
     public function changeFlag($id, $field) {
@@ -226,5 +200,5 @@ class UserController extends Controller
         $result['id'] = $el->id;
         $result['flag'] = $el->$field;
         return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
-    }    
+    }
 }

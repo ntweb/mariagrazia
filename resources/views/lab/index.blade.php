@@ -248,8 +248,15 @@
                             <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\CouponController@index')}}">Lista</a></li>
                             <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\CouponController@create')}}">Crea nuovo elemento</a></li>
                         </ul>
+                    </ul>                    
+                </li>
+
+                <li class="dropdown"><a href=""><i class="fa fa-fw fa-user-circle-o" aria-hidden="true"></i> Utenti registrati</a>
+                    <ul>
+                        <li><a href="javascript:void(0)" class="get-html" data-route="{{action('Lab\BusinessController@index')}}">Lista</a></li>
                     </ul>
-                </li> 
+                </li>                 
+
                 <li class="dropdown"><a href=""><i class="fa fa-fw fa-cog" aria-hidden="true"></i> Parametri</a>
                     <ul>
                         @foreach ($arrParameters as $el)                        
@@ -260,7 +267,6 @@
                         @endforeach
                     </ul>
                 </li>
-
             </ul>
         </div><!--leftmenu-->
         

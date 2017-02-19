@@ -176,6 +176,11 @@ Route::get($cms_folder.'coupon/delete/img/{id}/{img}', 'Lab\CouponController@del
 Route::get($cms_folder.'coupon/change/flag/{id}/{field}', 'Lab\CouponController@changeFlag');
 Route::put($cms_folder.'coupon/settings/{id}', 'Lab\CouponController@settings');
 
+// Business
+Route::resource($cms_folder.'business', 'Lab\BusinessController');
+Route::get($cms_folder.'business/change/flag/{id}/{field}', 'Lab\BusinessController@changeFlag');
+Route::put($cms_folder.'business/settings/{id}', 'Lab\BusinessController@settings');
+
 // Order
 Route::post($cms_folder.'order/{table}', 'Lab\OrderController@update');
 

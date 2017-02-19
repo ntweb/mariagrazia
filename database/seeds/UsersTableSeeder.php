@@ -21,5 +21,11 @@ class UsersTableSeeder extends Seeder
             'administrator' => '1',
             'active' => '1',
         ]);
+
+        DB::table('lab_business')->insert([
+            'businessname' => 'Admin',
+            'id_user' => 1,
+        ]);
+
     }
 }

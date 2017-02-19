@@ -14,8 +14,8 @@ class AddLimitedFieldToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->enum('business', [0,1])->after('editor');
-            $table->enum('limited', [0,1])->after('business');
+            $table->enum('business', [0,1])->after('lastname');
+            $table->enum('limited', [0,1])->after('editor');
         });
     }
 
