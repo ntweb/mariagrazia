@@ -1,7 +1,7 @@
 <tr>
     <td class="header">
-        <a href="{{ $url }}">
-            {{ $slot }}
+        <a href="{{ url('/') }}">
+            {{ env('MAIL_SITE_NAME') }}
         </a>
     </td>
 </tr>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{App::getLocale()}}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,26 +23,67 @@
   </head>
   <body>
 
-    <ul>
-      <li><a href="{{action('Web\HomepageController@index')}}">Home</a></li>
-      <li><a href="{{action('Web\NewsController@index')}}">News</a></li>
-      <li><a href="{{action('Web\BlogController@index')}}">Blog</a></li>
-      <li><a href="{{action('Web\PageController@show', array(1, 'titolo-della-pagina'))}}">Pagina</a></li>
-      <li><a href="{{action('Web\ServiceController@index')}}">Servizi</a></li>
-      <li><a href="{{action('Web\StaffController@show', array(1, 'titolo-della-persona'))}}">Staff</a></li>
-      <li><a href="{{action('Web\PhotogalleryController@index')}}">Photogallery</a></li>
-      <li><a href="{{action('Web\VideogalleryController@index')}}">Videogallery</a></li>
-      <li><a href="{{action('Web\PortfolioController@index')}}">Portfolio</a></li>
 
-      @if (!isset($route_loalization_resource))
-        <li><a href="{{ LaravelLocalization::getLocalizedURL('it') }}">Italiano no risorsa</a></li>
-        <li><a href="{{ LaravelLocalization::getLocalizedURL('en') }}">English no risorsa</a></li>
-      @else
-        <li><a href="{{ LaravelLocalization::getURLFromRouteNameTranslated('it', $route_loalization_resource, $route_loalization_resource_param['it']) }}">Italiano Risorsa</a></li>
-        <li><a href="{{ LaravelLocalization::getURLFromRouteNameTranslated('en', $route_loalization_resource, $route_loalization_resource_param['en']) }}">English Risorsa</a></li>
-      @endif
-    </ul>
-    
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>          
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <?php $rname = Route::currentRouteName(); ?>
+            <li @if($rname == 'home') class="active" @endif><a href="{{action('Web\HomepageController@index')}}">Home</a></li>
+            <li @if($rname == 'news') class="active" @endif><a href="{{action('Web\NewsController@index')}}">News</a></li>
+            <li @if($rname == 'blog') class="active" @endif><a href="{{action('Web\BlogController@index')}}">Blog</a></li>
+            <li><a href="{{action('Web\PageController@show', array(1, 'titolo-della-pagina'))}}">Pagina</a></li>
+            <li @if($rname == 'service') class="active" @endif><a href="{{action('Web\ServiceController@index')}}">Servizi</a></li>
+            <li @if($rname == 'staff') class="active" @endif><a href="{{action('Web\StaffController@show', array(1, 'titolo-della-persona'))}}">Staff</a></li>
+            <li @if($rname == 'photogallery') class="active" @endif><a href="{{action('Web\PhotogalleryController@index')}}">Photogallery</a></li>
+            <li @if($rname == 'videogallery') class="active" @endif><a href="{{action('Web\VideogalleryController@index')}}">Videogallery</a></li>
+            <li @if($rname == 'portfolio') class="active" @endif><a href="{{action('Web\PortfolioController@index')}}">Portfolio</a></li>
+
+            @if (Auth::check())
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{Auth::user()->name}} <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ url('/logout') }}">Logout</a></li>
+              </ul>
+            </li>            
+            @else
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ url('/login') }}">Login</a></li>
+                <li><a href="{{ url('/register') }}">Register</a></li>
+              </ul>
+            </li>                        
+            @endif
+          </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+            @if (!isset($route_loalization_resource))
+              <li><a href="{{ LaravelLocalization::getLocalizedURL('it') }}">Ita no risorsa</a></li>
+              <li><a href="{{ LaravelLocalization::getLocalizedURL('en') }}">Eng no risorsa</a></li>
+            @else
+              <li><a href="{{ LaravelLocalization::getURLFromRouteNameTranslated('it', $route_loalization_resource, $route_loalization_resource_param['it']) }}">Ita Risorsa</a></li>
+              <li><a href="{{ LaravelLocalization::getURLFromRouteNameTranslated('en', $route_loalization_resource, $route_loalization_resource_param['en']) }}">Eng Risorsa</a></li>
+            @endif
+            </ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <br>
+    <br>
+    <br>
+    <br>    
+
     @yield('content')
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -51,6 +92,8 @@
     <script src="{{url('js/bootstrap.min.js')}}"></script>
 
     {{-- my library --}}
+    <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_PLACE_API_KEY')}}&libraries=places"></script>
+    <script src="{{url('js/geocomplete/jquery.geocomplete.min.js')}}"></script>
     <script src="{{url('js/_site_library.js')}}"></script>
 
   </body>

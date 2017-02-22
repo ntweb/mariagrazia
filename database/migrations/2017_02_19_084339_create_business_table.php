@@ -22,8 +22,8 @@ class CreateBusinessTable extends Migration
             $table->string('telephone', 20)->nullable();
             $table->string('political_short_name', 50)->nullable();
             $table->string('country_short_name', 10)->nullable();
-            $table->string('place', 20)->nullable();
-            $table->string('city', 50)->nullable();
+            $table->string('place_id', 100)->nullable();
+            $table->string('city', 100)->nullable();
             $table->string('address', 100)->nullable();
             $table->string('street_number', 100)->nullable();
             $table->string('postal_code', 20)->nullable();

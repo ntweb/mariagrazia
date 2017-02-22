@@ -165,7 +165,7 @@ return [
         Dimsav\Translatable\TranslatableServiceProvider::class,
         JildertMiedema\LaravelPlupload\LaravelPluploadServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
+        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,        
 
         /*
          * Package Service Providers...
@@ -233,7 +233,7 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Plupload' => JildertMiedema\LaravelPlupload\Facades\Plupload::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'LaravelLocalization'   => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
+        'LaravelLocalization'   => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,        
 
     ],
 

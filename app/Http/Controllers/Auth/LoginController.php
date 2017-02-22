@@ -28,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -39,14 +39,5 @@ class LoginController extends Controller
     {
         $this->middleware('guest', ['except' => 'logout']);
     }
-
-    protected function redirectTo()
-    {
-        // Log::info(URL::previous());
-        // Log::info(action('Lab\LoginController@login'));
-        if (URL::previous() == action('Lab\LoginController@login'))
-            return '/lab/home';
-        
-        return '/home';
-    }    
+    
 }

@@ -9,8 +9,8 @@
 
 <link rel="shortcut icon" type="image/x-icon" href="{{url('assets/lab/images/favicon.png')}}">
 
-<link rel="stylesheet" href="{{url('assets/lab/css/style.navyblue.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/style.default.css')}}" />
+<link rel="stylesheet" href="{{url('assets/lab/css/style.navyblue.css')}}" />
 
 <link rel="stylesheet" href="{{url('assets/lab/css/responsive-tables.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/font-awesome.min.css')}}" />

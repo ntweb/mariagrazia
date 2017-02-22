@@ -92,6 +92,8 @@ class UserController extends Controller
                 if ($key == 'password' && $value) $el->$key = bcrypt($value);
             }
 
+            $el->verified = '1';
+            $el->active = '1';
             if (!$el->save()){
                 return response()->json(array('error' => trans('labels.errore-sql')));
             }            

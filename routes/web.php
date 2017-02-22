@@ -20,41 +20,50 @@ Route::group(
 function()
 {
 
-	Route::get('/', 'Web\HomepageController@index');
+	Route::get('/', 'Web\HomepageController@index')->name('home');
 
 	// Page	
 	Route::get('/'.LaravelLocalization::transRoute('routes.page_show'), 'Web\PageController@show');
 
 	// News
-	Route::get('/'.LaravelLocalization::transRoute('routes.news'), 'Web\NewsController@index');
-	Route::get('/'.LaravelLocalization::transRoute('routes.news_show'), 'Web\NewsController@show');
+	Route::get('/'.LaravelLocalization::transRoute('routes.news'), 'Web\NewsController@index')->name('news');
+	Route::get('/'.LaravelLocalization::transRoute('routes.news_show'), 'Web\NewsController@show')->name('news');
 
 	// Blog
-	Route::get('/'.LaravelLocalization::transRoute('routes.blog'), 'Web\BlogController@index');
-	Route::get('/'.LaravelLocalization::transRoute('routes.blog_show'), 'Web\BlogController@show');
+	Route::get('/'.LaravelLocalization::transRoute('routes.blog'), 'Web\BlogController@index')->name('blog');
+	Route::get('/'.LaravelLocalization::transRoute('routes.blog_show'), 'Web\BlogController@show')->name('blog');
 
 	// Service
-	Route::get('/'.LaravelLocalization::transRoute('routes.service'), 'Web\ServiceController@index');
-	Route::get('/'.LaravelLocalization::transRoute('routes.service_show'), 'Web\ServiceController@show');
+	Route::get('/'.LaravelLocalization::transRoute('routes.service'), 'Web\ServiceController@index')->name('service');
+	Route::get('/'.LaravelLocalization::transRoute('routes.service_show'), 'Web\ServiceController@show')->name('service');
 
 	// Staff	
-	Route::get('/'.LaravelLocalization::transRoute('routes.staff_show'), 'Web\StaffController@show');
+	Route::get('/'.LaravelLocalization::transRoute('routes.staff_show'), 'Web\StaffController@show')->name('staff');
 
 	// Photogallery
-	Route::get('/'.LaravelLocalization::transRoute('routes.photogallery'), 'Web\PhotogalleryController@index');
-	Route::get('/'.LaravelLocalization::transRoute('routes.photogallery_show'), 'Web\PhotogalleryController@show');
+	Route::get('/'.LaravelLocalization::transRoute('routes.photogallery'), 'Web\PhotogalleryController@index')->name('photogallery');
+	Route::get('/'.LaravelLocalization::transRoute('routes.photogallery_show'), 'Web\PhotogalleryController@show')->name('photogallery');
 
 	// Videogallery
-	Route::get('/'.LaravelLocalization::transRoute('routes.videogallery'), 'Web\VideogalleryController@index');
-	Route::get('/'.LaravelLocalization::transRoute('routes.videogallery_show'), 'Web\VideogalleryController@show');
+	Route::get('/'.LaravelLocalization::transRoute('routes.videogallery'), 'Web\VideogalleryController@index')->name('videogallery');
+	Route::get('/'.LaravelLocalization::transRoute('routes.videogallery_show'), 'Web\VideogalleryController@show')->name('videogallery');
 
 	// Portfolio
-	Route::get('/'.LaravelLocalization::transRoute('routes.portfolio'), 'Web\PortfolioController@index');
-	Route::get('/'.LaravelLocalization::transRoute('routes.portfolio_show'), 'Web\PortfolioController@show');
+	Route::get('/'.LaravelLocalization::transRoute('routes.portfolio'), 'Web\PortfolioController@index')->name('portfolio');
+	Route::get('/'.LaravelLocalization::transRoute('routes.portfolio_show'), 'Web\PortfolioController@show')->name('portfolio');
+
+	// Test route
+	Route::get('/test', 'Web\TestController@index');		
 
 });
 
 Route::post('/review', 'Web\ReviewController@store');
+
+// Alternative Account route
+Route::get('/sended/verification', '\App\Http\Controllers\Auth\RegisterController@sendverification');
+Route::get('/verify/{token}', '\App\Http\Controllers\Auth\RegisterController@verify');
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
 
 // ******************************************************************************* //
 // CMS Route

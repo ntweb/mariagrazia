@@ -175,6 +175,10 @@ var maincontainer = '#rpc-container'; // container rprincipale per risultati RPC
 	   		}
 	   }); 	
 
+	   $(document).on('submit', 'form.ns-disable-submit', function(e){
+	   		$("button", $(this)).attr('disabled', 'disabled');
+	   });
+
 	});
 
 	$(document).on('click', '.callback', function(e){
@@ -186,6 +190,36 @@ var maincontainer = '#rpc-container'; // container rprincipale per risultati RPC
 		$('#upload-meta').html('');				
 		$('#upload-plugin').show(0);				
 	});
+
+
+	// google geocomplete
+    $("input[name='city']")
+    .geocomplete({
+        types: ['(cities)'] })
+    .bind("geocode:result", function(event, result){
+        $(this).prevAll("input[name='place_id']").first().val(result.place_id);
+        var political_short_name = $(this).prevAll("input[name='political_short_name']").first();
+        var country_short_name = $(this).prevAll("input[name='country_short_name']").first();
+
+        var geocoder = new google.maps.Geocoder;
+        geocoder.geocode({'placeId': result.place_id}, function(results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                    var address_components = results[0].address_components;
+                    $(address_components).each(function(i, el){
+                        if (el.types.indexOf('country') >= 0) {                                
+                            country_short_name.val(el.short_name)
+                        } else if (el.types.indexOf('political') >= 0) {
+                            political_short_name.val(el.short_name)
+                        }
+
+                    });
+                }
+            } else {
+              window.alert('Geocoder failed due to: ' + status);
+            }
+          });          
+    });	
 
 })(jQuery);
 
