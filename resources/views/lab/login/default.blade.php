@@ -40,6 +40,13 @@
                 <div class="alert alert-error">Le credenziali sono errate</div>
             </div>
             @endif
+
+            @if (session('status'))
+            <div class="login-alert" style="display: block;">
+                <div class="alert alert-error">{{ session('status') }}</div>
+            </div>
+            @endif
+
             <div class="inputwrapper animate1 bounceIn">
                 <input type="text" name="email" id="email" value="{{ old('email') }}" placeholder="Email" autofocus />
             </div>

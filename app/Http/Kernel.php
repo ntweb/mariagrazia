@@ -60,7 +60,10 @@ class Kernel extends HttpKernel
         // REDIRECTION LOCALIZATION MIDDLEWARE
         'localize' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRoutes::class,
         'localizationRedirect' => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationRedirectFilter::class,
-        'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class
+        'localeSessionRedirect' => \Mcamara\LaravelLocalization\Middleware\LocaleSessionRedirect::class,
         // REDIRECTION MIDDLEWARE  
+
+        // ACCESS LAB MIDDLEWARE
+        'labenter' => \App\Http\Middleware\LabEnter::class,
     ];
 }
