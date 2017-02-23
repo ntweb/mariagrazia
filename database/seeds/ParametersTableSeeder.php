@@ -49,7 +49,7 @@ class ParametersTableSeeder extends Seeder
             ['module' => 'type', 'module2nd' => null, 'label' => 'category', 'value' => 'standard', 'extras' => null],
             ['module' => 'type', 'module2nd' => null, 'label' => 'productoptions', 'value' => 'color,size', 'extras' => null],
             ['module' => 'type', 'module2nd' => null, 'label' => 'banner', 'value' => 'standard', 'extras' => null],
-            ['module' => 'type', 'module2nd' => null, 'label' => 'review', 'value' => 'news,product', 'extras' => null],
+            ['module' => 'type', 'module2nd' => null, 'label' => 'review', 'value' => 'news,products', 'extras' => null],
             ['module' => 'type', 'module2nd' => null, 'label' => 'coupon', 'value' => 'percent,value', 'extras' => null],
         ]);
     }

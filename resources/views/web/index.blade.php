@@ -47,6 +47,15 @@
             <li @if($rname == 'videogallery') class="active" @endif><a href="{{action('Web\VideogalleryController@index')}}">Videogallery</a></li>
             <li @if($rname == 'portfolio') class="active" @endif><a href="{{action('Web\PortfolioController@index')}}">Portfolio</a></li>
 
+            <li class="dropdown @if($rname == 'category') active @endif">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Catalogue <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                @foreach ($arrCategories as $el)
+                <li><a href="{{ action('Web\CategoryController@index', array($el->murl, $el->id)) }}">{{$el->title}}</a></li>
+                @endforeach
+              </ul>
+            </li>  
+
             @if (Auth::check())
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{Auth::user()->name}} <span class="caret"></span></a>

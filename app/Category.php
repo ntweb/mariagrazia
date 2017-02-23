@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App;
 
 class Category extends Model
 {
@@ -17,5 +18,21 @@ class Category extends Model
 
     public function updated_by(){
 		return $this->belongsTo('\App\User','id_updated_by');
+    }
+
+    public function scopeActive ($query, $active = '1') {
+    	if ($active)
+        	return $query->where('active','=',$active);
+
+        return $query;
+    }
+
+    public function subcategories() {
+    	return $this->hasMany('\App\Subcategory', 'type')
+    					->where('lab_subcategories.active', '=', '1')
+    					->whereHas('translations', function ($query) {
+                                $query->where('locale', App::getLocale())
+                                ->orderBy('title');
+                            });
     }
 }

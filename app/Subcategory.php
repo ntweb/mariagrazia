@@ -22,4 +22,16 @@ class Subcategory extends Model
     public function category(){
 		return $this->belongsTo('\App\Category','type');
     }
+
+    public function scopeActive ($query, $active = '1') {
+        if ($active)
+            return $query->where('active','=',$active);
+
+        return $query;
+    }    
+
+    public function products() {
+        return $this->hasMany('\App\Product', 'type')
+                        ->where('lab_products.active', '=', '1');
+    }
 }

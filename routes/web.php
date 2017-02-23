@@ -52,6 +52,16 @@ function()
 	Route::get('/'.LaravelLocalization::transRoute('routes.portfolio'), 'Web\PortfolioController@index')->name('portfolio');
 	Route::get('/'.LaravelLocalization::transRoute('routes.portfolio_show'), 'Web\PortfolioController@show')->name('portfolio');
 
+	// Category
+	Route::get('/'.LaravelLocalization::transRoute('routes.category'), 'Web\CategoryController@index')->name('category');
+
+	// Subcategory
+	Route::get('/'.LaravelLocalization::transRoute('routes.subcategory'), 'Web\SubcategoryController@index')->name('category');
+
+	// Product
+	Route::get('/'.LaravelLocalization::transRoute('routes.product_show'), 'Web\ProductController@show')->name('category');
+	Route::get('/p/search', 'Web\ProductController@index')->name('category');
+
 	// Test route
 	Route::get('/test', 'Web\TestController@index');		
 

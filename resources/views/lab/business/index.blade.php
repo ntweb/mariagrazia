@@ -12,6 +12,7 @@
         <thead>
             <tr>
                 <th class="center"><i class="fa fa-power-off" aria-hidden="true"></i></th>                
+                <th class="center"><i class="fa fa-shield" aria-hidden="true"></i></th>                
                 <th>USER ID</th>
                 <th>BUSINESS ID</th>
                 <th>{{trans('labels.businessname')}}</th>
@@ -29,6 +30,11 @@
                 <td class="center">
                     <a href="javascript:void(0);" class="change-flag {{$active = $el->active ? 'colorGreen' : 'colorRed'}}" data-route="{{action('Lab\BusinessController@changeFlag', array($el->id, 'active'))}}">
                         <i class="fa fa-circle tip" aria-hidden="true" data-placement="top" data-original-title="{{trans('labels.active')}} ?"></i>
+                    </a>
+                </td>
+                <td class="center">
+                    <a href="javascript:void(0);" class="cannot-change-flag {{$verified = $el->verified ? 'colorGreen' : 'colorRed'}}" data-route="{{action('Lab\BusinessController@changeFlag', array($el->id, 'verified'))}}">
+                        <i class="fa fa-circle tip" aria-hidden="true" data-placement="top" data-original-title="{{trans('labels.verified')}} ?"></i>
                     </a>
                 </td>
                 <td>{{$el->id}}</td>

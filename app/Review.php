@@ -12,7 +12,7 @@ class Review extends Model
     	if ($this->type == 'news')
 			return $this->belongsTo('\App\News','id_el');
 
-        if ($this->type == 'product')
+        if ($this->type == 'products')
             return $this->belongsTo('\App\Product','id_el');
 
     	if ($this->type == 'pages')

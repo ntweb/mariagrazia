@@ -25,6 +25,11 @@
 		return date($l->date, strtotime($date));
 	}
 
+	// get euro format
+	function euro ($number, $dec = 2 ) {
+		return number_format ($number, $dec,",",".");
+	}
+
 	function types($label) {
 		$types = \App\Parameter::where('label', '=', $label)->first();
 		return explode(',', $types->value);

@@ -24,4 +24,9 @@ return [
     'portfolio' => 'portfolio',
     'portfolio_show' => 'portfolio/{id}/{title?}',
 
+    'category' => 's/{category}/{id}',
+    'subcategory' => 's/{category}/{subcategory}/{id}',
+    
+    'product_show' => 's/{category}/{subcategory}/{product}/{id}',
+
 ];
