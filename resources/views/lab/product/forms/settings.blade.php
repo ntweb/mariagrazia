@@ -40,11 +40,11 @@
     </p>    
                                     
     <p>
-        <label>{{trans('labels.vat')}}</label>
+        <label>{{trans('labels.tax')}}</label>
         <div class="field">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-percent" aria-hidden="true"></i></span>
-                <input type="text" name="vat" class="form-control" value="{{$el->vat}}" />                        
+                <input type="text" name="tax" class="form-control" value="{{$el->tax}}" />                        
             </div>
         </div>
     </p>    

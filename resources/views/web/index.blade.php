@@ -17,8 +17,12 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
     {{-- FontAwesome Preferred distr --}}
     <link href="{{url('css/font-awesome.min.css')}}" rel="stylesheet">
+    {{-- Alert --}}
+    <link rel="stylesheet" href="{{url('css/alertify.core.css')}}" />
+    <link rel="stylesheet" href="{{url('css/alertify.default.css')}}" />
 
   </head>
   <body>
@@ -93,6 +97,11 @@
     <br>
     <br>    
 
+    {{-- cart dynamic widget --}}
+    <div data-cart-widget="cart_refresh" data-route="{{action('Web\CartController@refresh')}}" class="well">
+      @include('web.cart.widget.cart')
+    </div>
+
     @yield('content')
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -103,7 +112,9 @@
     {{-- my library --}}
     <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_PLACE_API_KEY')}}&libraries=places"></script>
     <script src="{{url('js/geocomplete/jquery.geocomplete.min.js')}}"></script>
+    <script src="{{url('js/alertify/alertify.min.js')}}"></script>
     <script src="{{url('js/_site_library.js')}}"></script>
+    <script src="{{url('js/_site_cart.js')}}"></script>
 
   </body>
 </html>

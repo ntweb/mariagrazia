@@ -10,6 +10,7 @@ use Auth;
 use Log;
 use Session;
 use Storage;
+use Faker;
 
 class CouponController extends Controller
 {
@@ -78,6 +79,10 @@ class CouponController extends Controller
         $data['back'] = action('Lab\CouponController@index');
         $data['route'] = action('Lab\CouponController@store');
 
+        // fake coupon
+        $faker = Faker\Factory::create();
+        $data['code'] = strtoupper(substr($faker->md5, 0, 5));
+
         return view()->make('lab.coupon.create', $data);
     }
 
@@ -91,6 +96,7 @@ class CouponController extends Controller
     {
         // validator
         $fieldsToValidate["title"] = "required";
+        $fieldsToValidate["code"] = "required|unique:lab_coupons";
 
         $fields = $request->except('_token');
         $validator = Validator::make($fields, $fieldsToValidate);

@@ -19,12 +19,14 @@
         </span>
     </p>
 
+    {{--
     <p>
         <label>{{trans('labels.user')}}</label>
         <span class="field">
             <input type="text" name="id_user" class="form-control datepicker" value="{{$el->id_user}}" />
         </span>
     </p>
+    --}}
 
     <p>
         <label>{{trans('labels.begin')}}</label>
@@ -40,6 +42,16 @@
         </span>
     </p>
 
+    <p>
+        <label>{{trans('labels.multipleusers')}}</label>
+        <span class="field">
+            <select name="multipleusers" class="uniformselect">
+                <option value="0" @if(!$el->multipleusers) selected="selected" @endif>{{trans('labels.no')}}</option>
+                <option value="1" @if($el->multipleusers) selected="selected" @endif>{{trans('labels.yes')}}</option>
+            </select>        
+        </span>
+    </p>
+                                    
     <p>
         <label>{{trans('labels.active')}}</label>
         <span class="field">

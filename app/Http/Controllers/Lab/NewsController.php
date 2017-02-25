@@ -200,7 +200,7 @@ class NewsController extends Controller
                                     'error' => trans('labels.compilare_campi_obbligatori'),
                                     'errorfields' => $validator->messages()
                                 )
-                            );        
+                            );
     
     }
 

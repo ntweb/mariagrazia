@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('code', 50)->nullable();
             $table->decimal('price', 30,4)->default(0);
             $table->decimal('price_discount', 30,4)->default(0);
-            $table->integer('vat')->default(0);
+            $table->integer('tax')->default(0);
             $table->string('uploadfolder', 50)->nullable();
             $table->string('img', 100)->nullable();
             $table->integer('type');

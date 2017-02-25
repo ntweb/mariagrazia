@@ -25,8 +25,10 @@
                 <th></th>
             @endif
                 <th class="center"><i class="fa fa-power-off" aria-hidden="true"></i></th>                
+                <th class="center"><i class="fa fa-users" aria-hidden="true"></i></th>                
                 <th>ID</th>
                 <th>{{trans('labels.title')}}</th>
+                <th>{{trans('labels.code')}}</th>
                 <th>{{trans('labels.type')}}</th>
                 <th class="right">{{trans('labels.amount')}}</th>
                 <th>{{trans('labels.begin')}}</th>
@@ -48,8 +50,14 @@
                         <i class="fa fa-circle tip" aria-hidden="true" data-placement="top" data-original-title="{{trans('labels.active')}} ?"></i>
                     </a>
                 </td>
+                <td class="center">
+                    <a href="javascript:void(0);" class="change-flag {{$multipleusers = $el->multipleusers ? 'colorGreen' : 'colorRed'}}" data-route="{{action('Lab\CouponController@changeFlag', array($el->id, 'multipleusers'))}}">                        
+                        <i class="fa fa-circle tip" aria-hidden="true" data-placement="top" data-original-title="{{trans('labels.multipleusers')}} ?"></i>
+                    </a>
+                </td>
                 <td>{{$el->id}}</td>
                 <td>{{$el->title}}</td>
+                <td>{{$el->code}}</td>
                 <td>{{$el->type}}</td>
                 <td class="right">{{$el->amount}}</td>
                 <td>@if($el->begin) {{date($default_lang->date, strtotime($el->begin))}} @endif</td>

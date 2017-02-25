@@ -103,7 +103,7 @@ class RegisterController extends Controller
         $b->save();
 
         // email di verifica
-        Mail::to($u->email)->send(new AccountActivation($u));
+        Mail::to($u->email)->queue(new AccountActivation($u));
 
         // return $u;
         return new \App\User;

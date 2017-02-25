@@ -19,4 +19,12 @@ class Coupon extends Model
     public function updated_by(){
 		return $this->belongsTo('\App\User','id_updated_by');
     }
+
+    public function scopeActive ($query, $active = '1') {
+        if ($active)
+            return $query->where('active','=',$active);
+
+        return $query;
+    }    
+    
 }

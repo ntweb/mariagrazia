@@ -8,6 +8,8 @@ use Validator;
 use DB;
 use Log;
 use Auth;
+use Session;
+use Storage;
 
 class OrderController extends Controller
 {

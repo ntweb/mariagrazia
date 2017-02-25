@@ -39,3 +39,21 @@ a.preview {
 .handle {
   cursor:move;
 }
+
+.received {
+  background-color: #fcdb55;
+  color: black;
+}
+
+.prepared {
+  background-color: orange;
+  color: black;
+}
+
+.sent {
+  background-color: green;
+}
+
+.cancelled {
+  background-color: red;
+}

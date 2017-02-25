@@ -30,6 +30,11 @@
 		return number_format ($number, $dec,",",".");
 	}
 
+	// get percent format
+	function percent ($number, $dec = 2 ) {
+		return number_format ($number, $dec,",",".");
+	}
+
 	function types($label) {
 		$types = \App\Parameter::where('label', '=', $label)->first();
 		return explode(',', $types->value);
@@ -105,4 +110,34 @@
 
 		if ($rid) $rid = str_replace('-', '', $rid).'-';
 		return url('media/'.$folder.'/'.$id.'/'.$gallery.$rid.$el->$field);
+	}
+
+	// iva
+	function ivato($prezzo, $iva) {
+		$prezzo =  $prezzo + iva($prezzo, $iva);
+		return sprintf("%01.2f", round($prezzo,2));
+	}	
+
+	function iva($prezzo, $iva) {		
+		$prezzo =  $prezzo /100 * $iva;
+		return sprintf("%01.2f", round($prezzo,2));
+	}	
+
+	// cart 
+	function get_cart_total ($instance = 'main') {
+		$_subtotal = 0;
+		foreach (Cart::instance($instance)->content() as $rowId => $row) {
+			$_subtotal += $row->options->product['price']*$row->qty;
+		}
+
+		return $_subtotal;
+	}
+
+	function get_cart_total_ivato ($instance = 'main') {
+		$_subtotal = 0;
+		foreach (Cart::instance($instance)->content() as $rowId => $row) {
+			$_subtotal += ivato($row->options->product['price']*$row->qty, $row->options->product['tax']);
+		}
+
+		return $_subtotal;
 	}

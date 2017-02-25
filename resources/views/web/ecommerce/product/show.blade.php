@@ -15,17 +15,24 @@ is_discount: {{$page->discount}} <br>
 
 Colors: 
 @foreach ($options_colors as $el)
-    <i class="fa fa-circle" aria-hidden="true" style="font-size: 28px; color: {{$el->color}};"></i> {{$el->title}}
+    <a href="javascript:void(0);" data-cart-widget="mod_color" data-target=".cart-form-{{$page->id}}" data-v="{{$el->title}}">        
+        <i class="fa fa-circle" aria-hidden="true" style="font-size: 28px; color: {{$el->color}};"></i> {{$el->title}}
+    </a>
 @endforeach
 <br><br>
 Sizes:
 <ul>
 @foreach ($options_sizes as $el)
-    <li><a href="#">{{$el->title}}</a></li>
+    <li><a href="javascript:void(0);" data-cart-widget="mod_size" data-target=".cart-form-{{$page->id}}" data-v="{{$el->title}}">{{$el->title}}</a></li>
 @endforeach
 </ul>
 
 <hr>
+
+@include('web.cart.widget.add')
+
+<hr>
+
 <br><br>
 <h2>Galleria immagini</h2>
 @if(count($page_images))

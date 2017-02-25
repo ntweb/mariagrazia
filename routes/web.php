@@ -62,6 +62,20 @@ function()
 	Route::get('/'.LaravelLocalization::transRoute('routes.product_show'), 'Web\ProductController@show')->name('category');
 	Route::get('/p/search', 'Web\ProductController@index')->name('category');
 
+	// Cart
+	Route::get('/cart/checkout', 'Web\CartController@checkout');
+	Route::get('/cart/shipment', 'Web\CartController@shipment')->middleware('auth');
+	Route::get('/cart/payment', 'Web\CartController@payment')->middleware('auth');
+	Route::get('/cart/summary', 'Web\CartController@summary')->middleware('auth');
+	Route::get('/cart/do-payment/{id}', 'Web\CartController@doPayment')->middleware('auth');
+	Route::get('/cart/widget/refresh', 'Web\CartController@refresh');
+	Route::get('/cart/delete/{rowid}', 'Web\CartController@delete');
+	Route::get('/cart/coupon', 'Web\CartController@coupon');
+	Route::get('/cart/finish', 'Web\CartController@finish');
+	Route::get('/cart/error', 'Web\CartController@error');
+	Route::post('/cart/add', 'Web\CartController@add');
+	Route::post('/cart/store', 'Web\CartController@store')->middleware('auth');
+
 	// Test route
 	Route::get('/test', 'Web\TestController@index');		
 
@@ -195,6 +209,19 @@ Route::group(['middleware' => ['labenter']], function () use ($cms_folder) {
 	Route::get($cms_folder.'coupon/delete/img/{id}/{img}', 'Lab\CouponController@deleteImg');
 	Route::get($cms_folder.'coupon/change/flag/{id}/{field}', 'Lab\CouponController@changeFlag');
 	Route::put($cms_folder.'coupon/settings/{id}', 'Lab\CouponController@settings');
+
+	// Shipment
+	Route::resource($cms_folder.'shipment', 'Lab\ShipmentController');	
+	Route::get($cms_folder.'shipment/change/flag/{id}/{field}', 'Lab\ShipmentController@changeFlag');
+	Route::put($cms_folder.'shipment/settings/{id}', 'Lab\ShipmentController@settings');
+
+	// Payment
+	Route::resource($cms_folder.'payment', 'Lab\PaymentController');	
+	Route::get($cms_folder.'payment/change/flag/{id}/{field}', 'Lab\PaymentController@changeFlag');
+	Route::put($cms_folder.'payment/settings/{id}', 'Lab\PaymentController@settings');
+
+	// Cart
+	Route::resource($cms_folder.'cart', 'Lab\CartController');	
 
 	// Business
 	Route::resource($cms_folder.'business', 'Lab\BusinessController');
