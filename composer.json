@@ -12,6 +12,7 @@
         "gloudemans/shoppingcart": "^2.3",
         "jildertmiedema/laravel-plupload": "^0.4.1",
         "laravel/framework": "5.4.*",
+        "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "mcamara/laravel-localization": "1.2.*",
         "omnipay/paypal": "~2.0"

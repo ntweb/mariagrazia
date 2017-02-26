@@ -1,0 +1,5 @@
+set path in php.ini
+[cURL] 
+curl.cainfo=C:\php\cacert.pem
+
+It works after server restart.

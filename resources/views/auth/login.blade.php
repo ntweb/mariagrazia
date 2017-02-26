@@ -48,5 +48,9 @@
     </a>
     
 </form>
+
+<hr>
+
+Or Login with Facebook -> <a href="{{action('Web\FacebookController@redirectToProvider')}}">Facebook Login</a>
            
 @endsection
