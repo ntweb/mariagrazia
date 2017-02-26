@@ -13,7 +13,8 @@
         "jildertmiedema/laravel-plupload": "^0.4.1",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "mcamara/laravel-localization": "1.2.*"
+        "mcamara/laravel-localization": "1.2.*",
+        "omnipay/paypal": "~2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

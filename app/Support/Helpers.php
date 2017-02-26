@@ -35,6 +35,15 @@
 		return number_format ($number, $dec,",",".");
 	}
 
+	// get parameter
+	function param($label) {
+		$p = \App\Parameter::where('label', '=', $label)->first();
+		if ($p)
+			return $p->value;
+
+		return null;
+	}
+
 	function types($label) {
 		$types = \App\Parameter::where('label', '=', $label)->first();
 		return explode(',', $types->value);

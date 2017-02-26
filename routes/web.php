@@ -71,10 +71,17 @@ function()
 	Route::get('/cart/widget/refresh', 'Web\CartController@refresh');
 	Route::get('/cart/delete/{rowid}', 'Web\CartController@delete');
 	Route::get('/cart/coupon', 'Web\CartController@coupon');
-	Route::get('/cart/finish', 'Web\CartController@finish');
-	Route::get('/cart/error', 'Web\CartController@error');
+	Route::get('/cart/finish', 'Web\CartController@finish')->middleware('auth');
+	Route::get('/cart/error', 'Web\CartController@error')->middleware('auth');
 	Route::post('/cart/add', 'Web\CartController@add');
 	Route::post('/cart/store', 'Web\CartController@store')->middleware('auth');
+
+	// Cart payment
+	Route::get('/cart/paypal/{id}', 'Web\PaypalController@pay')->middleware('auth');
+	Route::get('/cart/paypal/check/{id}', 'Web\PaypalController@check')->middleware('auth');
+
+	// Order
+	Route::resource('/order', 'Web\OrderController');	
 
 	// Test route
 	Route::get('/test', 'Web\TestController@index');		

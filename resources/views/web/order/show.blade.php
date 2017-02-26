@@ -1,9 +1,9 @@
-@extends('lab.news.default')
+@extends('web.index')
 
 @section('content')
 
 <?php 
-	$u = $el->user;
+	$u = $o->user;
 	$b = $u->b;
 ?>
 
@@ -12,8 +12,8 @@
 
 		<table class="table table-bordered table-invoice">
 			<tr>
-				<td class="width30">{{trans('labels.cart')}}</td>
-				<td class="width70"><strong>{{$el->label}}</strong></td>
+				<td >{{trans('labels.cart')}}</td>
+				<td ><strong>{{$o->label}}</strong></td>
 			</tr>
 			<tr>
 				<td>{{trans('labels.user')}}:</td>
@@ -30,37 +30,11 @@
 				</td>
 			</tr>
 		</table>
-		
-		<br>
 
-		<form class="ns" data-route="{{$route}}" data-method="PUT">
-		{!! csrf_field() !!}
-		<table class="table table-bordered table-invoice">
-			<tr>
-				<td class="width30">{{trans('labels.paid')}}:</td>
-				<td class="width70">
-					<select name="paid">
-						<option value="0" @if(!$el->paid) selected="selected" @endif>{{trans('labels.no')}}</option>
-						<option value="1" @if($el->paid) selected="selected" @endif>{{trans('labels.yes')}}</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>{{trans('labels.status')}}:</td>
-				<td>
-					<select name="type">
-						@foreach ($arrType as $t)
-						<option value="{{$t}}" @if($el->type == $t) selected="selected" @endif >{{$t}}</option>
-						@endforeach
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><button type="submit" class="btn btn-xs btn-primary">{{trans('labels.save')}}</button></td>
-			</tr>
-		</table>
-		</form>
+		@if(!$o->paid && $o->payment->type == 'paypal')
+		<br>
+		<a href="{{action('Web\CartController@doPayment', array($o->id))}}">Paga ora</a>
+		@endif
 
 	</div>
 
@@ -69,16 +43,16 @@
 			<tr>
 				<td class="width30">{{trans('labels.shipping_data')}}:</td>
 				<td class="width70">
-					<strong>{{$el->shipment_name}}</strong> <br />
-					{{$el->shipment_businessname}}, <br />
-					{{$el->shipment_address}}, {{$el->shipment_street_number}} <br />
-					{{$el->shipment_postal_code}} - {{$el->shipment_city}} ({{$el->shipment_political_short_name}} {{$el->shipment_country_short_name}} ) 
+					<strong>{{$o->shipment_name}}</strong> <br />
+					{{$o->shipment_businessname}}, <br />
+					{{$o->shipment_address}}, {{$o->shipment_street_number}} <br />
+					{{$o->shipment_postal_code}} - {{$o->shipment_city}} ({{$o->shipment_political_short_name}} {{$o->shipment_country_short_name}} ) 
 				</td>
 			</tr>
 			<tr>
 				<td class="width30">{{trans('labels.note')}}:</td>
 				<td class="width70">					
-					<div style="font-size: 11px; line-height: 18px;">{{$el->shipment_note}}</div>
+					<div style="font-size: 11px; line-height: 18px;">{{$o->shipment_note}}</div>
 				</td>
 			</tr>
 		</table>
@@ -88,32 +62,22 @@
 		<table class="table table-bordered table-invoice">
 			<tr>
 				<td class="width30">{{trans('labels.shipment')}}</td>
-				<td class="width70"><strong>{{$el->shipment->title}}</strong></td>
+				<td class="width70"><strong>{{$o->shipment->title}}</strong></td>
 			</tr>
 			<tr>
 				<td>{{trans('labels.payment')}}</td>
 				<td>
-					<strong>{{$el->payment->title}}</strong>
-					@if ($el->payment_token)
+					<strong>{{$o->payment->title}}</strong>
+					@if ($o->payment_token)
 					<br>
-					token: <i>{{$el->payment_token}}</i>
+					token: <i>{{$o->payment_token}}</i>
 					@endif
 				</td>
 			</tr>
-			@if ($el->payment_log)
-			<tr>
-				<td>{{trans('labels.payment_log')}}</td>
-				<td>
-					<textarea name="log" id="" rows="10" style="width: 100%;">
-					{{$el->payment_log}}	
-					</textarea>				
-				</td>
-			</tr>
-			@endif
-			@if ($el->id_coupon)
+			@if ($o->id_coupon)
 			<tr>
 				<td>{{trans('labels.coupon')}}</td>
-				<td><strong>{{$el->coupon->title}}</strong></td>
+				<td><strong>{{$o->coupon->title}}</strong></td>
 			</tr>
 			@endif
 		</table>
@@ -149,7 +113,7 @@
         		$_subtotal = 0;
         		$_tax = 0;
     		?>                	
-        	@foreach ($el->rows()->get() as $r)
+        	@foreach ($o->rows()->get() as $r)
         	<?php
         		$_subtotal += $r->row_qty * $r->row_price;
         		$_tax += $r->row_taxable;                		
@@ -186,7 +150,9 @@
 		</table>
 	
 	<div class="amountdue">
-		<h1><span>Total:</span> {{ euro($el->total) }}</h1> <br />            
+		<h1><span>Total:</span> {{ euro($o->total) }}</h1> <br />            
 	</div>
+
+
 
 @endsection

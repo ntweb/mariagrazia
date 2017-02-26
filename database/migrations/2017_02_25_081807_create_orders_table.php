@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->integer('id_coupon')->default(0);
 
             $table->string('payment_type')->nullable();
-            $table->string('payment_log')->nullable();
+            $table->text('payment_log')->nullable();
             $table->string('payment_token')->nullable();
             
             $table->string('shipment_name')->nullable();

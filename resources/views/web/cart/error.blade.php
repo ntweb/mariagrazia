@@ -3,7 +3,11 @@
 @section('content')
 
 	<p class="alert alert-danger">
-		{{ session('error') }}
+		@if (session('error'))
+			{{ session('error') }}
+		@else
+			{{trans('labels.payment_generic_error')}}
+		@endif
 	</p>
 
 @endsection

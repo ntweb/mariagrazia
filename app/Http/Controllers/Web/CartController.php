@@ -150,7 +150,7 @@ class CartController extends Controller
                 return redirect()->action('Web\CartController@payment');
 
             if ($s->amount_type == 'percent')
-                $s->amount = ((get_cart_total_ivato('main') + get_cart_total_ivato('coupon') + get_cart_total_ivato('shipment')) / 100) * $s->amount;
+                $s->amount = (get_cart_total_ivato('main') + get_cart_total_ivato('coupon') + get_cart_total_ivato('shipment')) / 100 * $s->amount;
 
             $options['product']['tax'] = $s->tax;
             $options['product']['price'] = $s->amount;
@@ -311,8 +311,9 @@ class CartController extends Controller
         Cart::instance('payment')->destroy();
 
         // send order email
-        Mail::to(Auth::user()->email)->queue(new OrderReceived(Auth::user(), $o));
-
+        Mail::to(Auth::user()->email)
+                ->cc(param('site_email_admin'))
+                ->queue(new OrderReceived(Auth::user(), $o));
 
         return redirect()->action('Web\CartController@doPayment', ['id'=>$o->id]);
     }
@@ -335,7 +336,7 @@ class CartController extends Controller
         switch ($o->payment_type) {
             case 'paypal':
                 // se il pagamento è con paypal faccio il redirect al controller di paypal
-                
+                return redirect()->action('Web\PaypalController@pay', ['id' => $o->id]);
                 break;
             
             default:
@@ -357,10 +358,15 @@ class CartController extends Controller
         return view()->make('web.cart.error');
     }
 
-    public function finish() {
+    public function finish(Request $request) {
         $this->set_step('finish');
+        $data = array();
 
-        return view()->make('web.cart.finish');
+        if ($request->has('id')){
+            $data['order'] = \App\Order::find($request->get('id'));
+        }
+
+        return view()->make('web.cart.finish', $data);
     }
 
 	private function set_step($key) {
