@@ -11,7 +11,6 @@
 
 <link rel="stylesheet" href="{{url('assets/lab/css/style.default.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/style.navyblue.css')}}" />
-
 <link rel="stylesheet" href="{{url('assets/lab/css/responsive-tables.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/font-awesome.min.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/js/summernote/codemirror.css')}}" />
@@ -20,7 +19,7 @@
 <link rel="stylesheet" href="{{url('assets/lab/js/plupload/js/jquery.ui.plupload/css/jquery.ui.plupload.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/jquery.googlePreviewSnippet.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/style.css')}}" />
-    
+
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
 <script src="js/html5shiv.js"></script>

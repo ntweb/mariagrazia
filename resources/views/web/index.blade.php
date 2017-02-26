@@ -7,6 +7,9 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Bootstrap 101 Template</title>
 
+@if (env('MINIFY_HTML'))
+    <link rel="stylesheet" href="{{url('minify/style.min.css')}}" />
+@else
     <!-- Bootstrap -->
     <link href="{{url('css/bootstrap.min.css')}}" rel="stylesheet">
 
@@ -23,6 +26,7 @@
     {{-- Alert --}}
     <link rel="stylesheet" href="{{url('css/alertify.core.css')}}" />
     <link rel="stylesheet" href="{{url('css/alertify.default.css')}}" />
+@endif
 
   </head>
   <body>
@@ -107,17 +111,21 @@
 
     @yield('content')
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="{{url('js/jquery-1.12.4.js')}}"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{{url('js/bootstrap.min.js')}}"></script>
+    @if (env('MINIFY_HTML'))
+      <script src="{{url('minify/code.min.js')}}"></script>
+    @else
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="{{url('js/jquery-1.12.4.js')}}"></script>
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="{{url('js/bootstrap.min.js')}}"></script>
 
-    {{-- my library --}}
+      {{-- my library --}}
+      <script src="{{url('js/geocomplete/jquery.geocomplete.min.js')}}"></script>
+      <script src="{{url('js/alertify/alertify.min.js')}}"></script>
+      <script src="{{url('js/_site_library.js')}}"></script>
+      <script src="{{url('js/_site_cart.js')}}"></script>
+    @endif
     <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_PLACE_API_KEY')}}&libraries=places"></script>
-    <script src="{{url('js/geocomplete/jquery.geocomplete.min.js')}}"></script>
-    <script src="{{url('js/alertify/alertify.min.js')}}"></script>
-    <script src="{{url('js/_site_library.js')}}"></script>
-    <script src="{{url('js/_site_cart.js')}}"></script>
 
   </body>
 </html>
