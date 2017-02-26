@@ -10,6 +10,7 @@
         "approached/laravel-image-optimizer": "^2.2",
         "dimsav/laravel-translatable": "^7.0",
         "gloudemans/shoppingcart": "^2.3",
+        "graham-campbell/htmlmin": "^4.5",
         "jildertmiedema/laravel-plupload": "^0.4.1",
         "laravel/framework": "5.4.*",
         "laravel/socialite": "^3.0",

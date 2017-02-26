@@ -168,6 +168,7 @@ return [
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -238,6 +239,7 @@ return [
         'LaravelLocalization'   => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'HTMLMin' => GrahamCampbell\HTMLMin\Facades\HTMLMin::class,
 
     ],
 
