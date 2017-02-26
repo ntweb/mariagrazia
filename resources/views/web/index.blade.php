@@ -47,8 +47,8 @@
             <li><a href="{{action('Web\PageController@show', array(1, 'titolo-della-pagina'))}}">Pagina</a></li>
             <li @if($rname == 'service') class="active" @endif><a href="{{action('Web\ServiceController@index')}}">Servizi</a></li>
             <li @if($rname == 'staff') class="active" @endif><a href="{{action('Web\StaffController@show', array(1, 'titolo-della-persona'))}}">Staff</a></li>
-            <li @if($rname == 'photogallery') class="active" @endif><a href="{{action('Web\PhotogalleryController@index')}}">Photogallery</a></li>
-            <li @if($rname == 'videogallery') class="active" @endif><a href="{{action('Web\VideogalleryController@index')}}">Videogallery</a></li>
+            <li @if($rname == 'photogallery') class="active" @endif><a href="{{action('Web\PhotogalleryController@index')}}">Photo</a></li>
+            <li @if($rname == 'videogallery') class="active" @endif><a href="{{action('Web\VideogalleryController@index')}}">Video</a></li>
             <li @if($rname == 'portfolio') class="active" @endif><a href="{{action('Web\PortfolioController@index')}}">Portfolio</a></li>
 
             <li class="dropdown @if($rname == 'category') active @endif">
@@ -59,6 +59,8 @@
                 @endforeach
               </ul>
             </li>  
+
+            <li @if($rname == 'contact') class="active" @endif><a href="{{action('Web\ContactController@index')}}">Contact</a></li>
 
             @if (Auth::check())
             <li class="dropdown">
@@ -81,11 +83,11 @@
 
             <ul class="nav navbar-nav navbar-right">
             @if (!isset($route_loalization_resource))
-              <li><a href="{{ LaravelLocalization::getLocalizedURL('it') }}">Ita no risorsa</a></li>
-              <li><a href="{{ LaravelLocalization::getLocalizedURL('en') }}">Eng no risorsa</a></li>
+              <li><a href="{{ LaravelLocalization::getLocalizedURL('it') }}">Ita no ris</a></li>
+              <li><a href="{{ LaravelLocalization::getLocalizedURL('en') }}">Eng no ris</a></li>
             @else
-              <li><a href="{{ LaravelLocalization::getURLFromRouteNameTranslated('it', $route_loalization_resource, $route_loalization_resource_param['it']) }}">Ita Risorsa</a></li>
-              <li><a href="{{ LaravelLocalization::getURLFromRouteNameTranslated('en', $route_loalization_resource, $route_loalization_resource_param['en']) }}">Eng Risorsa</a></li>
+              <li><a href="{{ LaravelLocalization::getURLFromRouteNameTranslated('it', $route_loalization_resource, $route_loalization_resource_param['it']) }}">Ita ris</a></li>
+              <li><a href="{{ LaravelLocalization::getURLFromRouteNameTranslated('en', $route_loalization_resource, $route_loalization_resource_param['en']) }}">Eng ris</a></li>
             @endif
             </ul>
 

@@ -36,10 +36,10 @@
 	}
 
 	// get parameter
-	function param($label) {
+	function param($label, $field = 'value') {
 		$p = \App\Parameter::where('label', '=', $label)->first();
 		if ($p)
-			return $p->value;
+			return $p->$field;
 
 		return null;
 	}

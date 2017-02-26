@@ -14,7 +14,7 @@ class PagesTableSeeder extends Seeder
     	App::setLocale('it');
 
     	$delimiter = '#;#';
-    	$contents = Storage::disk('public')->get('pages.txt');
+    	$contents = file_get_contents(public_path('assets/pages.txt'));
 		foreach(preg_split("/((\r?\n)|(\r\n?))/", $contents) as $line){
 			if(strlen(trim($line)) > 0) {
 			    $xxx = explode($delimiter, $line);

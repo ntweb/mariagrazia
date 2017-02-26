@@ -29,4 +29,5 @@ return [
     
     'product_show' => 's/{category}/{subcategory}/{product}/{id}',
 
+    'contact' => 'contatti',
 ];

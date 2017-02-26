@@ -179,6 +179,33 @@ var maincontainer = '#rpc-container'; // container rprincipale per risultati RPC
 	   		$("button", $(this)).attr('disabled', 'disabled');
 	   });
 
+	   // map
+	   if ($("*[data-widget='map']").length) {
+	   		if($("*[data-widget='infowindow']").length) {
+
+	   			var widget = $("*[data-widget='infowindow']").first();
+	   			var txt_infowindow = widget.html();
+	   			var txt_lat = parseFloat(widget.data('lat'));
+	   			var txt_lng = parseFloat(widget.data('lng'));
+
+			    var zoom = 16;
+				var myLatlng = new google.maps.LatLng(txt_lat, txt_lng);
+				var mapOptions = {
+					zoom: zoom,
+					center: myLatlng
+				}
+				var infowindow = new google.maps.InfoWindow({
+					content: txt_infowindow,
+				});		
+
+				var map = new google.maps.Map($("*[data-widget='map']").first()[0], mapOptions);
+				var marker = new google.maps.Marker({position: myLatlng, map: map});
+
+				map.setZoom(zoom);
+				infowindow.open(map,marker);
+	   		}
+	   }
+
 	});
 
 	$(document).on('click', '.callback', function(e){

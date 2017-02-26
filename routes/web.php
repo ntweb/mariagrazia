@@ -83,7 +83,11 @@ function()
 	Route::get('/cart/paypal/check/{id}', 'Web\PaypalController@check')->middleware('auth');
 
 	// Order
-	Route::resource('/order', 'Web\OrderController');	
+	Route::resource('/order', 'Web\OrderController');
+
+	// Contact
+	Route::get('/'.LaravelLocalization::transRoute('routes.contact'), 'Web\ContactController@index')->name('contact');
+	Route::post('/contact/send', 'Web\ContactController@send')->name('contact');
 
 	// Test route
 	Route::get('/test', 'Web\TestController@index');		
