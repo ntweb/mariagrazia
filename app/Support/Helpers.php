@@ -83,7 +83,7 @@
 	}
 	
 	// get img of model
-	function img($el, $field, $rid = null) {
+	function img($el, $field, $rid = null, $quality = 80) {
 
 		$id = $el->id;
 		$gallery = '';
@@ -113,7 +113,7 @@
 		    	else { // crop
 		    		$img->fit($w, $h);
 		    	}
-		    	$img->save('media/'.$folder.'/'.$id.'/'.$gallery.$rid.'-'.$el->$field,100);
+		    	$img->save('media/'.$folder.'/'.$id.'/'.$gallery.$rid.'-'.$el->$field, $quality);
 			}
 		}
 

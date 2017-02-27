@@ -1,3 +1,5 @@
 - copiare in windows/system32 i due eseguibili
 - copiare il bat nella cartella public
 - lanciare il bat per ottimizzare la cartella "media"
+
+In generale cmq creare immagine con 80% di qualitàè su Photoshop

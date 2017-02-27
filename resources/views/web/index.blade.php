@@ -7,9 +7,16 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Bootstrap 101 Template</title>
 
-@if (env('MINIFY_HTML'))
-    <link rel="stylesheet" href="{{url('minify/style.min.css')}}" />
-@else
+    @if (env('MINIFY_HTML'))
+
+        @if(isset($_above_the_fold_css))
+          <style>{!! $_above_the_fold_css !!}</style>
+        @else
+          <link rel="stylesheet" href="{{url('minify/style.min.css')}}" />
+        @endif
+
+    @else
+    
     <!-- Bootstrap -->
     <link href="{{url('css/bootstrap.min.css')}}" rel="stylesheet">
 
@@ -26,7 +33,8 @@
     {{-- Alert --}}
     <link rel="stylesheet" href="{{url('css/alertify.core.css')}}" />
     <link rel="stylesheet" href="{{url('css/alertify.default.css')}}" />
-@endif
+
+    @endif
 
   </head>
   <body>
@@ -112,7 +120,7 @@
     @yield('content')
 
     @if (env('MINIFY_HTML'))
-      <script src="{{url('minify/code.min.js')}}"></script>
+        <script src="{{url('minify/code.min.js')}}"></script>
     @else
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="{{url('js/jquery-1.12.4.js')}}"></script>
@@ -125,7 +133,10 @@
       <script src="{{url('js/_site_library.js')}}"></script>
       <script src="{{url('js/_site_cart.js')}}"></script>
     @endif
+
+    @if($rname == 'contact')
     <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_PLACE_API_KEY')}}&libraries=places"></script>
+    @endif
 
   </body>
 </html>
