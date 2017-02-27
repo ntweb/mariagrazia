@@ -11,6 +11,9 @@ use Log;
 use Session;
 use Storage;
 
+use SEO;
+use LaravelLocalization;
+
 class VideogalleryController extends Controller
 {
     public function __construct()
@@ -32,6 +35,14 @@ class VideogalleryController extends Controller
     	//** for paging
     	$data['arrElements'] = \App\Videogallery::active()->type('standard')->paginate(2);
 
+        //**** SEO ****//
+        SEO::setTitle($data['page']->mtitle);
+        SEO::setDescription($data['page']->mdescription);
+        SEO::opengraph()->setUrl(url()->current());        
+        SEO::opengraph()->addProperty('locale', LaravelLocalization::getCurrentLocaleRegional());
+        if ($data['page']->img)
+            SEO::opengraph()->addImage(img($data['page'], 'img')); 
+
     	return view()->make('web.videogallery.index', $data);
     }
 
@@ -47,6 +58,14 @@ class VideogalleryController extends Controller
 		}
 		//** for resource localization url **//
 
+        //**** SEO ****//
+        SEO::setTitle($data['page']->mtitle);
+        SEO::setDescription($data['page']->mdescription);
+        SEO::opengraph()->setUrl(url()->current());        
+        SEO::opengraph()->addProperty('locale', LaravelLocalization::getCurrentLocaleRegional());
+        if ($data['page']->img)
+            SEO::opengraph()->addImage(img($data['page'], 'img')); 
+        
 		return view()->make('web.videogallery.show', $data);
     }  
 }

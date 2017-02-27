@@ -11,6 +11,9 @@ use Log;
 use Session;
 use Storage;
 
+use SEO;
+use LaravelLocalization;
+
 class StaffController extends Controller
 {
     public function __construct()
@@ -40,6 +43,14 @@ class StaffController extends Controller
     	$data['page_images'] = $data['page']->attachments_images()->get();
     	$data['page_docs'] = $data['page']->attachments_docs()->get();
 
+        //**** SEO ****//
+        SEO::setTitle($data['page']->mtitle);
+        SEO::setDescription($data['page']->mdescription);
+        SEO::opengraph()->setUrl(url()->current());        
+        SEO::opengraph()->addProperty('locale', LaravelLocalization::getCurrentLocaleRegional());
+        if ($data['page']->img)
+            SEO::opengraph()->addImage(img($data['page'], 'img')); 
+        
 		return view()->make('web.staff.show', $data);
     }     
 }

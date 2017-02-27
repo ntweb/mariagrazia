@@ -11,6 +11,9 @@ use Log;
 use Session;
 use Storage;
 
+use SEO;
+use LaravelLocalization;
+
 class CategoryController extends Controller
 {
     public function __construct()
@@ -32,6 +35,15 @@ class CategoryController extends Controller
     	Session::put('breadcrumb_cat', $data['page']);
     	Session::forget('breadcrumb_subcat');
     	Session::forget('breadcrumb_prod');
+
+
+        //**** SEO ****//
+        SEO::setTitle($data['page']->mtitle);
+        SEO::setDescription($data['page']->mdescription);
+        SEO::opengraph()->setUrl(url()->current());        
+        SEO::opengraph()->addProperty('locale', LaravelLocalization::getCurrentLocaleRegional());
+        if ($data['page']->img)
+            SEO::opengraph()->addImage(img($data['page'], 'img'));           
 
     	return view()->make('web.ecommerce.category.index', $data);
     }    

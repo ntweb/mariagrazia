@@ -11,6 +11,9 @@ use Log;
 use Session;
 use Storage;
 
+use SEO;
+use LaravelLocalization;
+
 class SubcategoryController extends Controller
 {
     public function __construct()
@@ -35,6 +38,14 @@ class SubcategoryController extends Controller
 
     	//** for paging
     	$data['arrElements'] = \App\Product::active()->where('type', '=', $id)->paginate(2);
+
+        //**** SEO ****//
+        SEO::setTitle($data['page']->mtitle);
+        SEO::setDescription($data['page']->mdescription);
+        SEO::opengraph()->setUrl(url()->current());        
+        SEO::opengraph()->addProperty('locale', LaravelLocalization::getCurrentLocaleRegional());
+        if ($data['page']->img)
+            SEO::opengraph()->addImage(img($data['page'], 'img')); 
 
     	return view()->make('web.ecommerce.category.index', $data);
     }

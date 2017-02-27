@@ -11,6 +11,9 @@ use Log;
 use Session;
 use Storage;
 
+use SEO;
+use LaravelLocalization;
+
 class NewsController extends Controller
 {
 
@@ -33,6 +36,14 @@ class NewsController extends Controller
     	//** for paging
     	$data['arrElements'] = \App\News::active()->type('standard')->paginate(2);
 
+        //**** SEO ****//
+        SEO::setTitle($data['page']->mtitle);
+        SEO::setDescription($data['page']->mdescription);
+        SEO::opengraph()->setUrl(url()->current());
+        SEO::opengraph()->addProperty('locale', LaravelLocalization::getCurrentLocaleRegional());   
+        if ($data['page']->img)
+            SEO::opengraph()->addImage(img($data['page'], 'img'));
+
     	return view()->make('web.news.index', $data);
     }
 
@@ -53,6 +64,17 @@ class NewsController extends Controller
 
     	$data['page_reviews'] = $data['page']->reviews()->get();
 
+        //**** SEO ****//
+        SEO::setTitle($data['page']->mtitle);
+        SEO::setDescription($data['page']->mdescription);
+        SEO::opengraph()->setUrl(url()->current());        
+        SEO::opengraph()->addProperty('type', 'article');
+        SEO::opengraph()->addProperty('locale', LaravelLocalization::getCurrentLocaleRegional());
+        SEO::opengraph()->addProperty('published_time', $data['page']->created_at);
+        SEO::opengraph()->addProperty('modified_time', $data['page']->updated_at);
+        if ($data['page']->img)
+            SEO::opengraph()->addImage(img($data['page'], 'img'));
+        
 		return view()->make('web.news.show', $data);
     }
 }

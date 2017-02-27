@@ -11,6 +11,9 @@ use Log;
 use Session;
 use Storage;
 
+use SEO;
+use LaravelLocalization;
+
 class PageController extends Controller
 {
     public function __construct()
@@ -42,6 +45,14 @@ class PageController extends Controller
 
     	$data['page_reviews'] = $data['page']->reviews()->get();
 
+        //**** SEO ****//
+        SEO::setTitle($data['page']->mtitle);
+        SEO::setDescription($data['page']->mdescription);
+        SEO::opengraph()->setUrl(url()->current());        
+        SEO::opengraph()->addProperty('locale', LaravelLocalization::getCurrentLocaleRegional());
+        if ($data['page']->img)
+            SEO::opengraph()->addImage(img($data['page'], 'img'));  
+        
 		return view()->make('web.page.show', $data);
     }    
 }

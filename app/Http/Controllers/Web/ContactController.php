@@ -14,11 +14,22 @@ use Storage;
 use Mail;
 use App\Mail\SendContact;
 
+use SEO;
+use LaravelLocalization;
+
 class ContactController extends Controller
 {
     public function index() {
     	$data['page'] = page('contact', '1');
     	if (!$data['page']) abort(404);
+
+        //**** SEO ****//
+        SEO::setTitle($data['page']->mtitle);
+        SEO::setDescription($data['page']->mdescription);
+        SEO::opengraph()->setUrl(url()->current());        
+        SEO::opengraph()->addProperty('locale', LaravelLocalization::getCurrentLocaleRegional());
+        if ($data['page']->img)
+            SEO::opengraph()->addImage(img($data['page'], 'img'));           
 
     	return view()->make('web.contact.index', $data);
     }

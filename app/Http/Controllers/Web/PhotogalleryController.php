@@ -11,6 +11,9 @@ use Log;
 use Session;
 use Storage;
 
+use SEO;
+use LaravelLocalization;
+
 class PhotogalleryController extends Controller
 {
     public function __construct()
@@ -32,6 +35,14 @@ class PhotogalleryController extends Controller
     	//** for paging
     	$data['arrElements'] = \App\Photogallery::active()->type('standard')->paginate(2);
 
+        //**** SEO ****//
+        SEO::setTitle($data['page']->mtitle);
+        SEO::setDescription($data['page']->mdescription);
+        SEO::opengraph()->setUrl(url()->current());        
+        SEO::opengraph()->addProperty('locale', LaravelLocalization::getCurrentLocaleRegional());
+        if ($data['page']->img)
+            SEO::opengraph()->addImage(img($data['page'], 'img')); 
+
     	return view()->make('web.photogallery.index', $data);
     }
 
@@ -49,6 +60,14 @@ class PhotogalleryController extends Controller
 
     	$data['page_images'] = $data['page']->attachments_images()->get();
 
+        //**** SEO ****//
+        SEO::setTitle($data['page']->mtitle);
+        SEO::setDescription($data['page']->mdescription);
+        SEO::opengraph()->setUrl(url()->current());        
+        SEO::opengraph()->addProperty('locale', LaravelLocalization::getCurrentLocaleRegional());
+        if ($data['page']->img)
+            SEO::opengraph()->addImage(img($data['page'], 'img')); 
+        
 		return view()->make('web.photogallery.show', $data);
     }      
 }

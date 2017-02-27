@@ -12,6 +12,9 @@ use Log;
 use Session;
 use Storage;
 
+use SEO;
+use LaravelLocalization;
+
 class OrderController extends Controller
 {
 
@@ -20,7 +23,16 @@ class OrderController extends Controller
         parent::__construct();        
         $this->middleware('auth');
 
-        view()->share('page', page('my-orders'));
+        $data['page'] = page('cart');
+        view()->share('page', page('cart'));
+
+        //**** SEO ****//
+        SEO::setTitle($data['page']->mtitle);
+        SEO::setDescription($data['page']->mdescription);
+        SEO::opengraph()->setUrl(url()->current());        
+        SEO::opengraph()->addProperty('locale', LaravelLocalization::getCurrentLocaleRegional());
+        if ($data['page']->img)
+            SEO::opengraph()->addImage(img($data['page'], 'img'));  
     }   
 
     /**

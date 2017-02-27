@@ -12,6 +12,9 @@ use Session;
 use Storage;
 use App;
 
+use SEO;
+use LaravelLocalization;
+
 class ProductController extends Controller
 {
 
@@ -65,6 +68,13 @@ class ProductController extends Controller
         $data['options_colors'] = $data['page']->options_colors()->get();
         $data['options_sizes'] = $data['page']->options_sizes()->get();
         
+        //**** SEO ****//
+        SEO::setTitle($data['page']->mtitle);
+        SEO::setDescription($data['page']->mdescription);
+        SEO::opengraph()->setUrl(url()->current());        
+        SEO::opengraph()->addProperty('locale', LaravelLocalization::getCurrentLocaleRegional());
+        if ($data['page']->img)
+            SEO::opengraph()->addImage(img($data['page'], 'img')); 
 
     	return view()->make('web.ecommerce.category.index', $data);
     }
