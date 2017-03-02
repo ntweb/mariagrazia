@@ -234,6 +234,15 @@ class SubcategoryController extends Controller
         if (!$validator->fails()) {
             $el = \App\Subcategory::find($id);
             foreach ($fields as $key => $value) {
+
+                if ($key == 'type') {
+                    // cambio id_category anche ai prodotti
+                    if ($el->$key != $value) {
+                        \App\Product::where('type', $el->id)
+                                    ->update(['id_category' => $value]);
+                    }
+                }
+
                 $el->$key = $value;
 
                 if ($key == 'begin' && $value) $el->$key = \Carbon\Carbon::createFromFormat($this->default_lang->date, $value)->toDateString();
@@ -243,6 +252,10 @@ class SubcategoryController extends Controller
             if (!$el->save()){
                 return response()->json(array('error' => trans('labels.errore-sql')));
             }            
+
+            // se la sottocategory viene disattivata => disattivo anche i prodotti
+            if (!$el->active)
+                    \App\Product::where('type', $el->id)->update(['active' => '0']);            
 
             $result['id'] = $el->id;
             return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));

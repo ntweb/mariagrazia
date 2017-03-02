@@ -83,7 +83,7 @@
 	}
 	
 	// get img of model
-	function img($el, $field, $rid = null, $quality = 80) {
+	function img($el, $field, $rid = null, $quality = 60) {
 
 		$id = $el->id;
 		$gallery = '';

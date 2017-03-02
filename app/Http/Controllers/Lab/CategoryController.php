@@ -237,7 +237,13 @@ class CategoryController extends Controller
             $el->id_updated_by = Auth::user()->id;
             if (!$el->save()){
                 return response()->json(array('error' => trans('labels.errore-sql')));
-            }            
+            }     
+
+           // se la category viene disattivata => disattivo anche le sottocategory ed i prodotti
+            if (!$el->active) {                
+                \App\Subcategory::where('type', $el->id)->update(['active' => '0']); 
+                \App\Product::where('id_category', $el->id)->update(['active' => '0']); 
+            }
 
             $result['id'] = $el->id;
             return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));

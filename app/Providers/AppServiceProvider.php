@@ -29,9 +29,8 @@ class AppServiceProvider extends ServiceProvider
         View::share ('arrCategories', $query->get());
 
         // css above the fold 
-        // usare il file unico minified sul seguente url: https://jonassebastianohlsson.com/criticalpathcssgenerator/
-        if (file_exists(public_path('minify/above.css')))
-            View::share ('_above_the_fold_css', file_get_contents(public_path('minify/above.css')));
+        if (file_exists(public_path('minify/style.min.css')))
+            View::share ('_above_the_fold_css', file_get_contents(public_path('minify/style.min.css')));
 
     }
 

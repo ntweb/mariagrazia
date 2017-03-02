@@ -8,13 +8,9 @@
     {!! SEO::generate(true) !!}
 
     @if (env('MINIFY_HTML'))
-
         @if(isset($_above_the_fold_css))
           <style>{!! $_above_the_fold_css !!}</style>
-        @else
-          <link rel="stylesheet" href="{{url('minify/style.min.css')}}" />
         @endif
-
     @else
     
     <!-- Bootstrap -->

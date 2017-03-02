@@ -5,14 +5,22 @@ var autoprefixer = require('gulp-autoprefixer');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var order = require("gulp-order");
+var replace = require("gulp-replace");
 
 // create task
 gulp.task('min-css', function(){
-    gulp.src('public/css/**/*.css')
+    // //gulp.src('public/css/**/*.css')
+    gulp.src([
+        "public/css/bootstrap.css",
+        "public/css/font-awesome.css",
+        "public/css/alertify.core.css",
+        "public/css/alertify.default.css"
+      ])
         .pipe(cleanCSS())
         .pipe(concat('style.min.css'))
-        .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9'))
-        .pipe(gulp.dest('public/minify/'))
+        .pipe(replace("../fonts/", "/test/public/fonts/")) // remove test/public
+        .pipe(gulp.dest('public/minify/'));
+
 });
 
 gulp.task('min-js', function () {
