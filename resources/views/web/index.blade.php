@@ -29,6 +29,8 @@
     {{-- Alert --}}
     <link rel="stylesheet" href="{{url('css/alertify.core.css')}}" />
     <link rel="stylesheet" href="{{url('css/alertify.default.css')}}" />
+    {{-- My Site Style--}}
+    <link rel="stylesheet" href="{{url('css/_site_style.css')}}" />
 
     @endif
 
@@ -119,6 +121,8 @@
 
     @include('web.newsletter.index')
 
+    @include('web.cookie.index')
+
     @if (env('MINIFY_HTML'))
         <script src="{{url('minify/code.min.js')}}"></script>
     @else
@@ -132,6 +136,9 @@
       <script src="{{url('js/alertify/alertify.min.js')}}"></script>
       <script src="{{url('js/_site_library.js')}}"></script>
       <script src="{{url('js/_site_cart.js')}}"></script>
+      <script src="{{url('js/cookie/js.storage.min.js')}}"></script>
+      <script src="{{url('js/cookie/cookie.js')}}"></script>
+
     @endif
 
     @if($rname == 'contact')

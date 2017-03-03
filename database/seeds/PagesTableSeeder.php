@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Log;
 
 class PagesTableSeeder extends Seeder
 {
@@ -27,6 +28,8 @@ class PagesTableSeeder extends Seeder
 
 			    $p->id_created_by = 1;
 			    $p->save();
+
+			    #echo $p->module." - ";
 			}
 		}     	
     }

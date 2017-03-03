@@ -5,6 +5,14 @@
 		return \App\Page::active($active)->where('id', '=', $id_or_module)->orWhere('module', '=', $id_or_module)->first();
 	}
 
+	function page_url($id_or_module, $active = null) {
+		$page = page($id_or_module, $active = null);
+		if (!$page)
+			return "#";
+		
+		return action('Web\PageController@show', array($page->id, $page->murl));
+	}
+
 	// get date in locale format
 	function fdate($date) {
 		if (!$date)

@@ -1,0 +1,22 @@
+#cookie-info {
+	background-color: rgba(0,0,0,0.9);
+	color: white;
+
+	position: fixed;
+	bottom: 0;
+	z-index: 3000;
+
+	width: 100%;
+	display: none;
+	
+	padding-top: 20px;
+	padding-bottom: 20px;
+	
+	text-align: center;
+	font-size: 13px;
+}
+
+#cookie-info a {
+	color: rgb(255,255,255);
+	font-weight: bold;
+}

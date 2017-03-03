@@ -15,6 +15,7 @@ gulp.task('min-css', function(){
         "public/css/font-awesome.css",
         "public/css/alertify.core.css",
         "public/css/alertify.default.css"
+        "public/css/_site_style.css"
       ])
         .pipe(cleanCSS())
         .pipe(concat('style.min.css'))
@@ -30,7 +31,9 @@ gulp.task('min-js', function () {
 	    	"public/js/geocomplete/jquery.geocomplete.min.js",
 	    	"public/js/alertify/alertify.min.js",
 	    	"public/js/_site_library.js",
-	    	"public/js/_site_cart.js"
+        "public/js/_site_cart.js",
+        "public/js/cookie/js.storage.min.js",
+	    	"public/js/cookie/cookie.js"
 	  	])
       	.pipe(uglify())
       	.pipe(concat('code.min.js'))
