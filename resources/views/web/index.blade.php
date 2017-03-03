@@ -115,6 +115,10 @@
 
     @yield('content')
 
+    <hr>
+
+    @include('web.newsletter.index')
+
     @if (env('MINIFY_HTML'))
         <script src="{{url('minify/code.min.js')}}"></script>
     @else

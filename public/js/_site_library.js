@@ -88,6 +88,9 @@ var maincontainer = '#rpc-container'; // container rprincipale per risultati RPC
 					if (data.success)
 						simpleSuccess (frm, data.success);
 
+					if (data.pop_up_success)
+						alertify.success(data.pop_up_success);					
+
 		  			var _ismodified = frm.find("input[name='_ismodified']").first();
 		  			if (_ismodified.length) {
 		  				_ismodified.val(0);

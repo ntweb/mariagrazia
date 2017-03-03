@@ -13,6 +13,7 @@
 Auth::routes();
 Route::get('/facebook/login', 'Web\FacebookController@redirectToProvider');
 Route::get('/facebook/callback', 'Web\FacebookController@handleProviderCallback');
+Route::post('/newsletter', 'Web\NewsletterController@store');
 
 Route::group(
 [
