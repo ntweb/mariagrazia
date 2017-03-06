@@ -20,7 +20,7 @@
 		        		@if ($el->value || !$el->extras)
 		                	<input type="text" name="value__{{$el->label}}" class="form-control" value="{{$el->value}}" />
 	                	@else
-	                		<textarea name="extras__{{$el->label}}" class="summernote">{{$el->extras}}</textarea>
+	                		<textarea name="extras__{{$el->label}}" class="wysiwyg_editor">{{$el->extras}}</textarea>
 	                	@endif
 		            </span>
 		        </p>

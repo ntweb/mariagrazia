@@ -442,12 +442,11 @@ function initUI() {
 	(function($) {
 		$('.tabbedwidget').tabs();
 		
-		$('.summernote').summernote({
-	  		height: 400,   
-	  		codemirror: { 
-	    		theme: 'monokai'
-	  		}
-		});
+		// ckeditor
+		var elements = CKEDITOR.document.find( '.wysiwyg_editor' ), i = 0,element;
+		while ( ( element = elements.getItem( i++ ) ) ) {
+		    CKEDITOR.replace( element );
+		}		
 
 		$('.datepicker').each(function(i, el){
 			var format = $(el).data('format');

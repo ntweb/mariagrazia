@@ -35,7 +35,7 @@
         <p>
             <label>{{trans('labels.description')}}</label>
             <span class="field">
-                <textarea name="description" class="summernote">{{@$el->translate($l->lang)->description}}</textarea>
+                <textarea name="description" class="wysiwyg_editor">{{@$el->translate($l->lang)->description}}</textarea>
             </span>
         </p>
 

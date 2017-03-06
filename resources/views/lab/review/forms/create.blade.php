@@ -72,7 +72,7 @@
         <p>
             <label>{{trans('labels.answer')}}</label>
             <span class="field">
-                <textarea name="answer" class="summernote">{{@$el->answer}}</textarea>
+                <textarea name="answer" class="wysiwyg_editor">{{@$el->answer}}</textarea>
             </span>
         </p>
 

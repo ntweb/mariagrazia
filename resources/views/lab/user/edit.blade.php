@@ -50,7 +50,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Editor</label>
                         <div class="col-md-10">
-                            <select name="editor" class="form-control">
+                            <select name="wysiwyg_editor" class="form-control">
                                 <option value="0" @if(!$el->editor) selected="selected" @endif>{{trans('labels.no')}}</option>
                                 <option value="1" @if($el->editor) selected="selected" @endif>{{trans('labels.yes')}}</option>
                             </select>

@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         // // Languages        
-        // View::share ('languages', \App\Language::all());
+        View::share ('languages', \App\Language::all());
 
         // // Category
         // $query =  \App\Category::active()->whereHas('translations', function ($query) {

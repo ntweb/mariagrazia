@@ -13,9 +13,6 @@
 <link rel="stylesheet" href="{{url('assets/lab/css/style.navyblue.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/responsive-tables.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/font-awesome.min.css')}}" />
-<link rel="stylesheet" href="{{url('assets/lab/js/summernote/codemirror.css')}}" />
-<link rel="stylesheet" href="{{url('assets/lab/js/summernote/monokai.css')}}" />
-<link rel="stylesheet" href="{{url('assets/lab/js/summernote/summernote.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/js/plupload/js/jquery.ui.plupload/css/jquery.ui.plupload.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/jquery.googlePreviewSnippet.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/style.css')}}" />
@@ -44,15 +41,12 @@
 <script src="{{url('assets/lab/js/jquery.alerts.js')}}"></script>
 <script src="{{url('assets/lab/js/jquery.jgrowl.js')}}"></script>
 <script src="{{url('assets/lab/js/jquery.tagsinput.min.js')}}"></script>
-<script src="{{url('assets/lab/js/summernote/codemirror.js')}}"></script>
-<script src="{{url('assets/lab/js/summernote/xml.js')}}"></script>
-<script src="{{url('assets/lab/js/summernote/formatting.js')}}"></script>
-<script src="{{url('assets/lab/js/summernote/summernote.min.js')}}"></script>
 <script src="{{url('assets/lab/js/plupload/js/plupload.min.js')}}"></script>
 <script src="{{url('assets/lab/js/plupload/js/jquery.ui.plupload/jquery.ui.plupload.min.js')}}"></script>
 <script src="{{url('assets/lab/js/imagepreview.min.js')}}"></script>
 <script src="{{url('assets/lab/js/colorpicker.js')}}"></script>
 <script src="{{url('assets/lab/js/jquery.googlePreviewSnippet.js')}}"></script>
+<script src="{{url('assets/lab/js/ckeditor/ckeditor.js')}}"></script>
 <script src="{{url('assets/lab/js/custom.js')}}"></script>
 <script src="{{url('assets/lab/js/lab.js')}}"></script>
 
