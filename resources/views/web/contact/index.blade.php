@@ -30,7 +30,7 @@
    <textarea name="message" cols="30" rows="10"></textarea>
 
    <br><br>
-   {{trans('labels.privacy_check')}}
+   {{trans('web.privacy_check')}}
    <br>
    <button type="submit">{{trans('labels.send')}}</button>
 
