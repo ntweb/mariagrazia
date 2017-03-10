@@ -126,18 +126,26 @@
     @if (env('MINIFY_HTML'))
         <script src="{{url('minify/code.min.js')}}"></script>
     @else
-      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-      <script src="{{url('js/jquery-1.12.4.js')}}"></script>
-      <!-- Include all compiled plugins (below), or include individual files as needed -->
-      <script src="{{url('js/bootstrap.min.js')}}"></script>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="{{url('js/jquery-1.12.4.js')}}"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="{{url('js/bootstrap.min.js')}}"></script>
 
-      {{-- my library --}}
-      <script src="{{url('js/geocomplete/jquery.geocomplete.min.js')}}"></script>
-      <script src="{{url('js/alertify/alertify.min.js')}}"></script>
-      <script src="{{url('js/_site_library.js')}}"></script>
-      <script src="{{url('js/_site_cart.js')}}"></script>
-      <script src="{{url('js/cookie/js.storage.min.js')}}"></script>
-      <script src="{{url('js/cookie/cookie.js')}}"></script>
+		{{-- my library --}}
+		<script src="{{url('js/geocomplete/jquery.geocomplete.min.js')}}"></script>
+		<script src="{{url('js/alertify/alertify.min.js')}}"></script>
+		<script src="{{url('js/_site_library.js')}}"></script>
+		<script src="{{url('js/_site_cart.js')}}"></script>
+		<script src="{{url('js/cookie/js.storage.min.js')}}"></script>
+		<script src="{{url('js/cookie/cookie.js')}}"></script>
+	  
+		<script type="text/javascript">
+		if (is_cookie_info_hidden) {
+
+			// ... inserire cosa si vuole nascondere
+
+		}
+		</script>	  
 
     @endif
 
