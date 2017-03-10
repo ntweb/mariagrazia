@@ -32,7 +32,7 @@ class CreateLabUploadsTable extends Migration
             $table->integer('upload_id')->unsigned();
 
             $table->string('mtitle')->nullable();
-            $table->string('mdescription')->nullable();
+            $table->string('mdescription', 250)->nullable();
             $table->string('mkeys')->nullable();
 
             $table->string('locale')->index();

@@ -63,7 +63,7 @@
         <p>
             <label>{{trans('labels.mdescription')}}</label>
             <span class="field">
-                <textarea name="mdescription" class="form-control google-snippet" id="mdescription-{{$l->lang}}" data-v="{{$l->lang}}" rows="5" >{{@$el->translate($l->lang)->mdescription}}</textarea>
+                <textarea name="mdescription" maxlength="250" class="form-control google-snippet" id="mdescription-{{$l->lang}}" data-v="{{$l->lang}}" rows="5" >{{@$el->translate($l->lang)->mdescription}}</textarea>
             </span>
         </p>
 

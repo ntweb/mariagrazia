@@ -31,7 +31,7 @@ class CreateBannerTable extends Migration
             $table->integer('banner_id')->unsigned();
 
             $table->string('title');
-            $table->string('abstract')->nullable();
+            $table->string('abstract', 250)->nullable();
             $table->text('description')->nullable();
             
             $table->string('locale')->index();

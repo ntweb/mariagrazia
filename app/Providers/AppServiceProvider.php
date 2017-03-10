@@ -18,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
+
         // // Languages        
         View::share ('languages', \App\Language::all());
 
@@ -31,7 +32,6 @@ class AppServiceProvider extends ServiceProvider
         // // css above the fold 
         // if (file_exists(public_path('minify/style.min.css')))
         //     View::share ('_above_the_fold_css', file_get_contents(public_path('minify/style.min.css')));
-
     }
 
     /**

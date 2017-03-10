@@ -35,7 +35,7 @@
         <p>
             <label>{{trans('labels.abstract')}}</label>
             <span class="field">
-                <textarea name="abstract" class="form-control" rows="5" >{{@$el->translate($l->lang)->abstract}}</textarea>
+                <textarea name="abstract" class="form-control" rows="5" maxlength="250" >{{@$el->translate($l->lang)->abstract}}</textarea>
             </span>
         </p>        
 

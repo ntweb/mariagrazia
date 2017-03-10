@@ -43,7 +43,7 @@ class CreateStaffTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('mtitle')->nullable();
-            $table->string('mdescription')->nullable();
+            $table->string('mdescription', 250)->nullable();
             $table->string('mkeys')->nullable();
             $table->string('murl')->nullable();
             

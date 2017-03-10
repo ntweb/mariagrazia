@@ -34,10 +34,10 @@ class CreatePortfolioTable extends Migration
             $table->integer('portfolio_id')->unsigned();
 
             $table->string('title');
-            $table->string('abstract')->nullable();
+            $table->string('abstract', 250)->nullable();
             $table->text('description')->nullable();
             $table->string('mtitle')->nullable();
-            $table->string('mdescription')->nullable();
+            $table->string('mdescription', 250)->nullable();
             $table->string('mkeys')->nullable();
             $table->string('murl')->nullable();
             

@@ -32,7 +32,7 @@ class CreatePaymentTable extends Migration
             $table->integer('payment_id')->unsigned();
 
             $table->string('title');
-            $table->string('abstract')->nullable();
+            $table->string('abstract', 250)->nullable();
             
             $table->string('locale')->index();
 
