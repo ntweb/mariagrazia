@@ -33,6 +33,9 @@ class SubcategoryController extends Controller
     	$data['page'] = \App\Subcategory::active()->where('id', '=', $id)->first();
     	if (!$data['page']) abort(404);
 
+        if (!Session::has('breadcrumb_cat'))
+            Session::put('breadcrumb_cat', $data['page']->category);
+        
         Session::put('breadcrumb_subcat', $data['page']);
         Session::forget('breadcrumb_prod');
 
