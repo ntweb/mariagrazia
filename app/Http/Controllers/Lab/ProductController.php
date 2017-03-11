@@ -113,6 +113,9 @@ class ProductController extends Controller
               
             }
 
+            // mi ricavo anche la categoria
+            $el->id_category = $el->subcategory->category->id;            
+
             // default 
             $el->uploadfolder = $this->uploadfolder;
 
