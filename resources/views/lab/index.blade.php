@@ -47,6 +47,7 @@
 <script src="{{url('assets/lab/js/colorpicker.js')}}"></script>
 <script src="{{url('assets/lab/js/jquery.googlePreviewSnippet.js')}}"></script>
 <script src="{{url('assets/lab/js/ckeditor/ckeditor.js')}}"></script>
+<script src="{{url('assets/lab/js/ckeditor/adapters/jquery.js')}}"></script>
 <script src="{{url('assets/lab/js/custom.js')}}"></script>
 <script src="{{url('assets/lab/js/lab.js')}}"></script>
 

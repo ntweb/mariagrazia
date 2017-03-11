@@ -443,10 +443,7 @@ function initUI() {
 		$('.tabbedwidget').tabs();
 		
 		// ckeditor
-		var elements = CKEDITOR.document.find( '.wysiwyg_editor' ), i = 0,element;
-		while ( ( element = elements.getItem( i++ ) ) ) {
-		    CKEDITOR.replace( element );
-		}		
+		$('.wysiwyg_editor').ckeditor();	
 
 		$('.datepicker').each(function(i, el){
 			var format = $(el).data('format');
