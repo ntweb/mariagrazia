@@ -59,6 +59,12 @@ class ProductController extends Controller
     	$data['page'] = \App\Product::active()->where('id', '=', $id)->first();
     	if (!$data['page']) abort(404);
 
+        if (!Session::has('breadcrumb_cat'))
+            Session::put('breadcrumb_cat', $data['page']->category);
+
+        if (!Session::has('breadcrumb_subcat'))
+            Session::put('breadcrumb_subcat', $data['page']->subcategory);
+        
         Session::put('breadcrumb_prod', $data['page']);
 
         $data['page_images'] = $data['page']->attachments_images()->get();
