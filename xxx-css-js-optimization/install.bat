@@ -1,10 +1,4 @@
-Installare gulp
-
 npm install gulp
-
-
-poi installare i seguenti plugin (sito di riferimento per plugin: https://www.npmjs.com/)
-
 npm install --save-dev gulp-concat
 npm install --save-dev gulp-clean-css
 npm install --save-dev gulp-autoprefixer
@@ -12,13 +6,3 @@ npm install --save-dev gulp-rename
 npm install --save-dev gulp-uglify
 npm install --save-dev gulp-replace
 npm install --save-dev gulp-order
-
-
-nel file gulpfile.js specificare l'ordine delle risorse JS perchè è importante per il loro utilizzo
-
-lanciare:
-gulp min-css
-gulp min-js
-
-
-// Usare il .bat
