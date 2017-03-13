@@ -45,11 +45,16 @@
 
 	// get parameter
 	function param($label, $field = 'value') {
-		$p = \App\Parameter::where('label', '=', $label)->first();
-		if ($p)
-			return $p->$field;
 
-		return null;
+		if (!Session::has($label)) {
+			$p = \App\Parameter::where('label', '=', $label)->first();
+			if ($p) {
+				Session::put($label, $p->$field);
+				return Session::get($label);
+			}
+			return null;			
+		}
+		return Session::get($label);
 	}
 
 	function types($label) {
