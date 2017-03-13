@@ -124,7 +124,7 @@
     @include('web.cookie.index')
 
     @if (env('MINIFY_HTML'))
-        <script src="{{url('minify/code.min.js')}}"></script>
+        <script src="{{url('minify/code.min.js')}}" defer></script>
     @else
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="{{url('js/jquery-1.12.4.js')}}"></script>
@@ -150,7 +150,7 @@
     @endif
 
     @if($rname == 'contact')
-    <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_PLACE_API_KEY')}}&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_PLACE_API_KEY')}}&libraries=places" defer></script>
     @endif
 
   </body>
