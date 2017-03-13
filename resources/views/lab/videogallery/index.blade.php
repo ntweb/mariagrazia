@@ -55,10 +55,10 @@
                 <td>{{$el->id}}</td>
                 <td>{{$el->title}}</td>
                 <td>{{$el->type}}</td>
-                <td>@if($el->begin) {{date($default_lang->date, strtotime($el->begin))}} @endif</td>
+                <td>@if($el->begin) {{date($default_lang['date'], strtotime($el->begin))}} @endif</td>
                 <td>{{$el->created_by->name}}</td>
-                <td>{{date($default_lang->datetime, strtotime($el->created_at))}}</td>
-                <td>{{date($default_lang->datetime, strtotime($el->updated_at))}}</td>
+                <td>{{date($default_lang['datetime'], strtotime($el->created_at))}}</td>
+                <td>{{date($default_lang['datetime'], strtotime($el->updated_at))}}</td>
                 <td class="right">
                     <div class="btn-group btn-group-xs">
                         <button href="javascript:void(0);" class="btn btn-primary get-html" data-route="{{action('Lab\VideogalleryController@edit', array($el->id))}}"><i class="fa fa-fw fa-pencil" aria-hidden="true"></i></button>

@@ -15,6 +15,7 @@ class PageController extends Controller
 {
 
     protected $uploadfolder = 'pages';
+    protected $default_lang;
 
     public function __construct()
     {
@@ -23,7 +24,10 @@ class PageController extends Controller
 
         view()->share('table', 'lab_pages');
         view()->share('uploadfolder', $this->uploadfolder);
-        view()->share('default_lang', \App\Language::first());
+
+        \LaravelLocalization::setLocale('it');
+        $this->default_lang = config('laravellocalization.supportedLocales.it');
+        view()->share('default_lang', $this->default_lang);
 
         view()->share('mod_name', 'Pagine');
         view()->share('mod_action', 'Lista');

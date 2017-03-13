@@ -23,8 +23,11 @@ class CartController extends Controller
         parent::__construct();
         $this->middleware('auth');
 
-        $this->default_lang = \App\Language::first();
-        view()->share('default_lang', $this->default_lang);        
+                
+
+        \LaravelLocalization::setLocale('it');
+        $this->default_lang = config('laravellocalization.supportedLocales.it');
+        view()->share('default_lang', $this->default_lang);
 
         view()->share('mod_name', 'Ordini');
         view()->share('mod_action', 'Lista');

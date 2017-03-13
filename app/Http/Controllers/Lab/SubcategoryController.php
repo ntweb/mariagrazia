@@ -25,7 +25,10 @@ class SubcategoryController extends Controller
 
         view()->share('table', 'lab_subcategories');
         view()->share('uploadfolder', $this->uploadfolder);
-        $this->default_lang = \App\Language::first();
+        
+
+        \LaravelLocalization::setLocale('it');
+        $this->default_lang = config('laravellocalization.supportedLocales.it');
         view()->share('default_lang', $this->default_lang);
 
         view()->share('mod_name', 'Sotto categorie');
@@ -245,7 +248,7 @@ class SubcategoryController extends Controller
 
                 $el->$key = $value;
 
-                if ($key == 'begin' && $value) $el->$key = \Carbon\Carbon::createFromFormat($this->default_lang->date, $value)->toDateString();
+                if ($key == 'begin' && $value) $el->$key = \Carbon\Carbon::createFromFormat($this->default_lang['date'], $value)->toDateString();
             }
 
             $el->id_updated_by = Auth::user()->id;

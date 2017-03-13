@@ -15,7 +15,7 @@
     <p>
         <label>{{trans('labels.begin')}}</label>
         <span class="field">
-            <input type="text" name="begin" class="form-control datepicker" data-format="{{$default_lang->date_ui}}" placeholder="{{$default_lang->date_ui}}" value="@if($el->begin) {{date($default_lang->date, strtotime($el->begin))}} @endif" />
+            <input type="text" name="begin" class="form-control datepicker" data-format="{{$default_lang['date_ui']}}" placeholder="{{$default_lang['date_ui']}}" value="@if($el->begin) {{date($default_lang['date'], strtotime($el->begin))}} @endif" />
         </span>
     </p>
 

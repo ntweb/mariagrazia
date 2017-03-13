@@ -19,8 +19,12 @@
 			return null;
 
 		$locale = App::getLocale();
-		$l = \App\Language::where('lang', '=', $locale)->first();
-		return date($l->date, strtotime($date));
+		$config = config('laravellocalization.supportedLocales.'.$locale);
+
+		// $l = \App\Language::where('lang', '=', $locale)->first();
+		// return date($l->date, strtotime($date));
+
+		return date($config['date'], strtotime($date));
 	}
 
 	// get datetime in locale format
@@ -29,8 +33,11 @@
 			return null;
 
 		$locale = App::getLocale();
-		$l = \App\Language::where('lang', '=', $locale)->first();
-		return date($l->date, strtotime($date));
+		$config = config('laravellocalization.supportedLocales.'.$locale);
+
+		// $l = \App\Language::where('lang', '=', $locale)->first();
+		// return date($l->date, strtotime($date));
+		return date($config['datetime'], strtotime($date));
 	}
 
 	// get euro format

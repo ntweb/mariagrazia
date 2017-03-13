@@ -9,7 +9,7 @@
 
 {!! csrf_field() !!}    {{-- token --}}
 @if (isset($l))         {{-- locale --}}
-<input type="hidden" name="lang" value="{{$l->lang}}">
+<input type="hidden" name="lang" value="{{$localeCode}}">
 @endif
 
     @if(!isset($el))

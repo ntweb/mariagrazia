@@ -9,7 +9,7 @@
 
 {!! csrf_field() !!}    {{-- token --}}
 @if (isset($l))         {{-- locale --}}
-<input type="hidden" name="lang" value="{{$l->lang}}">
+<input type="hidden" name="lang" value="{{$localeCode}}">
 @endif
 
     @if(!isset($el))
@@ -28,21 +28,21 @@
         <p>
             <label>{{trans('labels.title')}}</label>
             <span class="field">
-                <input type="text" name="title" class="form-control" value="{{@$el->translate($l->lang)->title}}" />
+                <input type="text" name="title" class="form-control" value="{{@$el->translate($localeCode)->title}}" />
             </span>
         </p>
 
         <p>
             <label>{{trans('labels.abstract')}}</label>
             <span class="field">
-                <textarea name="abstract" class="form-control" rows="5" maxlength="250" >{{@$el->translate($l->lang)->abstract}}</textarea>
+                <textarea name="abstract" class="form-control" rows="5" maxlength="250" >{{@$el->translate($localeCode)->abstract}}</textarea>
             </span>
         </p>        
 
         <p>
             <label>{{trans('labels.consumer_message')}}</label>
             <span class="field">
-                <textarea name="consumer_message" class="form-control" rows="5" >{{@$el->translate($l->lang)->consumer_message}}</textarea>
+                <textarea name="consumer_message" class="form-control" rows="5" >{{@$el->translate($localeCode)->consumer_message}}</textarea>
             </span>
         </p>        
 

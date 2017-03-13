@@ -42,8 +42,8 @@
                 <td>{{$business->businessname}}</td>
                 <td>{{$el->email}}</td>                
                 <td>{{$business->telephone}}</td>                
-                <td>{{date($default_lang->datetime, strtotime($el->created_at))}}</td>
-                <td>{{date($default_lang->datetime, strtotime($el->updated_at))}}</td>
+                <td>{{date($default_lang['datetime'], strtotime($el->created_at))}}</td>
+                <td>{{date($default_lang['datetime'], strtotime($el->updated_at))}}</td>
                 <td class="right">
                     <div class="btn-group btn-group-xs">
                         <button href="javascript:void(0);" class="btn btn-primary get-html" data-route="{{action('Lab\BusinessController@edit', array($el->id))}}"><i class="fa fa-fw fa-pencil" aria-hidden="true"></i></button>

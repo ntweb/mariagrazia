@@ -20,7 +20,11 @@ class UploadController extends Controller
         $this->middleware('auth');
 
         view()->share('table', 'lab_uploads');
-        view()->share('default_lang', \App\Language::first());
+        // view()->share('default_lang', \App\Language::first());
+
+        view()->share('default_lang', config('laravellocalization.supportedLocales.it'));
+
+        \LaravelLocalization::setLocale('it');
     }
 
     // upload cms images

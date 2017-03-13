@@ -9,7 +9,7 @@
 
 {!! csrf_field() !!}    {{-- token --}}
 @if (isset($l))         {{-- locale --}}
-<input type="hidden" name="lang" value="{{$l->lang}}">
+<input type="hidden" name="lang" value="{{$localeCode}}">
 @endif
 
     @if(!isset($el))
@@ -39,7 +39,7 @@
         <p>
             <label>{{trans('labels.title')}}</label>
             <span class="field">
-                <input type="text" name="title" class="form-control" value="{{@$el->translate($l->lang)->title}}" />
+                <input type="text" name="title" class="form-control" value="{{@$el->translate($localeCode)->title}}" />
             </span>
         </p>
 

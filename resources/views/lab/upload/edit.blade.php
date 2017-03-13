@@ -1,14 +1,14 @@
 <div class="tabbedwidget tab-primary">
     <ul>
-        @foreach ($languages as $l)
-        <li><a href="#tabs-upload-{{$l->id}}">{{strtoupper($l->lang)}} <i class="fa fa-globe" aria-hidden="true"></i> <b>{{trans('labels.descriptions')}}</b></a></li>
+        @foreach ($languages as $localeCode => $l)
+        <li><a href="#tabs-upload-{{$localeCode}}">{{strtoupper($localeCode)}} <i class="fa fa-globe" aria-hidden="true"></i> <b>{{trans('labels.descriptions')}}</b></a></li>
         @endforeach
 
         <li><a href="#tabs-upload-settings"><i class="fa fa-wrench" aria-hidden="true"></i> {{trans('labels.settings')}}</a></li>
     </ul>
 
-    @foreach ($languages as $l)
-    <div id="tabs-upload-{{$l->id}}">            
+    @foreach ($languages as $localeCode => $l)
+    <div id="tabs-upload-{{$localeCode}}">            
         @include('lab.upload.forms.create')
     </div>
     @endforeach

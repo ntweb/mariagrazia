@@ -15,7 +15,9 @@ class ParameterController extends Controller
 
         view()->share('table', 'lab_parameters');
         view()->share('uploadfolder', 'parameters');
-        view()->share('default_lang', \App\Language::first());
+
+        \LaravelLocalization::setLocale('it');
+        view()->share('default_lang', config('laravellocalization.supportedLocales.it'));
 
         view()->share('mod_name', 'Parametri');
         view()->share('mod_action', 'Lista');

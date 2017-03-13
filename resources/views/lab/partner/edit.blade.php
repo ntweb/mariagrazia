@@ -6,8 +6,8 @@
         <ul>
             <li><a href="#tabs-registy"><i class="fa fa-address-card-o" aria-hidden="true"></i> {{trans('labels.registy')}}</a></li>
 
-            @foreach ($languages as $l)
-            <li><a href="#tabs-{{$l->id}}">{{strtoupper($l->lang)}} <i class="fa fa-globe" aria-hidden="true"></i> <b>{{trans('labels.descriptions')}}</b></a></li>
+            @foreach ($languages as $localeCode => $l)
+            <li><a href="#tabs-{{$localeCode}}">{{strtoupper($localeCode)}} <i class="fa fa-globe" aria-hidden="true"></i> <b>{{trans('labels.descriptions')}}</b></a></li>
             @endforeach
     
             <li><a href="#tabs-images"><i class="fa fa-camera" aria-hidden="true"></i> {{trans('labels.images')}}</a></li>
@@ -19,8 +19,8 @@
             @include('lab.partner.forms.registry')
         </div>
 
-        @foreach ($languages as $l)
-        <div id="tabs-{{$l->id}}">            
+        @foreach ($languages as $localeCode => $l)
+        <div id="tabs-{{$localeCode}}">            
             @include('lab.partner.forms.create')
         </div>
         @endforeach

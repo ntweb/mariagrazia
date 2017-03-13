@@ -25,7 +25,10 @@ class BannerController extends Controller
 
         view()->share('table', 'lab_banners');
         view()->share('uploadfolder', $this->uploadfolder);
-        $this->default_lang = \App\Language::first();
+        
+
+        \LaravelLocalization::setLocale('it');
+        $this->default_lang = config('laravellocalization.supportedLocales.it');
         view()->share('default_lang', $this->default_lang);
 
         view()->share('mod_name', 'Banner');
