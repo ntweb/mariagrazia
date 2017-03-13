@@ -90,6 +90,9 @@ function()
 	Route::get('/'.LaravelLocalization::transRoute('routes.contact'), 'Web\ContactController@index')->name('contact');
 	Route::post('/contact/send', 'Web\ContactController@send')->name('contact');
 
+	// Sitemap route
+	Route::get('/sitemap/{what}', 'Web\SitemapController@index');
+
 	// Test route
 	Route::get('/test', 'Web\TestController@index');		
 
@@ -101,6 +104,7 @@ Route::post('/review', 'Web\ReviewController@store');
 Route::get('/sended/verification', '\App\Http\Controllers\Auth\RegisterController@sendverification');
 Route::get('/verify/{token}', '\App\Http\Controllers\Auth\RegisterController@verify');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
 
 
 // ******************************************************************************* //

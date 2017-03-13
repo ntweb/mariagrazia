@@ -27,6 +27,9 @@ class PagesTableSeeder extends Seeder
 			    $p->active = $xxx[3];
 
 			    $p->id_created_by = 1;
+
+			    $p->mtitle = $p->title;
+			    $p->murl = str_slug($p->title);
 			    $p->save();
 
 			    #echo $p->module." - ";

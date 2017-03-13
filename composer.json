@@ -16,7 +16,8 @@
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "mcamara/laravel-localization": "1.2.*",
-        "omnipay/paypal": "~2.0"
+        "omnipay/paypal": "~2.0",
+        "roumen/sitemap": "^2.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
