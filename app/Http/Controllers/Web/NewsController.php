@@ -54,7 +54,7 @@ class NewsController extends Controller
 
 		//** for resource localization url **//
 		$data['route_loalization_resource'] = 'routes.news_show';
-		foreach (\LaravelLocalization::getSupportedLocales() as $localeCode) {
+		foreach (\LaravelLocalization::getSupportedLocales() as $localeCode => $l) {
 			$data['route_loalization_resource_param'][$localeCode] = array('id' => $id, 'title' => $data['page']->translateOrDefault($localeCode)->murl);
 		}
 		//** for resource localization url **//
