@@ -9,7 +9,7 @@ class Banner extends Model
 	use \Dimsav\Translatable\Translatable;
     
     protected $table = 'lab_banners';
-    public $translatedAttributes = ['title', 'abstract', 'description'];
+    public $translatedAttributes = ['title', 'abstract', 'description', 'url'];
 
     public function created_by(){
 		return $this->belongsTo('\App\User','id_created_by');

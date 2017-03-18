@@ -40,6 +40,13 @@
         </p>        
 
         <p>
+            <label>{{trans('labels.url')}}</label>
+            <span class="field">
+                <textarea name="url" class="form-control" rows="5" maxlength="250" >{{@$el->translate($localeCode)->url}}</textarea>
+            </span>
+        </p>        
+
+        <p>
             <label>{{trans('labels.description')}}</label>
             <span class="field">
                 <textarea name="description" class="wysiwyg_editor">{{@$el->translate($localeCode)->description}}</textarea>
