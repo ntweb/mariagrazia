@@ -35,8 +35,8 @@ class PageController extends Controller
 
 		//** for resource localization url **//
 		$data['route_loalization_resource'] = 'routes.page_show';
-		foreach (\App\Language::all() as $v) {
-			$data['route_loalization_resource_param'][$v->lang] = array('id' => $id, 'title' => $data['page']->translateOrDefault($v->lang)->murl);
+		foreach (\LaravelLocalization::getSupportedLocales() as $localeCode => $l) {
+			$data['route_loalization_resource_param'][$localeCode] = array('id' => $id, 'title' => $data['page']->translateOrDefault($localeCode)->murl);
 		}
 		//** for resource localization url **//
 

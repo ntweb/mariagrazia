@@ -21,6 +21,15 @@ class HomepageController extends Controller
     	$data['page'] = page('homepage', '1');
     	if (!$data['page']) abort(404);
 
+        // banners
+        $data['arrB'] = \App\Banner::active()->orderBy('order')->get();
+
+        // loghi partner
+        $data['arrP'] = \App\Partner::active()->orderBy('order')->get();
+
+        // Dicono di noi
+        $data['arrR'] = \App\Review::active()->orderBy('order')->get();
+
     	// notizie
     	$data['arrN'] = \App\News::active()->type('standard')->orderBy('order')->get();
 
