@@ -51,18 +51,24 @@
 	}
 
 	// get parameter
-	function param($label, $field = 'value') {
+	function param($label, $field = 'value', $sep = null) {
 
 		if (!Session::has($label)) {
 			$p = \App\Parameter::where('label', '=', $label)->first();
 			if ($p) {
-				Session::put($label, $p->$field);
+
+				$v = $p->$field;
+				if ($sep)
+					$v = explode($p->$field, $sep)
+
+				Session::put($label, $v);
 				return Session::get($label);
 			}
 			return null;			
 		}
 		return Session::get($label);
 	}
+
 
 	function types($label) {
 		$types = \App\Parameter::where('label', '=', $label)->first();
