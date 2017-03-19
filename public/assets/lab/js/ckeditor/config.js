@@ -16,4 +16,6 @@ CKEDITOR.editorConfig = function( config ) {
 	];
 
 	config.removeButtons = 'Save,NewPage,Preview,Templates,Print,Cut,Copy,Undo,Redo,SelectAll,Scayt,Form,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,BidiLtr,BidiRtl,Language,Flash,Smiley,SpecialChar,PageBreak,Iframe,About';
+	config.protectedSource.push( /<i[\s\S]*?\>/g ); //allows beginning <i> tag
+	config.protectedSource.push( /<\/i[\s\S]*?\>/g ); //allows ending </i> tag	
 };
