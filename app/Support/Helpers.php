@@ -11,7 +11,6 @@
 			if (!$page)
 				return "#";
 
-			Log::info('faccio query');
 			Session::put($id_or_module, array(App::getLocale() => action('Web\PageController@show', array($page->id, $page->murl))));
 		}
 
