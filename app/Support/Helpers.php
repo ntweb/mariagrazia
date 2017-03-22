@@ -6,12 +6,18 @@
 	}
 
 	function page_url($id_or_module, $active = null) {
-		$page = page($id_or_module, $active = null);
-		if (!$page)
-			return "#";
-		
-		return action('Web\PageController@show', array($page->id, $page->murl));
+		if (!isset(Session::get($id_or_module)[App::getLocale()])) {
+			$page = page($id_or_module, $active = null);
+			if (!$page)
+				return "#";
+
+			Log::info('faccio query');
+			Session::put($id_or_module, array(App::getLocale() => action('Web\PageController@show', array($page->id, $page->murl))));
+		}
+
+		return Session::get($id_or_module)[App::getLocale()];
 	}
+
 
 	// get date in locale format
 	function fdate($date) {
