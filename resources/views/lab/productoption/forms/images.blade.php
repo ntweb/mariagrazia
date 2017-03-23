@@ -8,7 +8,7 @@
             @if ($el->img)
             <a href="{{url('media/'.$el->uploadfolder.'/'.$el->id.'/'.$el->img)}}" class="preview" target="_blank">preview</a>
 			&nbsp;&nbsp;&nbsp;
-            <a href="javascript:void(0);" class="colorRed get-json" data-route="{{action('Lab\NewsController@deleteImg', array($el->id, 'img'))}}"><i class="fa fa-trash-o" aria-hidden="true"></i> delete</a>
+            <a href="javascript:void(0);" class="colorRed get-json" data-route="{{action('Lab\ProductoptionController@deleteImg', array($el->id, 'img'))}}"><i class="fa fa-trash-o" aria-hidden="true"></i> delete</a>
             @endif
         </div>
     </p>
