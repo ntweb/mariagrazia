@@ -27,8 +27,8 @@ class Kernel extends ConsoleKernel
          // impostare cron * * * * * php -c /usr/local/apache/conf/userdata/std/2/vujcgrei/php.ini /home/vujcgrei/artisan schedule:run > /dev/null 2>&1
 
         $schedule->command('coupon:disable')->everyFiveMinutes();
-        $schedule->command('queue:restart')->everyMinute();
-        $schedule->command('queue:work --trie=3')->everyFiveMinutes()->withoutOverlapping();
+        $schedule->command('queue:restart')->everyFiveMinutes();
+        $schedule->command('queue:work --tries=3')->everyMinute()->withoutOverlapping();
     }
 
     /**
