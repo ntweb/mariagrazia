@@ -24,10 +24,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         // impostare cron * * * * * /usr/local/bin/php -c /usr/local/apache/conf/userdata/std/2/vujcgrei/php.ini /home/vujcgrei/artisan schedule:run > /dev/null 2>&1
+         // impostare cron * * * * * php -c /usr/local/apache/conf/userdata/std/2/vujcgrei/php.ini /home/vujcgrei/artisan schedule:run > /dev/null 2>&1
 
         $schedule->command('coupon:disable')->everyFiveMinutes();
-        $schedule->command('queue:work')->everyMinute();
+        $schedule->command('queue:restart')->everyMinute();
+        $schedule->command('queue:work --trie=3')->everyFiveMinutes()->withoutOverlapping();
     }
 
     /**
