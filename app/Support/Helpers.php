@@ -57,7 +57,6 @@
 
 	// get parameter
 	function param($label, $field = 'value', $sep = null) {
-
 		if (!Session::has($label)) {
 			$p = \App\Parameter::where('label', '=', $label)->first();
 			if ($p) {
