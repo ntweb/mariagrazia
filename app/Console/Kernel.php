@@ -32,7 +32,10 @@ class Kernel extends ConsoleKernel
         // l'istruzione is_file(PHP_BINARY)
 
         $schedule->command('coupon:disable')->everyFiveMinutes();
+
+
         $schedule->command('queue:restart')->everyFiveMinutes();
+        $schedule->command('queue:flush')->everyFiveMinutes();
         $schedule->command('queue:work --tries=3')->everyMinute()->withoutOverlapping();
     }
 
