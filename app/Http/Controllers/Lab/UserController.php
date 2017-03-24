@@ -232,4 +232,29 @@ class UserController extends Controller
         $result['flag'] = $el->$field;
         return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
     }    
+
+    public function setAvatar(Request $request) {
+        $folder = 'avatar/';
+        $filename = md5(Auth::user()->email)."_".time().".png";
+
+        $data = $request->base64Pic;
+        list($type, $data) = explode(';', $data);
+        list(, $data)      = explode(',', $data);
+        $data = base64_decode($data);
+
+        if (!Storage::disk('docs')->put($folder.$filename, $data)) {
+            return response()->json(array('error' => trans('labels.errore-salvataggio-immagine')));
+        }
+        
+        $u = Auth::user();
+        if ($u->img)
+            Storage::disk('docs')->delete($folder.$u->img);
+
+        $u->img = $filename;
+        $u->save();
+        
+        return response()->json(array('success' => true, 'result' => url('media/'.$folder.$filename)));
+    }    
+
+
 }

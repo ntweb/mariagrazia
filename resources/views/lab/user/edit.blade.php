@@ -86,6 +86,36 @@
 
     <div class="col-md-7">
                 
+        <form class="clearfix ns" data-route="{{action('Lab\UserController@setAvatar')}}" data-callback="changeAvatarPic('param')">
+        {!! csrf_field() !!}
+
+            <div class="widgetbox personal-information">
+                <h4 class="widgettitle">Avatar</h4>
+                <div class="widgetcontent form-horizontal">
+
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <div id="crop-img"></div>          
+                        </div> 
+                        <div class="col-md-4">
+                            <br>
+                            <br>
+                            <input type="file" id="upload" class="filestyle" accept="image/*">
+                            <br>
+                            <button class="btn btn-primary upload-crop" style="display: none;"><i class="fa fa-floppy-o" aria-hidden="true"></i> {{trans('labels.save')}}</button>
+                        </div>  
+                        <div class="col-md-8 col-md-offset-2 text-center">
+                        </div>
+
+                    </div>
+
+                    <textarea name="base64Pic" id="base64Pic" style="display: none;"></textarea>
+
+                </div>
+            </div>        
+
+        </form>
+
         <form class="ns" data-method='PUT' data-route="{{action('Lab\UserController@update', array($el->id))}}" >
         {!! csrf_field() !!}
 
@@ -112,9 +142,9 @@
             
             <p>
                <button type="submit" class="btn btn-primary">{{trans('labels.save')}}</button>
-            </p>
-            
+            </p>            
         </form>
+
     </div>
     
 @endsection

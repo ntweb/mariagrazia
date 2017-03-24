@@ -123,6 +123,12 @@
 		} 
 
 		$folder = $el->uploadfolder;
+
+		if (isset($el->password)) { // è l'avatar di un utente
+			$id = '';
+			$folder = 'avatar';
+		}
+
 		$filename = $folder.'/'.$id.'/'.$gallery.$el->$field;
 
 		$rid = strtolower($rid);

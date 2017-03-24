@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="{{url('assets/lab/css/font-awesome.min.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/js/plupload/js/jquery.ui.plupload/css/jquery.ui.plupload.css')}}" />
 <link rel="stylesheet" href="{{url('assets/lab/css/jquery.googlePreviewSnippet.css')}}" />
+<link rel="stylesheet" href="{{url('assets/lab/js/Croppie/croppie.css')}}" >
 <link rel="stylesheet" href="{{url('assets/lab/css/style.css')}}" />
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -48,6 +49,7 @@
 <script src="{{url('assets/lab/js/jquery.googlePreviewSnippet.js')}}"></script>
 <script src="{{url('assets/lab/js/ckeditor/ckeditor.js')}}"></script>
 <script src="{{url('assets/lab/js/ckeditor/adapters/jquery.js')}}"></script>
+<script src="{{url('assets/lab/js/Croppie/croppie.min.js')}}"></script>
 <script src="{{url('assets/lab/js/custom.js')}}"></script>
 <script src="{{url('assets/lab/js/lab.js')}}"></script>
 
@@ -122,7 +124,13 @@
                 </li>
                 <li class="right">
                     <div class="userloggedinfo">
-                        <img src="{{url('assets/lab/images/photos/thumb1.png')}}" alt="" />
+
+                        @if (Auth::user()->img)
+                        <img class="avatar" src="{{img(Auth::user(), 'img')}}" alt="" />
+                        @else
+                        <img class="avatar" src="{{url('assets/lab/images/photos/thumb1.png')}}" alt="" />
+                        @endif
+
                         <div class="userinfo">
                             <h5>{{Auth::user()->name}} {{Auth::user()->lastname}}<small> - {{Auth::user()->email}}</small></h5>
                             <ul>

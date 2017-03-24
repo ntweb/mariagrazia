@@ -438,9 +438,74 @@ function slugify(text)
     .replace(/-+$/, '');            // Trim - from end of text
 }
 
+function demoUpload() {    
+    (function($) {
+
+        var $uploadCrop;
+
+        function readFile(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    $uploadCrop.croppie('bind', {
+                        url: e.target.result
+                    });
+                    $('.upload-crop').show(0);
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+            else {
+                alert("Sorry - you're browser doesn't support the FileReader API");
+            }
+        }
+
+        $uploadCrop = $('#crop-img').croppie({
+            viewport: {
+                width: 300,
+                height: 300
+            },
+            boundary: {
+                width: 340,
+                height: 340
+            },
+            exif: true
+        });
+
+        $('#upload').on('change', function () { readFile(this); });
+        $('.upload-crop').on('click', function (ev) {
+            var btn = $(this); // for submitting form
+            $uploadCrop.croppie('result', {
+                type: 'canvas',
+                size: 'viewport'
+            }).then(function (resp) {
+                $('#base64Pic').val(resp);
+                var frm = btn.closest('form.ns');
+                frm.trigger('submit');
+                // btn.addClass('submit');
+                // setTimeout(function(){
+                //     btn.removeClass('submit');
+                // }, 2000);            
+            });
+        });
+    })(jQuery);
+}
+
+function changeAvatarPic (pic) {
+    (function($) {
+        $('.avatar').attr('src', pic);
+    })(jQuery);
+}
+
 function initUI() {
 	(function($) {
 		$('.tabbedwidget').tabs();
+
+	    // crop	    
+	    if ($('#crop-img').length) {        
+	        demoUpload();
+	    }		
 		
 		// ckeditor
 		$('.wysiwyg_editor').ckeditor();	

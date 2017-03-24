@@ -193,6 +193,7 @@ Route::group(['middleware' => ['labenter']], function () use ($cms_folder) {
 	Route::resource($cms_folder.'user', 'Lab\UserController');
 	Route::get($cms_folder.'user/change/flag/{id}/{field}', 'Lab\UserController@changeFlag');
 	Route::put($cms_folder.'user/password/{id}', 'Lab\UserController@password');
+	Route::post($cms_folder.'user/avatar/set', 'Lab\UserController@setAvatar');
 
 	// Upload
 	Route::get($cms_folder.'upload/{id}/edit/', 'Lab\UploadController@edit');
