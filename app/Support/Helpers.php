@@ -64,7 +64,7 @@
 
 				$v = $p->$field;
 				if ($sep)
-					$v = explode($p->$field, $sep);
+					$v = explode($sep, $p->$field);
 
 				Session::put($label, $v);
 				return Session::get($label);
