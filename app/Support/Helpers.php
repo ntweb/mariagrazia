@@ -17,6 +17,10 @@
 		return Session::get($id_or_module)[App::getLocale()];
 	}
 
+	function news_url($el) {
+		// chencge route if needed
+		return action('Web\NewsController@show', array($el->type, $el->murl, $el->id));
+	}	
 
 	// get date in locale format
 	function fdate($date) {
