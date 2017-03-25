@@ -171,6 +171,7 @@ return [
         GrahamCampbell\HTMLMin\HTMLMinServiceProvider::class,
         Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
         Roumen\Sitemap\SitemapServiceProvider::class,
+        Chencha\Share\ShareServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -243,6 +244,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'HTMLMin' => GrahamCampbell\HTMLMin\Facades\HTMLMin::class,
         'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
+        'Share' => Chencha\Share\ShareFacade::class,
 
     ],
 

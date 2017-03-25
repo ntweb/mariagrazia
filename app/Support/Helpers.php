@@ -101,6 +101,15 @@
 		return $data->html;
 	}
 
+	// get social share
+	function share($el) {
+
+		//'delicious','digg','email','evernote','facebook','gmail','gplus','linkedin','pinterest','reddit','scoopit','telegramMe','tumblr','twitter','viadeo','vk',
+		$url = Request::url();
+		$description = isset($el->mdescription) ? $el->mdescription : '';
+		return Share::load($url, $description)->services('facebook', 'gplus', 'twitter');
+	}	
+
 	// get doc of model
 	function doc($el, $field) {
 		$id = $el->id;
