@@ -1,4 +1,7 @@
 CKEDITOR.editorConfig = function( config ) {
+	
+	config.allowedContent = true;
+
 	config.toolbarGroups = [
 		{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
 		{ name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
