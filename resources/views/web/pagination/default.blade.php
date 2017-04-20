@@ -1,1 +1,1 @@
-{{$arrElements->links()}}
+{{$arrElements->appends($pagination_param)->links()}}

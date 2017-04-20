@@ -29,6 +29,9 @@ class AppServiceProvider extends ServiceProvider
                             });
         View::share ('arrCategories', $query->get());
 
+        // forn pagination that have paramenters
+        View::share ('pagination_param', array());
+        
         // // css above the fold 
         // if (file_exists(public_path('minify/style.min.css')))
         //     View::share ('_above_the_fold_css', file_get_contents(public_path('minify/style.min.css')));

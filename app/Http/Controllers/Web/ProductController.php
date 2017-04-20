@@ -59,6 +59,10 @@ class ProductController extends Controller
         $request->flash();
 
         $data['arrElements'] = $query->paginate(50);
+
+        // param pagination
+        $data['pagination_param']['key'] = $request->get('key', null);
+        $data['pagination_param']['type'] = $request->get('type', null);           
         return view()->make('web.ecommerce.category.index', $data);
     }
 
