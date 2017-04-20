@@ -42,7 +42,7 @@
         <p>
             <label>{{trans('labels.url')}}</label>
             <span class="field">
-                <textarea name="url" class="form-control" rows="5" maxlength="250" >{{@$el->translate($localeCode)->url}}</textarea>
+                <input type="text" name="url" class="form-control" value="{{@$el->translate($localeCode)->url}}" />                
             </span>
         </p>        
 
