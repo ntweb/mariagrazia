@@ -24,7 +24,7 @@
 					<i class="fa fa-telephone" aria-hidden="true"></i> <i>{{$b->telephone}}</i>
 					<hr style="margin: 2px;">
 					{{$b->businessname}} <br>
-					{{trans('label.vat')}} {{$b->vat}} / {{$b->cf}} <br>
+					{{trans('labels.vat')}} {{$b->vat}} / {{$b->cf}} <br>
 					{{$b->address}}, {{$b->street_number}} <br>
 					{{$b->postal_code}} - {{$b->city}} ({{$b->political_short_name}} {{$b->country_short_name}} )
 				</td>
