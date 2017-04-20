@@ -34,12 +34,21 @@ class ProductController extends Controller
     {            
         $data['show_search'] = true;
 
-        if ($request->has('key'))
-            $query = \App\Product::where('code', '=', $request->get('key'))
-                                    ->orWhereHas('translations', function ($query) use ($request) {
-                                        $query->where('locale', App::getLocale())
-                                        ->where('title', 'LIKE', '%'.$request->get('key').'%');
+        if ($request->has('key')) {
+            $query = \App\Product::leftJoin('lab_products_translations', 'lab_products.id', '=', 'lab_products_translations.product_id')
+                                    ->where('lab_products.active', '=', '1')
+                                    ->where('lab_products_translations.locale', '=', App::getLocale())
+                                    ->where(function ($query) use ($request) {
+                                        $query->where('lab_products.code', '=', $request->get('key'));
+                                        $query->orWhere(function ($query) use ($request) {
+                                            $keys = explode(' ', $request->get('key'));
+                                            foreach ($keys as $v) {
+                                                if (trim($v) != '')
+                                                    $query->where('title', 'LIKE', '%'.$v.'%');
+                                            }
+                                        });
                                     });
+        }
 
         // filter type
         if ($request->has('type')) {
