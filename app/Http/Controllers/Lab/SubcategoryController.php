@@ -60,7 +60,7 @@ class SubcategoryController extends Controller
             $query = \App\Subcategory::whereHas('translations', function ($query) use ($request) {
                                 $query->where('locale', 'it')
                                 ->where('title', 'LIKE', '%'.$request->get('key').'%')
-                                ->orWhere('category_id', '=', $request->get('key'));
+                                ->orWhere('subcategory_id', '=', $request->get('key'));
                             });
         else
             $query = \App\Subcategory::orderBy('order')->orderBy('id', 'desc');
