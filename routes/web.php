@@ -69,7 +69,7 @@ function()
 	Route::get('/cart/checkout', 'Web\CartController@checkout');
 	Route::get('/cart/shipment', 'Web\CartController@shipment')->middleware('auth');
 	Route::get('/cart/payment', 'Web\CartController@payment')->middleware('auth');
-	Route::get('/cart/summary', 'Web\CartController@summary')->middleware('auth');
+	Route::get('/cart/summary', 'Web\CartController@summary')->name('staff')->middleware('auth');
 	Route::get('/cart/do-payment/{id}', 'Web\CartController@doPayment')->middleware('auth');
 	Route::get('/cart/widget/refresh', 'Web\CartController@refresh');
 	Route::get('/cart/delete/{rowid}', 'Web\CartController@delete');

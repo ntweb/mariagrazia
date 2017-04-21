@@ -132,7 +132,7 @@
 		<script src="{{url('js/bootstrap.min.js')}}"></script>
 
 		{{-- my library --}}
-    @if($rname == 'contact' || $rname == 'register' || $rname == 'acocunt')
+    @if($rname == 'contact' || $rname == 'register' || $rname == 'account' || $rname == 'cart')
     <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_PLACE_API_KEY')}}&libraries=places" defer></script>
     @endif
     
