@@ -24,4 +24,10 @@ return [
     'do_payment' => 'Esegui il pagamento',
     'finish' => 'Fine',
     'select' => 'Seleziona',
+    'store_cart' => 'Invia l\'ordine',
+    'note' => 'Note',
+    'shipping_data' => 'Dati di spedizione',
+    'user' => 'Utente',
+    'cart' => 'Carrello',
+    'newsletter_ok' => 'Grazie per esserti iscritto!',
 ];
