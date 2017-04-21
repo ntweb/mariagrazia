@@ -2,199 +2,171 @@
 
 @section('content')
 
-    <div class="panel-heading">Register</div>
-    <div class="panel-body">
-        <form class="form-horizontal ns-disable-submit" role="form" method="POST" action="{{ route('register') }}">
-            {{ csrf_field() }}
 
-            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-4 control-label">{{trans('labels.name')}}</label>
+    @if(Auth::check())
+        Modifica account
+    @else
+        Regitrazione nuovo account
+    @endif
 
-                <div class="col-md-6">
-                    <input type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus>
 
-                    @if ($errors->has('name'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('name') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
+    @if(Auth::check())
+    <h2>Modifica account</h2>                                        
+    @else
+    <h2>Regitrazione nuovo account</h2>                                        
+    @endif
 
-            <div class="form-group{{ $errors->has('lastname') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-4 control-label">{{trans('labels.lastname')}}</label>
+    <form class="ns-disable-submit" role="form" method="POST" action="@if(Auth::check()) {{action('Web\AccountController@update')}} @else {{ route('register') }} @endif">
+    {{ csrf_field() }}
 
-                <div class="col-md-6">
-                    <input type="text" class="form-control" name="lastname" value="{{ old('lastname') }}" autofocus>
+    <label>Nome *</label><br />
+    <input type="text" class="form-control" name="name" value="{{ old('name', @Auth::user()->name) }}" autofocus>
+    @if ($errors->has('name'))
+        <span class="label label-danger">
+            <strong>{{ $errors->first('name') }}</strong>
+        </span>
+    @endif                                                                                                        
 
-                    @if ($errors->has('lastname'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('lastname') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
+    <label>Cognome *</label><br />
+    <input type="text" class="form-control" name="lastname" value="{{ old('lastname', @Auth::user()->lastname) }}" autofocus>
+    @if ($errors->has('lastname'))
+        <span class="label label-danger">
+            <strong>{{ $errors->first('lastname') }}</strong>
+        </span>
+    @endif                                                                                                        
 
-            <div class="form-group{{ $errors->has('businessname') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-4 control-label">{{trans('labels.businessname')}}</label>
+    <label>Ragione sociale</label><br />
+    <input type="text" class="form-control" name="businessname" value="{{ old('businessname', @Auth::user()->b->businessname) }}" autofocus>
 
-                <div class="col-md-6">
-                    <input type="text" class="form-control" name="businessname" value="{{ old('businessname') }}" autofocus>
+    @if ($errors->has('businessname'))
+        <span class="label label-danger">
+            <strong>{{ $errors->first('businessname') }}</strong>
+        </span>
+    @endif
 
-                    @if ($errors->has('businessname'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('businessname') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
+    <label>Cod. Fiscale *</label><br />
+    <input type="text" class="form-control" name="cf" value="{{ old('cf', @Auth::user()->b->cf) }}" autofocus>
+    @if ($errors->has('cf'))
+        <span class="label label-danger">
+            <strong>{{ $errors->first('cf') }}</strong>
+        </span>
+    @endif                                                                                                        
 
-            <div class="form-group{{ $errors->has('cf') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-4 control-label">{{trans('labels.cf')}}</label>
+    <label>P. IVA</label><br />
+    <input type="text" class="form-control" name="vat" value="{{ old('vat', @Auth::user()->b->vat) }}" autofocus>
+    @if ($errors->has('vat'))
+        <span class="label label-danger">
+            <strong>{{ $errors->first('vat') }}</strong>
+        </span>
+    @endif                                                                                                        
 
-                <div class="col-md-6">
-                    <input type="text" class="form-control" name="cf" value="{{ old('cf') }}" autofocus>
+    <label>Telefono</label><br />
+    <input type="text" class="form-control" name="telephone" value="{{ old('telephone', @Auth::user()->b->telephone) }}" autofocus>
+    @if ($errors->has('telephone'))
+        <span class="label label-danger">
+            <strong>{{ $errors->first('telephone') }}</strong>
+        </span>
+    @endif
 
-                    @if ($errors->has('cf'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('cf') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
+    <label>Città *</label><br />
+    <input type="hidden" name="political_short_name" value="{{ old('political_short_name', @Auth::user()->b->political_short_name) }}">
+    <input type="hidden" name="country_short_name" value="{{ old('country_short_name', @Auth::user()->b->country_short_name) }}">
+    <input type="hidden" name="place_id" value="{{ old('place_id', @Auth::user()->b->place_id) }}">
+    <input type="text" class="form-control" name="city" value="{{ old('city', @Auth::user()->b->city) }}" autofocus>
+    @if ($errors->has('city'))
+        <span class="label label-danger">
+            <strong>{{ $errors->first('city') }}</strong>
+        </span>
+    @endif                                                                                                        
 
-            <div class="form-group{{ $errors->has('vat') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-4 control-label">{{trans('labels.vat')}}</label>
+    <label>CAP *</label><br />
+    <input type="text" class="form-control" name="postal_code" value="{{ old('postal_code', @Auth::user()->b->postal_code) }}" autofocus>
+    @if ($errors->has('postal_code'))
+        <span class="label label-danger">
+            <strong>{{ $errors->first('postal_code') }}</strong>
+        </span>
+    @endif                                                                                                        
 
-                <div class="col-md-6">
-                    <input type="text" class="form-control" name="vat" value="{{ old('vat') }}" autofocus>
+    <label>Indirizzo *</label><br />
+    <input type="text" class="form-control" name="address" value="{{ old('address', @Auth::user()->b->address) }}" autofocus>
+    @if ($errors->has('address'))
+        <span class="label label-danger">
+            <strong>{{ $errors->first('address') }}</strong>
+        </span>
+    @endif                                                                                                        
 
-                    @if ($errors->has('vat'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('vat') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
+    <label>N° *</label><br />
+    <input type="text" class="form-control" name="street_number" value="{{ old('street_number', @Auth::user()->b->street_number) }}" autofocus>
+    @if ($errors->has('street_number'))
+        <span class="label label-danger">
+            <strong>{{ $errors->first('street_number') }}</strong>
+        </span>
+    @endif                                                                                                        
 
-            <div class="form-group{{ $errors->has('telephone') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-4 control-label">{{trans('labels.telephone')}}</label>
+    {{-- sto in fase di registrazione di un nuovo account --}}
+    @if (!Auth::check())
+        <h2>Dati di login</h2>
 
-                <div class="col-md-6">
-                    <input type="text" class="form-control" name="telephone" value="{{ old('telephone') }}" autofocus>
 
-                    @if ($errors->has('telephone'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('telephone') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
+        <label>Email *</label><br />
+        <input type="text" class="form-control" name="email" value="{{ old('email', @Auth::user()->email) }}" autofocus>
+        @if ($errors->has('email'))
+            <span class="label label-danger">
+                <strong>{{ $errors->first('email') }}</strong>
+            </span>
+        @endif
 
-            <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-4 control-label">{{trans('labels.city')}}</label>
+        <label>Password *</label><br />
+        <input type="password" class="form-control" name="password" value="" autofocus>
+        @if ($errors->has('password'))
+            <span class="label label-danger">
+                <strong>{{ $errors->first('password') }}</strong>
+            </span>
+        @endif                                                                                                        
 
-                <div class="col-md-6">
-                    <input type="hidden" name="political_short_name" value="{{ old('political_short_name') }}">
-                    <input type="hidden" name="country_short_name" value="{{ old('country_short_name') }}">
-                    <input type="hidden" name="place_id" value="{{ old('place_id') }}">
+        <label>Conferma password *</label><br />
+        <input type="password" class="form-control" name="password_confirmation" value="" autofocus>
+        @if ($errors->has('password_confirmation'))
+            <span class="label label-danger">
+                <strong>{{ $errors->first('password_confirmation') }}</strong>
+            </span>
+        @endif                                                                                                        
+    @endif                                         
 
-                    <input type="text" class="form-control" name="city" value="{{ old('city') }}" autofocus>
+    <div class="form-group clearfix">
+        <p><input type="submit" value="Invia" class="wpcf7-form-control wpcf7-submit" /></p>
+    </div>
+</form>
 
-                    @if ($errors->has('city'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('city') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
+{{-- sto in fase di aggiornamento delle informazioni --}}
+@if (Auth::check())
+        <h2>Login</h2>
 
-            <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-4 control-label">{{trans('labels.address')}}</label>
+        <form class="ns-disable-submit" role="form" method="POST" action="{{ action('Web\AccountController@credential') }}">
+        {{ csrf_field() }}
 
-                <div class="col-md-6">
-                    <input type="text" class="form-control" name="address" value="{{ old('address') }}" autofocus>
+            <label>Email</label><br />
+            {{ Auth::user()->email }}
 
-                    @if ($errors->has('address'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('address') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
+                <label>Password *</label><br />
+                <input type="password" class="form-control" name="password" value="" autofocus>
+                @if ($errors->has('password'))
+                    <span class="label label-danger">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                @endif                                                                                                        
 
-            <div class="form-group{{ $errors->has('street_number') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-4 control-label">{{trans('labels.street_number')}}</label>
-
-                <div class="col-md-6">
-                    <input type="text" class="form-control" name="street_number" value="{{ old('street_number') }}" autofocus>
-
-                    @if ($errors->has('street_number'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('street_number') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group{{ $errors->has('postal_code') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-4 control-label">{{trans('labels.postal_code')}}</label>
-
-                <div class="col-md-6">
-                    <input type="text" class="form-control" name="postal_code" value="{{ old('postal_code') }}" autofocus>
-
-                    @if ($errors->has('postal_code'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('postal_code') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                <div class="col-md-6">
-                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" >
-
-                    @if ($errors->has('email'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('email') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                <label for="password" class="col-md-4 control-label">Password</label>
-
-                <div class="col-md-6">
-                    <input id="password" type="password" class="form-control" name="password" >
-
-                    @if ($errors->has('password'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('password') }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                <div class="col-md-6">
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" >
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-6 col-md-offset-4">
-                    <button type="submit" id="btnRegister" class="btn btn-primary">
-                        Register
-                    </button>
-                </div>
-            </div>
+                <label>Conferma password *</label><br />
+                <input type="password" class="form-control" name="password_confirmation" value="" autofocus>
+                @if ($errors->has('password_confirmation'))
+                    <span class="label label-danger">
+                        <strong>{{ $errors->first('password_confirmation') }}</strong>
+                    </span>
+                @endif                                                                                                        
+            
+                <p><input type="submit" value="Invia" class="wpcf7-form-control wpcf7-submit" /></p>
         </form>
     </div>
+@endif
 
 @endsection

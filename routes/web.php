@@ -96,6 +96,11 @@ function()
 	// Test route
 	Route::get('/test', 'Web\TestController@index');		
 
+	// Account route
+	Route::get('/account/profile', 'Web\AccountController@edit')->name('account')->middleware('auth');
+	Route::post('/account/profile', 'Web\AccountController@update')->name('account')->middleware('auth');
+	Route::post('/account/profile/credential', 'Web\AccountController@credential')->name('account')->middleware('auth');	
+
 });
 
 Route::post('/review', 'Web\ReviewController@store');

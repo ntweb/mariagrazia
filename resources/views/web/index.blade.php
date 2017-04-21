@@ -132,6 +132,10 @@
 		<script src="{{url('js/bootstrap.min.js')}}"></script>
 
 		{{-- my library --}}
+    @if($rname == 'contact' || $rname == 'register' || $rname == 'acocunt')
+    <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_PLACE_API_KEY')}}&libraries=places" defer></script>
+    @endif
+    
 		<script src="{{url('js/geocomplete/jquery.geocomplete.min.js')}}"></script>
 		<script src="{{url('js/alertify/alertify.min.js')}}"></script>
 		<script src="{{url('js/_site_library.js')}}"></script>
@@ -147,10 +151,6 @@
 		}
 		</script>	  
 
-    @endif
-
-    @if($rname == 'contact')
-    <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_PLACE_API_KEY')}}&libraries=places" defer></script>
     @endif
 
   </body>
