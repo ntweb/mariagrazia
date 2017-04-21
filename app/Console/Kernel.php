@@ -38,7 +38,11 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('queue:restart')->everyFiveMinutes();
         $schedule->command('queue:flush')->everyFiveMinutes();
-        $schedule->command('queue:work --tries=3')->everyMinute()->withoutOverlapping();
+        $schedule->command('queue:work --tries=3')->everyFiveMinutes();
+
+        // $schedule->command('queue:restart')->everyFiveMinutes();
+        // $schedule->command('queue:flush')->everyFiveMinutes();
+        // $schedule->command('queue:work --tries=3')->everyMinute()->withoutOverlapping();
     }
 
     /**
