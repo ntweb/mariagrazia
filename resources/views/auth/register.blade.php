@@ -95,9 +95,9 @@
                 <label for="name" class="col-md-4 control-label">{{trans('labels.city')}}</label>
 
                 <div class="col-md-6">
-                    <input type="hidden" name="political_short_name" value="">
-                    <input type="hidden" name="country_short_name" value="">
-                    <input type="hidden" name="place_id" value="">
+                    <input type="hidden" name="political_short_name" value="{{ old('political_short_name') }}">
+                    <input type="hidden" name="country_short_name" value="{{ old('country_short_name') }}">
+                    <input type="hidden" name="place_id" value="{{ old('place_id') }}">
 
                     <input type="text" class="form-control" name="city" value="{{ old('city') }}" autofocus>
 
