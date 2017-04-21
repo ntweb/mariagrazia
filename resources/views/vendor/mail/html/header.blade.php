@@ -1,7 +1,5 @@
 <tr>
-    <td class="header">
-        <a href="{{ url('/') }}">
-            {{ env('MAIL_SITE_NAME') }}
-        </a>
+    <td class="header">        
+        {{ env('MAIL_SITE_NAME') }}        
     </td>
 </tr>
