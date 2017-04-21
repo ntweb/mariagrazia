@@ -155,11 +155,22 @@
 		    	$w = $xxx[0];
 		    	$h = $xxx[1];
 		    	if ($w == 'n' || $h == 'n'){ // ridimensiono
+		    		$w = ($w != 'n') ? $w : null;
+		    		$h = ($h != 'n') ? $h : null;
 					$img->resize($w, $h, function ($constraint) {
 					    $constraint->aspectRatio();
 					});		  				
 		    	}
 		    	else { // crop
+		    		if ($w < $h)
+						$img->resize($w, null, function ($constraint) {
+						    $constraint->aspectRatio();
+						});		  			
+					else {
+						$img->resize(null, $h, function ($constraint) {
+						    $constraint->aspectRatio();
+						});		  									
+					}	
 		    		$img->fit($w, $h);
 		    	}
 		    	$img->save('media/'.$folder.'/'.$id.'/'.$gallery.$rid.'-'.$el->$field, $quality);
