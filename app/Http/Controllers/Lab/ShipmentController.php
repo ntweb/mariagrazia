@@ -104,13 +104,6 @@ class ShipmentController extends Controller
             $el = new \App\Shipment;
             foreach ($fields as $key => $value) {
                 $el->$key = $value;
-
-                // mtitle and murl
-                if ($key == 'title') {
-                    $el->translateOrNew($request->get('lang'))->mtitle = $value;                
-                    $el->translateOrNew($request->get('lang'))->murl = str_slug($value);                
-                }
-              
             }
 
             // default 
