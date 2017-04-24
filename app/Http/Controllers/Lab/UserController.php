@@ -98,7 +98,7 @@ class UserController extends Controller
             $el->verified = '1';
             $el->active = '1';
             if (!$el->save()){
-                return response()->json(array('error' => trans('labels.errore-sql')));
+                return response()->json(array('error' => trans('lab.errore-sql')));
             }            
 
             $result['id'] = $el->id;
@@ -110,12 +110,12 @@ class UserController extends Controller
             $b->id_user = $el->id;
             $b->save();
 
-            return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result['route'])));
+            return response()->json(array('success' => trans('lab.store_ok'), 'result' => json_encode($result['route'])));
         }
         
         return response()->json(
                                 array(
-                                    'error' => trans('labels.compilare_campi_obbligatori'),
+                                    'error' => trans('lab.compilare_campi_obbligatori'),
                                     'errorfields' => $validator->messages()
                                 )
                             ); 
@@ -164,16 +164,16 @@ class UserController extends Controller
             }
 
             if (!$el->save()){
-                return response()->json(array('error' => trans('labels.errore-sql')));
+                return response()->json(array('error' => trans('lab.errore-sql')));
             }            
 
             $result['id'] = $el->id;
-            return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
+            return response()->json(array('success' => trans('lab.store_ok'), 'result' => json_encode($result)));
         }
         
         return response()->json(
                                 array(
-                                    'error' => trans('labels.compilare_campi_obbligatori'),
+                                    'error' => trans('lab.compilare_campi_obbligatori'),
                                     'errorfields' => $validator->messages()
                                 )
                             );    
@@ -194,16 +194,16 @@ class UserController extends Controller
             }
 
             if (!$el->save()){
-                return response()->json(array('error' => trans('labels.errore-sql')));
+                return response()->json(array('error' => trans('lab.errore-sql')));
             }            
 
             $result['id'] = $el->id;
-            return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
+            return response()->json(array('success' => trans('lab.store_ok'), 'result' => json_encode($result)));
         }
         
         return response()->json(
                                 array(
-                                    'error' => trans('labels.compilare_campi_obbligatori'),
+                                    'error' => trans('lab.compilare_campi_obbligatori'),
                                     'errorfields' => $validator->messages()
                                 )
                             );    
@@ -230,7 +230,7 @@ class UserController extends Controller
 
         $result['id'] = $el->id;
         $result['flag'] = $el->$field;
-        return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
+        return response()->json(array('success' => trans('lab.store_ok'), 'result' => json_encode($result)));
     }    
 
     public function setAvatar(Request $request) {
@@ -243,7 +243,7 @@ class UserController extends Controller
         $data = base64_decode($data);
 
         if (!Storage::disk('docs')->put($folder.$filename, $data)) {
-            return response()->json(array('error' => trans('labels.errore-salvataggio-immagine')));
+            return response()->json(array('error' => trans('lab.errore-salvataggio-immagine')));
         }
         
         $u = Auth::user();

@@ -12,11 +12,11 @@
 
 		<table class="table table-bordered table-invoice">
 			<tr>
-				<td class="width30">{{trans('labels.cart')}}</td>
+				<td class="width30">{{trans('lab.cart')}}</td>
 				<td class="width70"><strong>{{$el->label}}</strong></td>
 			</tr>
 			<tr>
-				<td>{{trans('labels.user')}}:</td>
+				<td>{{trans('lab.user')}}:</td>
 				<td>
 					{{$u->name}} {{$u->cognome}} <br>
 					<i class="fa fa-envelope-o" aria-hidden="true"></i> <i>{{$u->email}}</i>
@@ -24,7 +24,7 @@
 					<i class="fa fa-telephone" aria-hidden="true"></i> <i>{{$b->telephone}}</i>
 					<hr style="margin: 2px;">
 					{{$b->businessname}} <br>
-					{{trans('labels.vat')}} {{$b->vat}} / {{$b->cf}} <br>
+					{{trans('lab.vat')}} {{$b->vat}} / {{$b->cf}} <br>
 					{{$b->address}}, {{$b->street_number}} <br>
 					{{$b->postal_code}} - {{$b->city}} ({{$b->political_short_name}} {{$b->country_short_name}} )
 				</td>
@@ -37,16 +37,16 @@
 		{!! csrf_field() !!}
 		<table class="table table-bordered table-invoice">
 			<tr>
-				<td class="width30">{{trans('labels.paid')}}:</td>
+				<td class="width30">{{trans('lab.paid')}}:</td>
 				<td class="width70">
 					<select name="paid">
-						<option value="0" @if(!$el->paid) selected="selected" @endif>{{trans('labels.no')}}</option>
-						<option value="1" @if($el->paid) selected="selected" @endif>{{trans('labels.yes')}}</option>
+						<option value="0" @if(!$el->paid) selected="selected" @endif>{{trans('lab.no')}}</option>
+						<option value="1" @if($el->paid) selected="selected" @endif>{{trans('lab.yes')}}</option>
 					</select>
 				</td>
 			</tr>
 			<tr>
-				<td>{{trans('labels.status')}}:</td>
+				<td>{{trans('lab.status')}}:</td>
 				<td>
 					<select name="type">
 						@foreach ($arrType as $t)
@@ -57,7 +57,7 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td><button type="submit" class="btn btn-xs btn-primary">{{trans('labels.save')}}</button></td>
+				<td><button type="submit" class="btn btn-xs btn-primary">{{trans('lab.save')}}</button></td>
 			</tr>
 		</table>
 		</form>
@@ -67,7 +67,7 @@
 	<div class="col-md-6">
 		<table class="table table-bordered table-invoice">
 			<tr>
-				<td class="width30">{{trans('labels.shipping_data')}}:</td>
+				<td class="width30">{{trans('lab.shipping_data')}}:</td>
 				<td class="width70">
 					<strong>{{$el->shipment_name}}</strong> <br />
 					{{$el->shipment_businessname}}, <br />
@@ -76,7 +76,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="width30">{{trans('labels.note')}}:</td>
+				<td class="width30">{{trans('lab.note')}}:</td>
 				<td class="width70">					
 					<div style="font-size: 11px; line-height: 18px;">{{$el->shipment_note}}</div>
 				</td>
@@ -87,11 +87,11 @@
 
 		<table class="table table-bordered table-invoice">
 			<tr>
-				<td class="width30">{{trans('labels.shipment')}}</td>
+				<td class="width30">{{trans('lab.shipment')}}</td>
 				<td class="width70"><strong>{{$el->shipment->title}}</strong></td>
 			</tr>
 			<tr>
-				<td>{{trans('labels.payment')}}</td>
+				<td>{{trans('lab.payment')}}</td>
 				<td>
 					<strong>{{$el->payment->title}}</strong>
 					@if ($el->payment_token)
@@ -102,7 +102,7 @@
 			</tr>
 			@if ($el->payment_log)
 			<tr>
-				<td>{{trans('labels.payment_log')}}</td>
+				<td>{{trans('lab.payment_log')}}</td>
 				<td>
 					<textarea name="log" id="" rows="10" style="width: 100%;">
 					{{$el->payment_log}}	
@@ -112,7 +112,7 @@
 			@endif
 			@if ($el->id_coupon)
 			<tr>
-				<td>{{trans('labels.coupon')}}</td>
+				<td>{{trans('lab.coupon')}}</td>
 				<td><strong>{{$el->coupon->title}}</strong></td>
 			</tr>
 			@endif

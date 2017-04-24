@@ -2,27 +2,27 @@
 {!! csrf_field() !!}    {{-- token --}}
 
     <p>
-        <label>{{trans('labels.businessname')}}</label>
+        <label>{{trans('lab.businessname')}}</label>
         <span class="field">
             <input type="text" name="businessname" class="form-control" value="{{$el->businessname}}" />
         </span>
     </p>
 
     <p>
-        <label>{{trans('labels.email')}}</label>
+        <label>{{trans('lab.email')}}</label>
         <span class="field">
             <input type="text" name="email" class="form-control" value="{{$el->email}}" />
         </span>
     </p>
                                     
     <p>
-        <label>{{trans('labels.site')}}</label>
+        <label>{{trans('lab.site')}}</label>
         <span class="field">
             <input type="text" name="site" class="form-control" value="{{$el->site}}" />
         </span>
     </p>
                                     
     <p class="stdformbutton">
-        <button type="submit" class="btn btn-primary">{{trans('labels.save')}}</button>
+        <button type="submit" class="btn btn-primary">{{trans('lab.save')}}</button>
     </p>
 </form>

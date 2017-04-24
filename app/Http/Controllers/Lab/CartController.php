@@ -134,16 +134,16 @@ class CartController extends Controller
             }
 
             if (!$el->save()){
-                return response()->json(array('error' => trans('labels.errore-sql')));
+                return response()->json(array('error' => trans('lab.errore-sql')));
             }            
 
             $result['id'] = $el->id;
-            return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
+            return response()->json(array('success' => trans('lab.store_ok'), 'result' => json_encode($result)));
         }
         
         return response()->json(
                                 array(
-                                    'error' => trans('labels.compilare_campi_obbligatori'),
+                                    'error' => trans('lab.compilare_campi_obbligatori'),
                                     'errorfields' => $validator->messages()
                                 )
                             );

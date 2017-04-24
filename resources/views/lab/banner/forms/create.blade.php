@@ -16,7 +16,7 @@
         
         {{-- creation --}}
         <p>
-            <label>{{trans('labels.title')}}</label>
+            <label>{{trans('lab.title')}}</label>
             <span class="field">
                 <input type="text" name="title" class="form-control" />
             </span>
@@ -26,28 +26,28 @@
 
         {{-- editing --}}
         <p>
-            <label>{{trans('labels.title')}}</label>
+            <label>{{trans('lab.title')}}</label>
             <span class="field">
                 <input type="text" name="title" class="form-control" value="{{@$el->translate($localeCode)->title}}" />
             </span>
         </p>
 
         <p>
-            <label>{{trans('labels.abstract')}}</label>
+            <label>{{trans('lab.abstract')}}</label>
             <span class="field">
                 <textarea name="abstract" class="form-control" rows="5" maxlength="250" >{{@$el->translate($localeCode)->abstract}}</textarea>
             </span>
         </p>        
 
         <p>
-            <label>{{trans('labels.url')}}</label>
+            <label>{{trans('lab.url')}}</label>
             <span class="field">
                 <input type="text" name="url" class="form-control" value="{{@$el->translate($localeCode)->url}}" />                
             </span>
         </p>        
 
         <p>
-            <label>{{trans('labels.description')}}</label>
+            <label>{{trans('lab.description')}}</label>
             <span class="field">
                 <textarea name="description" class="wysiwyg_editor">{{@$el->translate($localeCode)->description}}</textarea>
             </span>
@@ -56,6 +56,6 @@
     @endif
                                     
     <p class="stdformbutton">
-        <button type="submit" class="btn btn-primary">{{trans('labels.save')}}</button>
+        <button type="submit" class="btn btn-primary">{{trans('lab.save')}}</button>
     </p>
 </form>

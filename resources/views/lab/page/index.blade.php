@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h4 class="widgettitle">{{trans('labels.list')}}</h4>
+    <h4 class="widgettitle">{{trans('lab.list')}}</h4>
     @if(count($arrElements))
 
     <table class="table table-striped responsive">
@@ -10,11 +10,11 @@
             <tr>
                 <th class="center"><i class="fa fa-power-off" aria-hidden="true"></i></th>
                 <th>ID</th>
-                <th>{{trans('labels.title')}}</th>
-                <th>{{trans('labels.module')}}</th>
-                <th>{{trans('labels.created_by')}}</th>
-                <th>{{trans('labels.created_at')}}</th>
-                <th>{{trans('labels.updated_at')}}</th>
+                <th>{{trans('lab.title')}}</th>
+                <th>{{trans('lab.module')}}</th>
+                <th>{{trans('lab.created_by')}}</th>
+                <th>{{trans('lab.created_at')}}</th>
+                <th>{{trans('lab.updated_at')}}</th>
                 <th></th>
             </tr>
         </thead>
@@ -23,7 +23,7 @@
             <tr>
                 <td class="center">
                     <a href="javascript:void(0);" class="change-flag {{$active = $el->active ? 'colorGreen' : 'colorRed'}}" data-route="{{action('Lab\PageController@changeFlag', array($el->id, 'active'))}}">                        
-                        <i class="fa fa-circle tip" aria-hidden="true" data-placement="top" data-original-title="{{trans('labels.active')}} ?"></i>
+                        <i class="fa fa-circle tip" aria-hidden="true" data-placement="top" data-original-title="{{trans('lab.active')}} ?"></i>
                     </a>
                 </td>
                 <td>{{$el->id}}</td>
@@ -35,7 +35,7 @@
                 <td class="right">
                     <div class="btn-group btn-group-xs">
                         <button href="javascript:void(0);" class="btn btn-primary get-html" data-route="{{action('Lab\PageController@edit', array($el->id))}}"><i class="fa fa-fw fa-pencil" aria-hidden="true"></i></button>
-                        <button href="javascript:void(0);" class="btn btn-danger delete-json" data-route="{{action('Lab\PageController@destroy', array($el->id))}}" data-token="{{ csrf_token() }}" data-callback="$(btn).closest('tr').remove()" data-confirm="{{trans('labels.confirm-delete')}}"><i class="fa fa-fw fa-trash" aria-hidden="true"></i></button>
+                        <button href="javascript:void(0);" class="btn btn-danger delete-json" data-route="{{action('Lab\PageController@destroy', array($el->id))}}" data-token="{{ csrf_token() }}" data-callback="$(btn).closest('tr').remove()" data-confirm="{{trans('lab.confirm-delete')}}"><i class="fa fa-fw fa-trash" aria-hidden="true"></i></button>
                     </div>                                
                 </td>
             </tr>
@@ -50,7 +50,7 @@
 
     <div class="alert alert-block">
         <h4>Ops!</h4>
-        <p>{{trans('labels.no_element_found')}}</p>
+        <p>{{trans('lab.no_element_found')}}</p>
     </div>
 
     @endif

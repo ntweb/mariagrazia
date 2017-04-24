@@ -25,6 +25,6 @@ class OrderController extends Controller
     		DB::table($table)->where('id', $id)->update(['order' => $o]);
     	}
 
-    	return response()->json(array('success' => trans('labels.update_ok')));
+    	return response()->json(array('success' => trans('lab.update_ok')));
     }
 }

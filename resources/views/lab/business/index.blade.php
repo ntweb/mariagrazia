@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="headtitle">
-        <h4 class="widgettitle title-primary">{{trans('labels.list')}}</h4>
+        <h4 class="widgettitle title-primary">{{trans('lab.list')}}</h4>
     </div>
 
     @if(count($arrElements))
@@ -15,11 +15,11 @@
                 <th class="center"><i class="fa fa-shield" aria-hidden="true"></i></th>                
                 <th>USER ID</th>
                 <th>BUSINESS ID</th>
-                <th>{{trans('labels.businessname')}}</th>
-                <th>{{trans('labels.email')}}</th>
-                <th>{{trans('labels.telephone')}}</th>
-                <th>{{trans('labels.created_at')}}</th>
-                <th>{{trans('labels.updated_at')}}</th>
+                <th>{{trans('lab.businessname')}}</th>
+                <th>{{trans('lab.email')}}</th>
+                <th>{{trans('lab.telephone')}}</th>
+                <th>{{trans('lab.created_at')}}</th>
+                <th>{{trans('lab.updated_at')}}</th>
                 <th></th>
             </tr>
         </thead>
@@ -29,12 +29,12 @@
             <tr>
                 <td class="center">
                     <a href="javascript:void(0);" class="change-flag {{$active = $el->active ? 'colorGreen' : 'colorRed'}}" data-route="{{action('Lab\BusinessController@changeFlag', array($el->id, 'active'))}}">
-                        <i class="fa fa-circle tip" aria-hidden="true" data-placement="top" data-original-title="{{trans('labels.active')}} ?"></i>
+                        <i class="fa fa-circle tip" aria-hidden="true" data-placement="top" data-original-title="{{trans('lab.active')}} ?"></i>
                     </a>
                 </td>
                 <td class="center">
                     <a href="javascript:void(0);" class="cannot-change-flag {{$verified = $el->verified ? 'colorGreen' : 'colorRed'}}" data-route="{{action('Lab\BusinessController@changeFlag', array($el->id, 'verified'))}}">
-                        <i class="fa fa-circle tip" aria-hidden="true" data-placement="top" data-original-title="{{trans('labels.verified')}} ?"></i>
+                        <i class="fa fa-circle tip" aria-hidden="true" data-placement="top" data-original-title="{{trans('lab.verified')}} ?"></i>
                     </a>
                 </td>
                 <td>{{$el->id}}</td>
@@ -61,7 +61,7 @@
 
     <div class="alert alert-block">
         <h4>Ops!</h4>
-        <p>{{trans('labels.no_element_found')}}</p>
+        <p>{{trans('lab.no_element_found')}}</p>
     </div>
 
     @endif

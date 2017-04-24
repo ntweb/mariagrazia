@@ -7,13 +7,13 @@
 
     @if (isset($route_search))
     <form class="searchbar form-get-html" data-route="{{$route_search}}">
-        <input type="text" name="key" placeholder="{{trans('labels.search_tips')}}" />
+        <input type="text" name="key" placeholder="{{trans('lab.search_tips')}}" />
     </form>
     @endif
 
     @if (isset($back))
     <div class="pull-right">        
-        <button class="btn btn-default get-html" data-route="{{$back}}"><i class="fa fa-angle-left" aria-hidden="true"></i> {{trans('labels.back')}}
+        <button class="btn btn-default get-html" data-route="{{$back}}"><i class="fa fa-angle-left" aria-hidden="true"></i> {{trans('lab.back')}}
         </button>
     </div>
     @endif

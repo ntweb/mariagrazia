@@ -45,6 +45,6 @@ class ParameterController extends Controller
     		}
     	}
 
-    	return response()->json(array('success' => trans('labels.store_ok')));
+    	return response()->json(array('success' => trans('lab.store_ok')));
     }
 }

@@ -4,7 +4,7 @@
 
     <div class="tabbedwidget tab-primary">
         <ul>
-            <li><a href="#tabs-settings"><i class="fa fa-wrench" aria-hidden="true"></i> {{trans('labels.settings')}}</a></li>
+            <li><a href="#tabs-settings"><i class="fa fa-wrench" aria-hidden="true"></i> {{trans('lab.settings')}}</a></li>
         </ul>
 
         <div id="tabs-settings">
@@ -28,7 +28,7 @@
 		        @endforeach
 
 			    <p class="stdformbutton">
-			        <button type="submit" class="btn btn-primary">{{trans('labels.save')}}</button>
+			        <button type="submit" class="btn btn-primary">{{trans('lab.save')}}</button>
 			    </p>
 			</form>
 

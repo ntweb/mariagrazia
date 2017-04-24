@@ -2,7 +2,7 @@
 {!! csrf_field() !!}    {{-- token --}}
 
     <p>
-        <label>{{trans('labels.subcategory')}}</label>
+        <label>{{trans('lab.subcategory')}}</label>
         <span class="field">
             <select name="type" class="form-control">
                 @foreach ($arrType as $t)
@@ -13,14 +13,14 @@
     </p>
 
     <p>
-        <label>{{trans('labels.code')}}</label>
+        <label>{{trans('lab.code')}}</label>
         <span class="field">
             <input type="text" name="code" class="form-control" value="{{$el->code}}" />
         </span>
     </p>    
                                     
     <p>
-        <label>{{trans('labels.price')}}</label>
+        <label>{{trans('lab.price')}}</label>
         <div class="field">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-euro" aria-hidden="true"></i></span>
@@ -30,7 +30,7 @@
     </p>    
                                     
     <p>
-        <label>{{trans('labels.price_discount')}}</label>
+        <label>{{trans('lab.price_discount')}}</label>
         <div class="field">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-euro" aria-hidden="true"></i></span>
@@ -40,7 +40,7 @@
     </p>    
                                     
     <p>
-        <label>{{trans('labels.tax')}}</label>
+        <label>{{trans('lab.tax')}}</label>
         <div class="field">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-percent" aria-hidden="true"></i></span>
@@ -50,46 +50,46 @@
     </p>    
                                     
     <p>
-        <label>{{trans('labels.homepage')}}</label>
+        <label>{{trans('lab.homepage')}}</label>
         <div class="field">
             <select name="homepage" class="uniformselect">
-                <option value="0" @if(!$el->homepage) selected="selected" @endif>{{trans('labels.no')}}</option>
-                <option value="1" @if($el->homepage) selected="selected" @endif>{{trans('labels.yes')}}</option>
+                <option value="0" @if(!$el->homepage) selected="selected" @endif>{{trans('lab.no')}}</option>
+                <option value="1" @if($el->homepage) selected="selected" @endif>{{trans('lab.yes')}}</option>
             </select>        
         </div>
     </p>
 
     <p>
-        <label>{{trans('labels.new')}}</label>
+        <label>{{trans('lab.new')}}</label>
         <div class="field">
             <select name="new" class="uniformselect">
-                <option value="0" @if(!$el->new) selected="selected" @endif>{{trans('labels.no')}}</option>
-                <option value="1" @if($el->new) selected="selected" @endif>{{trans('labels.yes')}}</option>
+                <option value="0" @if(!$el->new) selected="selected" @endif>{{trans('lab.no')}}</option>
+                <option value="1" @if($el->new) selected="selected" @endif>{{trans('lab.yes')}}</option>
             </select>        
         </div>
     </p>
 
     <p>
-        <label>{{trans('labels.discount')}}</label>
+        <label>{{trans('lab.discount')}}</label>
         <div class="field">
             <select name="discount" class="uniformselect">
-                <option value="0" @if(!$el->discount) selected="selected" @endif>{{trans('labels.no')}}</option>
-                <option value="1" @if($el->discount) selected="selected" @endif>{{trans('labels.yes')}}</option>
+                <option value="0" @if(!$el->discount) selected="selected" @endif>{{trans('lab.no')}}</option>
+                <option value="1" @if($el->discount) selected="selected" @endif>{{trans('lab.yes')}}</option>
             </select>        
         </div>
     </p>
 
     <p>
-        <label>{{trans('labels.active')}}</label>
+        <label>{{trans('lab.active')}}</label>
         <div class="field">
             <select name="active" class="uniformselect">
-                <option value="0" @if(!$el->active) selected="selected" @endif>{{trans('labels.no')}}</option>
-                <option value="1" @if($el->active) selected="selected" @endif>{{trans('labels.yes')}}</option>
+                <option value="0" @if(!$el->active) selected="selected" @endif>{{trans('lab.no')}}</option>
+                <option value="1" @if($el->active) selected="selected" @endif>{{trans('lab.yes')}}</option>
             </select>        
         </div>
     </p>
                                     
     <p class="stdformbutton">
-        <button type="submit" class="btn btn-primary">{{trans('labels.save')}}</button>
+        <button type="submit" class="btn btn-primary">{{trans('lab.save')}}</button>
     </p>
 </form>

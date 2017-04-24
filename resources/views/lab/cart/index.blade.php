@@ -4,16 +4,16 @@
 
     <div class="headtitle">
         <div class="btn-group">
-            <button data-toggle="dropdown" class="btn dropdown-toggle">{{request('type', trans('labels.all'))}} <span class="caret"></span></button>
+            <button data-toggle="dropdown" class="btn dropdown-toggle">{{request('type', trans('lab.all'))}} <span class="caret"></span></button>
             <ul class="dropdown-menu">
-                <li><a href="javascript:void(0);" class="get-html" data-route="{{action('Lab\CartController@index')}}">{{trans('labels.all')}}</a></li>
+                <li><a href="javascript:void(0);" class="get-html" data-route="{{action('Lab\CartController@index')}}">{{trans('lab.all')}}</a></li>
                 <li class="divider"></li>
                 @foreach ($arrType as $t)
                 <li><a href="javascript:void(0);" class="get-html" data-route="{{action('Lab\CartController@index')}}?type={{$t}}">{{$t}}</a></li>
                 @endforeach
             </ul>
           </div>
-        <h4 class="widgettitle title-primary">{{trans('labels.list')}}</h4>
+        <h4 class="widgettitle title-primary">{{trans('lab.list')}}</h4>
     </div>
 
     @if(count($arrElements))
@@ -22,14 +22,14 @@
         <thead>
             <tr>                
                 <th>ID</th>
-                <th>{{trans('labels.status')}}</th>                
-                <th>{{trans('labels.label')}}</th>
-                <th>{{trans('labels.user')}}</th>
+                <th>{{trans('lab.status')}}</th>                
+                <th>{{trans('lab.label')}}</th>
+                <th>{{trans('lab.user')}}</th>
                 <th></th>
-                <th class="right">{{trans('labels.amount')}}</th>
+                <th class="right">{{trans('lab.amount')}}</th>
                 <th></th>
-                <th>{{trans('labels.payment')}}</th>
-                <th>{{trans('labels.created_at')}}</th>
+                <th>{{trans('lab.payment')}}</th>
+                <th>{{trans('lab.created_at')}}</th>
                 <th></th>
             </tr>
         </thead>
@@ -44,7 +44,7 @@
                 <td class="right"><b>{{ euro($el->total) }}</b></td>
                 <td class="right">
                     <a href="javascript:void(0);" class=" {{$paid = $el->paid ? 'colorGreen' : 'colorRed'}}">
-                        <i class="fa fa-circle tip" aria-hidden="true" data-placement="top" data-original-title="{{trans('labels.paid')}} ?"></i>
+                        <i class="fa fa-circle tip" aria-hidden="true" data-placement="top" data-original-title="{{trans('lab.paid')}} ?"></i>
                     </a>
                 </td>
                 <td>
@@ -68,7 +68,7 @@
 
     <div class="alert alert-block">
         <h4>Ops!</h4>
-        <p>{{trans('labels.no_element_found')}}</p>
+        <p>{{trans('lab.no_element_found')}}</p>
     </div>
 
     @endif

@@ -16,14 +16,14 @@
         
         {{-- creation --}}
         <p>
-            <label>{{trans('labels.title')}}</label>
+            <label>{{trans('lab.title')}}</label>
             <span class="field">
                 <input type="text" name="title" class="form-control" />
             </span>
         </p>
 
         <p>
-            <label>{{trans('labels.code')}}</label>
+            <label>{{trans('lab.code')}}</label>
             <span class="field">
                 <input type="text" name="code" class="form-control" max="10" value="{{$code}}" />
             </span>
@@ -33,14 +33,14 @@
 
         {{-- editing --}}
         <p>
-            <label>{{trans('labels.title')}}</label>
+            <label>{{trans('lab.title')}}</label>
             <span class="field">
                 <input type="text" name="title" class="form-control" value="{{@$el->title}}" />
             </span>
         </p>
 
         <p>
-            <label>{{trans('labels.code')}}</label>
+            <label>{{trans('lab.code')}}</label>
             <span class="field">
                 <input type="text" name="code" class="form-control" max="10" value="{{$el->code}}" disabled="disabled" readonly="readonly" />
             </span>
@@ -49,6 +49,6 @@
     @endif
                                     
     <p class="stdformbutton">
-        <button type="submit" class="btn btn-primary">{{trans('labels.save')}}</button>
+        <button type="submit" class="btn btn-primary">{{trans('lab.save')}}</button>
     </p>
 </form>

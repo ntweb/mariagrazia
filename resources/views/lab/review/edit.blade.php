@@ -4,8 +4,8 @@
 
     <div class="tabbedwidget tab-primary">
         <ul>
-            <li><a href="#tabs-it">{{trans('labels.review')}}</b></a></li>    
-            <li><a href="#tabs-settings"><i class="fa fa-wrench" aria-hidden="true"></i> {{trans('labels.settings')}}</a></li>
+            <li><a href="#tabs-it">{{trans('lab.review')}}</b></a></li>    
+            <li><a href="#tabs-settings"><i class="fa fa-wrench" aria-hidden="true"></i> {{trans('lab.settings')}}</a></li>
         </ul>
 
         <div id="tabs-it">            

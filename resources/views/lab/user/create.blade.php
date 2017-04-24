@@ -31,7 +31,7 @@
                 </div>
             </div>   
             <p>
-                <button type="submit" class="btn btn-primary">{{trans('labels.save')}}</button>
+                <button type="submit" class="btn btn-primary">{{trans('lab.save')}}</button>
             </p>
         </form>
 

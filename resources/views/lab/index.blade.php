@@ -91,15 +91,15 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" data-target="#">
                     <span class="count"></span>
                     <span class="head-icon head-users"></span>
-                    <span class="headmenu-label">{{trans('labels.users')}}</span>
+                    <span class="headmenu-label">{{trans('lab.users')}}</span>
                     </a>
                     <ul class="dropdown-menu newusers">
                         <li>
                             <a href="javascript:void(0);" class="get-html" data-route="{{action('Lab\UserController@index')}}">
-                                <i class="fa fa-fw fa-angle-right" aria-hidden="true"></i> {{trans('labels.list')}}
+                                <i class="fa fa-fw fa-angle-right" aria-hidden="true"></i> {{trans('lab.list')}}
                             </a>
                             <a href="javascript:void(0);" class="get-html" data-route="{{action('Lab\UserController@create')}}">
-                                <i class="fa fa-fw fa-angle-right" aria-hidden="true"></i> {{trans('labels.create-new')}}
+                                <i class="fa fa-fw fa-angle-right" aria-hidden="true"></i> {{trans('lab.create-new')}}
                             </a>
                         </li>
                     </ul>
@@ -134,8 +134,8 @@
                         <div class="userinfo">
                             <h5>{{Auth::user()->name}} {{Auth::user()->lastname}}<small> - {{Auth::user()->email}}</small></h5>
                             <ul>
-                                <li><a href="javascript:void(0);" class="get-html" data-route="{{action('Lab\UserController@edit', array(Auth::user()->id))}}">{{trans('labels.settings')}}</a></li>
-                                <li><a href="{{action('Lab\LoginController@logout')}}">{{trans('labels.logout')}}</a></li>
+                                <li><a href="javascript:void(0);" class="get-html" data-route="{{action('Lab\UserController@edit', array(Auth::user()->id))}}">{{trans('lab.settings')}}</a></li>
+                                <li><a href="{{action('Lab\LoginController@logout')}}">{{trans('lab.logout')}}</a></li>
                             </ul>
                         </div>
                     </div>

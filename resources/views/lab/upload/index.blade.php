@@ -7,8 +7,8 @@
                 <tr>
                     <th></th>
                     <th></th>
-                    <th style="width: 50%;">{{trans('labels.filename')}}</th>
-                    <th>{{trans('labels.size')}}</th>
+                    <th style="width: 50%;">{{trans('lab.filename')}}</th>
+                    <th>{{trans('lab.size')}}</th>
                     <th></th>
                 </tr>
             </thead>
@@ -38,7 +38,7 @@
                 @endforeach
                 @else
                 <tr>
-                    <td colspan="3"><p class="alert alert-warning">{{trans('labels.no_files_uploaded')}}</p></td>
+                    <td colspan="3"><p class="alert alert-warning">{{trans('lab.no_files_uploaded')}}</p></td>
                 </tr>
                 @endif
             </tbody>

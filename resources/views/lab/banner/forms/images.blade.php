@@ -2,7 +2,7 @@
 {!! csrf_field() !!}    {{-- token --}}
 
     <p>
-        <label>{{trans('labels.image')}}</label>
+        <label>{{trans('lab.image')}}</label>
         <div class="field">
             <input type="file" name="img" accept=".jpg,.png,.gif">
             @if ($el->img)
@@ -14,7 +14,7 @@
     </p>
 
     <p>
-        <label>{{trans('labels.background')}}</label>
+        <label>{{trans('lab.background')}}</label>
         <div class="field">
             <input type="file" name="background" accept=".jpg,.png,.gif">
             @if ($el->background)
@@ -26,6 +26,6 @@
     </p>
                                     
     <p class="stdformbutton">
-        <button type="submit" class="btn btn-primary">{{trans('labels.save')}}</button>
+        <button type="submit" class="btn btn-primary">{{trans('lab.save')}}</button>
     </p>
 </form>

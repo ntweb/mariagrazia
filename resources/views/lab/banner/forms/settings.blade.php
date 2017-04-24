@@ -2,7 +2,7 @@
 {!! csrf_field() !!}    {{-- token --}}
 
     <p>
-        <label>{{trans('labels.type')}}</label>
+        <label>{{trans('lab.type')}}</label>
         <span class="field">
             <select name="type" class="form-control">
                 @foreach ($arrType as $t)
@@ -13,16 +13,16 @@
     </p>
 
     <p>
-        <label>{{trans('labels.active')}}</label>
+        <label>{{trans('lab.active')}}</label>
         <span class="field">
             <select name="active" class="uniformselect">
-                <option value="0" @if(!$el->active) selected="selected" @endif>{{trans('labels.no')}}</option>
-                <option value="1" @if($el->active) selected="selected" @endif>{{trans('labels.yes')}}</option>
+                <option value="0" @if(!$el->active) selected="selected" @endif>{{trans('lab.no')}}</option>
+                <option value="1" @if($el->active) selected="selected" @endif>{{trans('lab.yes')}}</option>
             </select>        
         </span>
     </p>
                                     
     <p class="stdformbutton">
-        <button type="submit" class="btn btn-primary">{{trans('labels.save')}}</button>
+        <button type="submit" class="btn btn-primary">{{trans('lab.save')}}</button>
     </p>
 </form>

@@ -16,7 +16,7 @@
         
         {{-- creation --}}
         <p>
-            <label>{{trans('labels.title')}}</label>
+            <label>{{trans('lab.title')}}</label>
             <span class="field">
                 <input type="text" name="title" class="form-control" />
             </span>
@@ -26,49 +26,49 @@
 
         {{-- editing --}}
         <p>
-            <label>{{trans('labels.title')}}</label>
+            <label>{{trans('lab.title')}}</label>
             <span class="field">
                 <input type="text" name="title" class="form-control" value="{{@$el->translate($localeCode)->title}}" />
             </span>
         </p>
 
         <p>
-            <label>{{trans('labels.abstract')}}</label>
+            <label>{{trans('lab.abstract')}}</label>
             <span class="field">
                 <textarea name="abstract" class="form-control" rows="5" maxlength="250" >{{@$el->translate($localeCode)->abstract}}</textarea>
             </span>
         </p>        
 
         <p>
-            <label>{{trans('labels.description')}}</label>
+            <label>{{trans('lab.description')}}</label>
             <span class="field">
                 <textarea name="description" class="wysiwyg_editor">{{@$el->translate($localeCode)->description}}</textarea>
             </span>
         </p>
 
         <p>
-            <label>{{trans('labels.google-preview')}}</label>
+            <label>{{trans('lab.google-preview')}}</label>
             <div class="field">
                 <div id="snippet-{{$localeCode}}"></div>
             </div>
         </p>
 
         <p>
-            <label>{{trans('labels.mtitle')}}</label>
+            <label>{{trans('lab.mtitle')}}</label>
             <span class="field">
                 <input type="text" name="mtitle" class="form-control google-snippet" id="mtitle-{{$localeCode}}" data-v="{{$localeCode}}" value="{{@$el->translate($localeCode)->mtitle}}" />
             </span>
         </p>
 
         <p>
-            <label>{{trans('labels.mdescription')}}</label>
+            <label>{{trans('lab.mdescription')}}</label>
             <span class="field">
                 <textarea name="mdescription" maxlength="250" class="form-control google-snippet" id="mdescription-{{$localeCode}}" data-v="{{$localeCode}}" rows="5" >{{@$el->translate($localeCode)->mdescription}}</textarea>
             </span>
         </p>
 
         <p>
-            <label>{{trans('labels.murl')}}</label>
+            <label>{{trans('lab.murl')}}</label>
             <span class="field">
                 <input type="text" name="murl" class="form-control google-snippet" id="murl-{{$localeCode}}" data-v="{{$localeCode}}" value="{{@$el->translate($localeCode)->murl}}" />
             </span>
@@ -76,7 +76,7 @@
 
 
         <p>
-            <label>{{trans('labels.mkeys')}}</label>
+            <label>{{trans('lab.mkeys')}}</label>
             <span class="field">
                 <textarea name="mkeys" class="form-control google-snippet" rows="2" >{{@$el->translate($localeCode)->mkeys}}</textarea>
             </span>
@@ -85,6 +85,6 @@
     @endif
                                     
     <p class="stdformbutton">
-        <button type="submit" class="btn btn-primary">{{trans('labels.save')}}</button>
+        <button type="submit" class="btn btn-primary">{{trans('lab.save')}}</button>
     </p>
 </form>

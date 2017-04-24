@@ -16,7 +16,7 @@
         
         {{-- creation --}}
         <p>
-            <label>{{trans('labels.type')}}</label>
+            <label>{{trans('lab.type')}}</label>
             <span class="field">
                 <select name="type" class="formcontrol">
                     @foreach ($arrType as $t)
@@ -27,7 +27,7 @@
         </p>
 
         <p>
-            <label>{{trans('labels.title')}}</label>
+            <label>{{trans('lab.title')}}</label>
             <span class="field">
                 <input type="text" name="title" class="form-control" />
             </span>
@@ -37,7 +37,7 @@
 
         {{-- editing --}}
         <p>
-            <label>{{trans('labels.title')}}</label>
+            <label>{{trans('lab.title')}}</label>
             <span class="field">
                 <input type="text" name="title" class="form-control" value="{{@$el->translate($localeCode)->title}}" />
             </span>
@@ -46,6 +46,6 @@
     @endif
                                     
     <p class="stdformbutton">
-        <button type="submit" class="btn btn-primary">{{trans('labels.save')}}</button>
+        <button type="submit" class="btn btn-primary">{{trans('lab.save')}}</button>
     </p>
 </form>

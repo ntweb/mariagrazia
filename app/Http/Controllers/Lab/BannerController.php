@@ -112,18 +112,18 @@ class BannerController extends Controller
 
             $el->id_created_by = Auth::user()->id;
             if (!$el->save()){
-                return response()->json(array('error' => trans('labels.errore-sql')));
+                return response()->json(array('error' => trans('lab.errore-sql')));
             }            
 
             $result['id'] = $el->id;
             $result['route'] = action('Lab\BannerController@edit', array($el->id));
 
-            return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result['route'])));
+            return response()->json(array('success' => trans('lab.store_ok'), 'result' => json_encode($result['route'])));
         }
         
         return response()->json(
                                 array(
-                                    'error' => trans('labels.compilare_campi_obbligatori'),
+                                    'error' => trans('lab.compilare_campi_obbligatori'),
                                     'errorfields' => $validator->messages()
                                 )
                             );
@@ -181,16 +181,16 @@ class BannerController extends Controller
 
             $el->id_updated_by = Auth::user()->id;
             if (!$el->save()){
-                return response()->json(array('error' => trans('labels.errore-sql')));
+                return response()->json(array('error' => trans('lab.errore-sql')));
             }            
 
             $result['id'] = $el->id;
-            return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
+            return response()->json(array('success' => trans('lab.store_ok'), 'result' => json_encode($result)));
         }
         
         return response()->json(
                                 array(
-                                    'error' => trans('labels.compilare_campi_obbligatori'),
+                                    'error' => trans('lab.compilare_campi_obbligatori'),
                                     'errorfields' => $validator->messages()
                                 )
                             );        
@@ -211,7 +211,7 @@ class BannerController extends Controller
 
         $el->delete();
         $result['id'] = $id;
-        return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));                
+        return response()->json(array('success' => trans('lab.store_ok'), 'result' => json_encode($result)));                
     }
 
     public function settings(Request $request, $id)
@@ -228,16 +228,16 @@ class BannerController extends Controller
 
             $el->id_updated_by = Auth::user()->id;
             if (!$el->save()){
-                return response()->json(array('error' => trans('labels.errore-sql')));
+                return response()->json(array('error' => trans('lab.errore-sql')));
             }            
 
             $result['id'] = $el->id;
-            return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
+            return response()->json(array('success' => trans('lab.store_ok'), 'result' => json_encode($result)));
         }
         
         return response()->json(
                                 array(
-                                    'error' => trans('labels.compilare_campi_obbligatori'),
+                                    'error' => trans('lab.compilare_campi_obbligatori'),
                                     'errorfields' => $validator->messages()
                                 )
                             );        
@@ -255,7 +255,7 @@ class BannerController extends Controller
         $el->save();
 
         $result['id'] = $el->id;
-        return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));        
+        return response()->json(array('success' => trans('lab.store_ok'), 'result' => json_encode($result)));        
     }
 
     public function changeFlag($id, $field) {
@@ -268,6 +268,6 @@ class BannerController extends Controller
 
         $result['id'] = $el->id;
         $result['flag'] = $el->$field;
-        return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
+        return response()->json(array('success' => trans('lab.store_ok'), 'result' => json_encode($result)));
     }
 }

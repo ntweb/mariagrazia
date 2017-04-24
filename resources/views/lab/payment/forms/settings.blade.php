@@ -2,7 +2,7 @@
 {!! csrf_field() !!}    {{-- token --}}
 
     <p>
-        <label>{{trans('labels.type')}}</label>
+        <label>{{trans('lab.type')}}</label>
         <span class="field">
             <select name="type" class="form-control">
                 @foreach ($arrType as $t)
@@ -13,7 +13,7 @@
     </p>
 
     <p>
-        <label>{{trans('labels.amount')}}</label>
+        <label>{{trans('lab.amount')}}</label>
         <div class="field">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-euro" aria-hidden="true"></i></span>
@@ -23,7 +23,7 @@
     </p>    
 
     <p>
-        <label>{{trans('labels.amount_type')}}</label>
+        <label>{{trans('lab.amount_type')}}</label>
         <div class="field">
             <select name="amount_type" class="form-control">               
                 <option value="value" @if($el->amount_type == 'value') selected="selected" @endif >value</option>                
@@ -33,7 +33,7 @@
     </p>    
                                     
     <p>
-        <label>{{trans('labels.tax')}}</label>
+        <label>{{trans('lab.tax')}}</label>
         <div class="field">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-percent" aria-hidden="true"></i></span>
@@ -43,16 +43,16 @@
     </p>    
                                     
     <p>
-        <label>{{trans('labels.active')}}</label>
+        <label>{{trans('lab.active')}}</label>
         <span class="field">
             <select name="active" class="uniformselect">
-                <option value="0" @if(!$el->active) selected="selected" @endif>{{trans('labels.no')}}</option>
-                <option value="1" @if($el->active) selected="selected" @endif>{{trans('labels.yes')}}</option>
+                <option value="0" @if(!$el->active) selected="selected" @endif>{{trans('lab.no')}}</option>
+                <option value="1" @if($el->active) selected="selected" @endif>{{trans('lab.yes')}}</option>
             </select>        
         </span>
     </p>
                                     
     <p class="stdformbutton">
-        <button type="submit" class="btn btn-primary">{{trans('labels.save')}}</button>
+        <button type="submit" class="btn btn-primary">{{trans('lab.save')}}</button>
     </p>
 </form>

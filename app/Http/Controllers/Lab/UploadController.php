@@ -52,23 +52,23 @@ class UploadController extends Controller
         		
             	// carico il file quote nello storage ridenominandolo per evitare duplicati
             	if (!Storage::disk('docs')->put($storage.$filename, file_get_contents($request->file($key)->getRealPath())))
-                	return response()->json(array('error' => trans('labels.errore_can_not_save_storage')));
+                	return response()->json(array('error' => trans('lab.errore_can_not_save_storage')));
         	
 	            if (!DB::table($table)
             			->where('id', $id)
             			->update([$key => $filename, 'uploadfolder' => $folder])) {
 
-	                return response()->json(array('error' => trans('labels.errore-sql')));
+	                return response()->json(array('error' => trans('lab.errore-sql')));
 	            }
         	}
 
             $result['id'] = $id;
-            return response()->json(array('success' => trans('labels.update_ok'), 'result' => json_encode($result)));
+            return response()->json(array('success' => trans('lab.update_ok'), 'result' => json_encode($result)));
         }
 
         return response()->json(
                                 array(
-                                    // 'error' => trans('labels.compilare_campi_obbligatori'),
+                                    // 'error' => trans('lab.compilare_campi_obbligatori'),
                                     'errorfields' => $validator->messages()
                                 )
                             );     	
@@ -141,16 +141,16 @@ class UploadController extends Controller
 
             $el->id_updated_by = Auth::user()->id;
             if (!$el->save()){
-                return response()->json(array('error' => trans('labels.errore-sql')));
+                return response()->json(array('error' => trans('lab.errore-sql')));
             }            
 
             $result['id'] = $el->id;
-            return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
+            return response()->json(array('success' => trans('lab.store_ok'), 'result' => json_encode($result)));
         }
         
         return response()->json(
                                 array(
-                                    // 'error' => trans('labels.compilare_campi_obbligatori'),
+                                    // 'error' => trans('lab.compilare_campi_obbligatori'),
                                     'errorfields' => $validator->messages()
                                 )
                             );        
@@ -170,16 +170,16 @@ class UploadController extends Controller
 
             $el->id_updated_by = Auth::user()->id;
             if (!$el->save()){
-                return response()->json(array('error' => trans('labels.errore-sql')));
+                return response()->json(array('error' => trans('lab.errore-sql')));
             }            
 
             $result['id'] = $el->id;
-            return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
+            return response()->json(array('success' => trans('lab.store_ok'), 'result' => json_encode($result)));
         }
         
         return response()->json(
                                 array(
-                                    // 'error' => trans('labels.compilare_campi_obbligatori'),
+                                    // 'error' => trans('lab.compilare_campi_obbligatori'),
                                     'errorfields' => $validator->messages()
                                 )
                             );        
@@ -195,10 +195,10 @@ class UploadController extends Controller
 			Storage::disk('docs')->delete($storage.$filename);
 
             $result['id'] = $el->id;
-            return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
+            return response()->json(array('success' => trans('lab.store_ok'), 'result' => json_encode($result)));
     	}
 
-    	return response()->json(array('error' => trans('labels.errore-sql')));
+    	return response()->json(array('error' => trans('lab.errore-sql')));
     }
 
     public function changeFlag($id, $field) {
@@ -211,7 +211,7 @@ class UploadController extends Controller
 
         $result['id'] = $el->id;
         $result['flag'] = $el->$field;
-        return response()->json(array('success' => trans('labels.store_ok'), 'result' => json_encode($result)));
+        return response()->json(array('success' => trans('lab.store_ok'), 'result' => json_encode($result)));
     }    
 
 }

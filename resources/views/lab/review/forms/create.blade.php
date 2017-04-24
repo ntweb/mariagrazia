@@ -16,7 +16,7 @@
         
         {{-- creation --}}
         <p>
-            <label>{{trans('labels.title')}}</label>
+            <label>{{trans('lab.title')}}</label>
             <span class="field">
                 <input type="text" name="title" class="form-control" />
             </span>
@@ -26,42 +26,42 @@
 
         {{-- editing --}}
         <p>
-            <label>{{trans('labels.title')}}</label>
+            <label>{{trans('lab.title')}}</label>
             <span class="field">
                 <input type="text" name="title" class="form-control" value="{{@$el->title}}" />
             </span>
         </p>
 
         <p>
-            <label>{{trans('labels.name')}}</label>
+            <label>{{trans('lab.name')}}</label>
             <span class="field">
                 <input type="text" name="name" class="form-control" value="{{@$el->name}}" />
             </span>
         </p>
 
         <p>
-            <label>{{trans('labels.email')}}</label>
+            <label>{{trans('lab.email')}}</label>
             <span class="field">
                 <input type="text" name="email" class="form-control" value="{{@$el->email}}" />
             </span>
         </p>
 
         <p>
-            <label>{{trans('labels.site')}}</label>
+            <label>{{trans('lab.site')}}</label>
             <span class="field">
                 <input type="text" name="site" class="form-control" value="{{@$el->site}}" />
             </span>
         </p>
 
         <p>
-            <label>{{trans('labels.vote')}}</label>
+            <label>{{trans('lab.vote')}}</label>
             <span class="field">
                 <input type="text" name="vote" class="form-control" value="{{@$el->vote}}" />
             </span>
         </p>
 
         <p>
-            <label>{{trans('labels.description')}}</label>
+            <label>{{trans('lab.description')}}</label>
             <div class="field">
                 <div class="alert alert-info">                    
                     {!! @$el->description !!}
@@ -70,7 +70,7 @@
         </p>
 
         <p>
-            <label>{{trans('labels.answer')}}</label>
+            <label>{{trans('lab.answer')}}</label>
             <span class="field">
                 <textarea name="answer" class="wysiwyg_editor">{{@$el->answer}}</textarea>
             </span>
@@ -79,6 +79,6 @@
     @endif
                                     
     <p class="stdformbutton">
-        <button type="submit" class="btn btn-primary">{{trans('labels.save')}}</button>
+        <button type="submit" class="btn btn-primary">{{trans('lab.save')}}</button>
     </p>
 </form>
