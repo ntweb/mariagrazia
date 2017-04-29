@@ -57,7 +57,7 @@ class PageController extends Controller
                                 ->orWhere('page_id', '=', $request->get('key'));
                             });
         else
-            $query = \App\Page::orderBy('id');
+            $query = \App\Page::orderBy('order');
 
         // filter type
         if ($request->has('type'))

@@ -21,6 +21,9 @@
     <table class="table table-striped responsive">
         <thead>
             <tr>
+            @if(request('type') || count($arrType) == 1)
+                <th></th>
+            @endif
                 <th class="center"><i class="fa fa-power-off" aria-hidden="true"></i></th>
                 <th>ID</th>
                 <th>{{trans('lab.title')}}</th>
@@ -32,9 +35,12 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="sortable" data-route="{{action('Lab\OrderController@update', array($table))}}" data-token="{{ csrf_token() }}">
             @foreach ($arrElements as $el)
-            <tr>
+            <tr id="item-{{$el->id}}">
+            @if(request('type') || count($arrType) == 1)
+                <td class="handle"><i class="fa fa-sort" aria-hidden="true"></i></td>
+            @endif
                 <td class="center">
                     <a href="javascript:void(0);" class="change-flag {{$active = $el->active ? 'colorGreen' : 'colorRed'}}" data-route="{{action('Lab\PageController@changeFlag', array($el->id, 'active'))}}">                        
                         <i class="fa fa-circle tip" aria-hidden="true" data-placement="top" data-original-title="{{trans('lab.active')}} ?"></i>
