@@ -11,10 +11,10 @@
 			if (!$page)
 				return "#";
 
-			Session::put($id_or_module, array(App::getLocale() => action('Web\PageController@show', array($page->id, $page->murl))));
+			Session::put('page_id_'.$id_or_module, array(App::getLocale() => action('Web\PageController@show', array($page->murl, $page->id))));
 		}
 
-		return Session::get($id_or_module)[App::getLocale()];
+		return Session::get('page_id_'.$id_or_module)[App::getLocale()];
 	}
 
 	function news_url($el) {
