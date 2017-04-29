@@ -29,6 +29,11 @@ class PageController extends Controller
         $this->default_lang = config('laravellocalization.supportedLocales.it');
         view()->share('default_lang', $this->default_lang);
 
+        // Tipologie
+        $el = \App\Parameter::where('module', '=', 'type')->where('label', '=', 'pages')->first();
+        $this->arrType = explode(',', $el->value);
+        view()->share('arrType', $this->arrType);
+
         view()->share('mod_name', 'Pagine');
         view()->share('mod_action', 'Lista');
         view()->share('mod_object', 'Pagine');
@@ -46,14 +51,19 @@ class PageController extends Controller
         $data['route_search'] = action('Lab\PageController@index');
 
         if ($request->has('key'))
-            $data['arrElements'] = \App\Page::whereHas('translations', function ($query) use ($request) {
+            $query = \App\Page::whereHas('translations', function ($query) use ($request) {
                                 $query->where('locale', 'it')
                                 ->where('title', 'LIKE', '%'.$request->get('key').'%')
                                 ->orWhere('page_id', '=', $request->get('key'));
-                            })->paginate(50);
+                            });
         else
-            $data['arrElements'] = \App\Page::orderBy('id')->paginate(50);
-        
+            $query = \App\Page::orderBy('id');
+
+        // filter type
+        if ($request->has('type'))
+            $query->where('type', '=', $request->get('type'));        
+
+        $data['arrElements'] = $query->paginate(50);
         return view()->make('lab.page.index', $data);
     }
 

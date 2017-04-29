@@ -61,7 +61,6 @@ class NewsController extends Controller
         else
             $query = \App\News::orderBy('order')->orderBy('id', 'desc');
 
-
         // filter type
         if ($request->has('type'))
             $query->where('type', '=', $request->get('type'));

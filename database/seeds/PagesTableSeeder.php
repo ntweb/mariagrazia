@@ -30,6 +30,7 @@ class PagesTableSeeder extends Seeder
 
 			    $p->mtitle = $p->title;
 			    $p->murl = str_slug($p->title);
+			    $p->type = 'standard';
 			    $p->save();
 
 			    #echo $p->module." - ";

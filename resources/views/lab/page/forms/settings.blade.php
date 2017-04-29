@@ -2,6 +2,17 @@
 {!! csrf_field() !!}    {{-- token --}}
 
     <p>
+        <label>{{trans('lab.type')}}</label>
+        <span class="field">
+            <select name="type" class="form-control">
+                @foreach ($arrType as $t)
+                    <option value="{{$t}}" @if($el->type == $t) selected="selected" @endif >{{$t}}</option>
+                @endforeach
+            </select>
+        </span>
+    </p>
+    
+    <p>
         <label>{{trans('lab.module')}}</label>
         <span class="field">
             <input type="text" name="module" class="form-control" value="{{$el->module}}" />     

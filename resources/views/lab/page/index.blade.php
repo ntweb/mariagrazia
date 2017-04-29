@@ -2,7 +2,20 @@
 
 @section('content')
 
-    <h4 class="widgettitle">{{trans('lab.list')}}</h4>
+    <div class="headtitle">
+        <div class="btn-group">
+            <button data-toggle="dropdown" class="btn dropdown-toggle">{{request('type', trans('lab.all'))}} <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a href="javascript:void(0);" class="get-html" data-route="{{action('Lab\PageController@index')}}">{{trans('lab.all')}}</a></li>
+                <li class="divider"></li>
+                @foreach ($arrType as $t)
+                <li><a href="javascript:void(0);" class="get-html" data-route="{{action('Lab\PageController@index')}}?type={{$t}}">{{$t}}</a></li>
+                @endforeach
+            </ul>
+          </div>
+        <h4 class="widgettitle title-primary">{{trans('lab.list')}}</h4>
+    </div>
+
     @if(count($arrElements))
 
     <table class="table table-striped responsive">
@@ -12,6 +25,7 @@
                 <th>ID</th>
                 <th>{{trans('lab.title')}}</th>
                 <th>{{trans('lab.module')}}</th>
+                <th>{{trans('lab.type')}}</th>
                 <th>{{trans('lab.created_by')}}</th>
                 <th>{{trans('lab.created_at')}}</th>
                 <th>{{trans('lab.updated_at')}}</th>
@@ -29,6 +43,7 @@
                 <td>{{$el->id}}</td>
                 <td>{{$el->title}}</td>
                 <td>{{$el->module}}</td>
+                <td>{{$el->type}}</td>
                 <td>{{$el->created_by->name}}</td>
                 <td>{{date($default_lang['datetime'], strtotime($el->created_at))}}</td>
                 <td>{{date($default_lang['datetime'], strtotime($el->updated_at))}}</td>
