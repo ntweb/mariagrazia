@@ -91,7 +91,8 @@ function()
 	Route::post('/contact/send', 'Web\ContactController@send')->name('contact');
 
 	// Sitemap route
-	Route::get('/sitemap/{what}', 'Web\SitemapController@index');
+	Route::get('/sitemap', 'Web\SitemapController@sitemap'); // html sitemap
+	Route::get('/sitemap/{what}', 'Web\SitemapController@index'); // xml sitemap
 
 	// Test route
 	Route::get('/test', 'Web\TestController@index');		

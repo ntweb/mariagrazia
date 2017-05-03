@@ -24,11 +24,11 @@ class AppServiceProvider extends ServiceProvider
         View::share ('languages', \LaravelLocalization::getSupportedLocales());
 
         // // Category
-        $query =  \App\Category::active()->whereHas('translations', function ($query) {
-                                $query->where('locale', App::getLocale())
-                                ->orderBy('title');
-                            });
-        View::share ('arrCategories', $query->get());
+        // $query =  \App\Category::active()->whereHas('translations', function ($query) {
+        //                         $query->where('locale', App::getLocale())
+        //                         ->orderBy('title');
+        //                     });
+        // View::share ('arrCategories', $query->get());
 
         // forn pagination that have paramenters
         View::share ('pagination_param', array());
@@ -38,14 +38,14 @@ class AppServiceProvider extends ServiceProvider
         //     View::share ('_above_the_fold_css', file_get_contents(public_path('minify/style.min.css')));
 
         //**** SEO ****//
-        $data['page'] = page('homepage', '1');
-        SEO::setTitle($data['page']->mtitle);
-        SEO::setDescription($data['page']->mdescription);
-        SEO::opengraph()->setUrl(url()->current());        
-        SEO::opengraph()->addProperty('locale', \LaravelLocalization::getCurrentLocaleRegional());
-        SEO::opengraph()->addProperty('type', 'website');
-        if ($data['page']->img)
-            SEO::opengraph()->addImage(img($data['page'], 'img'));              
+        // $data['page'] = page('homepage', '1');
+        // SEO::setTitle($data['page']->mtitle);
+        // SEO::setDescription($data['page']->mdescription);
+        // SEO::opengraph()->setUrl(url()->current());        
+        // SEO::opengraph()->addProperty('locale', \LaravelLocalization::getCurrentLocaleRegional());
+        // SEO::opengraph()->addProperty('type', 'website');
+        // if ($data['page']->img)
+        //     SEO::opengraph()->addImage(img($data['page'], 'img'));              
     }
 
     /**

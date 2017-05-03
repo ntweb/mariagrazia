@@ -90,4 +90,5 @@ return [
     'errore-sql' => 'Errore SQL Database',
     'store_ok' => 'Salvato',
     'compilare_campi_obbligatori' => 'Compilare i campi obbligatori',
+    'sitemap_priority_frequency' => 'Sitemap priority/freq.',
 ];
