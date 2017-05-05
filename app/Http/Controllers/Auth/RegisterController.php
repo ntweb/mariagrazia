@@ -115,7 +115,7 @@ class RegisterController extends Controller
 
     public function verify(Request $request, $token) {        
         // NB: non deve mai esser stato verificato prima
-        $data['u'] = \App\user::where('verified', '=', '0') 
+        $data['u'] = \App\User::where('verified', '=', '0') 
                             ->where('verify_token', '=', $token)
                             ->where('email', '=', $request->get('email'))
                             ->first();
