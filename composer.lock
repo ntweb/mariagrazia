@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0335ccd0f5f6cc3eb87bff5fb2f52c1a",
-    "content-hash": "a0472c92f4930cd9b65ecc9ddc92f889",
+    "hash": "4112079a1b9dabaf1ee06c5dd67e4c20",
+    "content-hash": "9177462cad25616a73a6c7b9ad7bdbce",
     "packages": [
         {
             "name": "artesaos/seotools",
@@ -2889,6 +2889,61 @@
                 "dump"
             ],
             "time": "2017-02-20 13:45:48"
+        },
+        {
+            "name": "themsaid/laravel-langman",
+            "version": "v1.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/themsaid/laravel-langman.git",
+                "reference": "15ac1b03d546a5247fdb89911fbe430af477e2eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/themsaid/laravel-langman/zipball/15ac1b03d546a5247fdb89911fbe430af477e2eb",
+                "reference": "15ac1b03d546a5247fdb89911fbe430af477e2eb",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "~5.1",
+                "illuminate/filesystem": "~5.1",
+                "illuminate/support": "~5.1",
+                "php": "^5.5.9 || ^7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.4",
+                "orchestra/database": "~3.0",
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "^4.8 || ^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Themsaid\\Langman\\": "src"
+                },
+                "classmap": [
+                    "tests"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mohamed Said",
+                    "email": "theMohamedSaid@gmail.com",
+                    "homepage": "https://themsaid.github.io"
+                }
+            ],
+            "description": "Manage language files with ease.",
+            "homepage": "https://github.com/themsaid/laravel-langman",
+            "keywords": [
+                "laravel",
+                "localization",
+                "multilingual"
+            ],
+            "time": "2017-01-30 21:02:10"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
