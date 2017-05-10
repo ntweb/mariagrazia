@@ -26,7 +26,7 @@ class AddMultipleuserToCouponTable extends Migration
     public function down()
     {
         Schema::table('lab_coupons', function (Blueprint $table) {
-            $table->dropColumn('multipleuser');
+            $table->dropColumn('multipleusers');
         });
     }
 }

@@ -55,6 +55,7 @@ class ParametersTableSeeder extends Seeder
             ['module' => 'type', 'module2nd' => null, 'label' => 'payment', 'value' => 'standard,paypal', 'extras' => null],
             ['module' => 'type', 'module2nd' => null, 'label' => 'orderstatus', 'value' => 'received,prepared,sent,cancelled', 'extras' => null],
             ['module' => 'type', 'module2nd' => null, 'label' => 'pages', 'value' => 'standard', 'extras' => null],
+            ['module' => 'type', 'module2nd' => null, 'label' => 'offices', 'value' => 'standard', 'extras' => null],
         ]);
     }
 }

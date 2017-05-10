@@ -11,10 +11,10 @@ use Log;
 use Session;
 use Storage;
 
-class StaffController extends Controller
+class OfficeController extends Controller
 {
 
-    protected $uploadfolder = 'staff';
+    protected $uploadfolder = 'offices';
     protected $arrType;
     protected $default_lang;
 
@@ -23,20 +23,19 @@ class StaffController extends Controller
         parent::__construct();
         $this->middleware('auth');
 
-        view()->share('table', 'lab_staff');
+        view()->share('table', 'lab_offices');
         view()->share('uploadfolder', $this->uploadfolder);
-        
 
         \LaravelLocalization::setLocale('it');
         $this->default_lang = config('laravellocalization.supportedLocales.it');
         view()->share('default_lang', $this->default_lang);
 
-        view()->share('mod_name', 'Staff');
+        view()->share('mod_name', 'Sedi / Uffici');
         view()->share('mod_action', 'Lista');
-        view()->share('mod_object', 'Staff');
+        view()->share('mod_object', 'Office');
 
         // Tipologie
-        $el = \App\Parameter::where('module', '=', 'type')->where('label', '=', 'staff')->first();
+        $el = \App\Parameter::where('module', '=', 'type')->where('label', '=', 'offices')->first();
         $this->arrType = explode(',', $el->value);
         view()->share('arrType', $this->arrType);
     }
@@ -51,22 +50,23 @@ class StaffController extends Controller
             
         // for back button
         Session::put('backurl', $request->fullUrl());
-        $data['route_search'] = action('Lab\StaffController@index');
+        $data['route_search'] = action('Lab\OfficeController@index');
 
         if ($request->has('key'))
-            $query = \App\Staff::where('name', 'LIKE', '%'.$request->get('key').'%')
-                                ->orWhere('lastname', 'LIKE', '%'.$request->get('key').'%')
-                                ->orWhere('id', '=', $request->get('key'));
+            $query = \App\Office::whereHas('translations', function ($query) use ($request) {
+                                $query->where('locale', 'it')
+                                ->where('title', 'LIKE', '%'.$request->get('key').'%')
+                                ->orWhere('office_id', '=', $request->get('key'));
+                            });
         else
-            $query = \App\Staff::orderBy('order')->orderBy('id', 'desc');
-
+            $query = \App\Office::orderBy('order')->orderBy('id', 'desc');
 
         // filter type
         if ($request->has('type'))
             $query->where('type', '=', $request->get('type'));
 
         $data['arrElements'] = $query->paginate(50);
-        return view()->make('lab.staff.index', $data);
+        return view()->make('lab.office.index', $data);
     }
 
     /**
@@ -77,12 +77,12 @@ class StaffController extends Controller
     public function create()
     {
         $data['mod_action'] = 'Crea nuovo elemento';
-        $data['mod_object'] = 'Staff';
+        $data['mod_object'] = 'Sedi / Uffici';
 
-        $data['back'] = action('Lab\StaffController@index');
-        $data['route'] = action('Lab\StaffController@store');
+        $data['back'] = action('Lab\OfficeController@index');
+        $data['route'] = action('Lab\OfficeController@store');
 
-        return view()->make('lab.staff.create', $data);
+        return view()->make('lab.office.create', $data);
     }
 
     /**
@@ -94,25 +94,26 @@ class StaffController extends Controller
     public function store(Request $request)
     {
         // validator
-        $fieldsToValidate["name"] = "required";
-        $fieldsToValidate["lastname"] = "required";
+        $fieldsToValidate["title"] = "required";
 
         $fields = $request->except('_token');
         $validator = Validator::make($fields, $fieldsToValidate);
         if (!$validator->fails()) {
-            $el = new \App\Staff;
+            $el = new \App\Office;
             foreach ($fields as $key => $value) {
                 $el->$key = $value;
+
+                // mtitle and murl
+                if ($key == 'title') {
+                    $el->translateOrNew($request->get('lang'))->mtitle = $value;                
+                    $el->translateOrNew($request->get('lang'))->murl = str_slug($value);                
+                }
+              
             }
 
             // default 
             $el->uploadfolder = $this->uploadfolder;
             $el->type = $this->arrType[0];
-            $el->title = $el->name." ".$el->lastname;
-
-            // mtitle and murl
-            $el->translateOrNew($request->get('lang'))->mtitle = $el->title;
-            $el->translateOrNew($request->get('lang'))->murl = str_slug($el->title);
 
             $el->id_created_by = Auth::user()->id;
             if (!$el->save()){
@@ -120,7 +121,7 @@ class StaffController extends Controller
             }            
 
             $result['id'] = $el->id;
-            $result['route'] = action('Lab\StaffController@edit', array($el->id));
+            $result['route'] = action('Lab\OfficeController@edit', array($el->id));
 
             return response()->json(array('success' => trans('lab.store_ok'), 'result' => json_encode($result['route'])));
         }
@@ -154,17 +155,14 @@ class StaffController extends Controller
     {
 
         $data['mod_action'] = 'Modifica';
-        $data['mod_object'] = 'Staff : ID '.$id;
+        $data['mod_object'] = 'Office : ID '.$id;
 
-        $data['route'] = action('Lab\StaffController@update', array($id));
-        $data['route_settings'] = action('Lab\StaffController@settings', array($id));
-        $data['route_registry'] = action('Lab\StaffController@registry', array($id));
-        $data['back'] = Session::get('backurl', action('Lab\StaffController@index'));
-        $data['el'] = \App\Staff::find($id);
+        $data['route'] = action('Lab\OfficeController@update', array($id));
+        $data['route_settings'] = action('Lab\OfficeController@settings', array($id));
+        $data['back'] = Session::get('backurl', action('Lab\OfficeController@index'));
+        $data['el'] = \App\Office::find($id);
 
-        $data['arrOffices'] = \App\Office::get();
-
-        return view()->make('lab.staff.edit', $data);
+        return view()->make('lab.office.edit', $data);
     }
 
     /**
@@ -176,12 +174,12 @@ class StaffController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fieldsToValidate['title'] = 'required'; 
+        $fieldsToValidate["title"] = "required";
 
         $fields = $request->except('_token', 'lang');
         $validator = Validator::make($fields, $fieldsToValidate);
         if (!$validator->fails()) {
-            $el = \App\Staff::find($id);
+            $el = \App\Office::find($id);
             foreach ($fields as $key => $value) {
                 $el->translateOrNew($request->get('lang'))->$key = $value;
 
@@ -203,7 +201,7 @@ class StaffController extends Controller
                                     'error' => trans('lab.compilare_campi_obbligatori'),
                                     'errorfields' => $validator->messages()
                                 )
-                            );        
+                            );
     
     }
 
@@ -215,48 +213,13 @@ class StaffController extends Controller
      */
     public function destroy($id)
     {
-        $el = \App\Staff::find($id);
+        $el = \App\Office::find($id);
 
         Storage::disk('docs')->deleteDirectory($el->uploadfolder.'/'.$el->id);
 
         $el->delete();
         $result['id'] = $id;
         return response()->json(array('success' => trans('lab.store_ok'), 'result' => json_encode($result)));                
-    }
-
-    public function registry(Request $request, $id)
-    {
-        $fieldsToValidate['name'] = 'required';
-        $fieldsToValidate['lastname'] = 'required';
-        $fieldsToValidate['email'] = 'sometimes|nullable|email';
-        $fieldsToValidate['fb'] = 'sometimes|nullable|url';
-        $fieldsToValidate['tw'] = 'sometimes|nullable|url';
-        $fieldsToValidate['gp'] = 'sometimes|nullable|url';
-        $fieldsToValidate['ln'] = 'sometimes|nullable|url';
-
-        $fields = $request->except('_token');
-        $validator = Validator::make($fields, $fieldsToValidate);
-        if (!$validator->fails()) {
-            $el = \App\Staff::find($id);
-            foreach ($fields as $key => $value) {
-                $el->$key = $value;
-            }
-
-            $el->id_updated_by = Auth::user()->id;
-            if (!$el->save()){
-                return response()->json(array('error' => trans('lab.errore-sql')));
-            }            
-
-            $result['id'] = $el->id;
-            return response()->json(array('success' => trans('lab.store_ok'), 'result' => json_encode($result)));
-        }
-        
-        return response()->json(
-                                array(
-                                    'error' => trans('lab.compilare_campi_obbligatori'),
-                                    'errorfields' => $validator->messages()
-                                )
-                            );        
     }
 
     public function settings(Request $request, $id)
@@ -266,9 +229,11 @@ class StaffController extends Controller
         $fields = $request->except('_token');
         $validator = Validator::make($fields, $fieldsToValidate);
         if (!$validator->fails()) {
-            $el = \App\Staff::find($id);
+            $el = \App\Office::find($id);
             foreach ($fields as $key => $value) {
                 $el->$key = $value;
+
+                if ($key == 'begin' && $value) $el->$key = \Carbon\Carbon::createFromFormat($this->default_lang['date'], $value)->toDateString();
             }
 
             $el->id_updated_by = Auth::user()->id;
@@ -289,7 +254,7 @@ class StaffController extends Controller
     }
 
     public function deleteImg($id,$img) {
-        $el = \App\Staff::find($id);
+        $el = \App\Office::find($id);
 
         $storage = $el->uploadfolder.'/'.$el->id.'/';
         $filename = $el->$img;
@@ -304,7 +269,7 @@ class StaffController extends Controller
     }
 
     public function changeFlag($id, $field) {
-        $el = \App\Staff::find($id);
+        $el = \App\Office::find($id);
 
         if ($el->$field) $el->$field = '0';
         else $el->$field = '1';
@@ -315,4 +280,5 @@ class StaffController extends Controller
         $result['flag'] = $el->$field;
         return response()->json(array('success' => trans('lab.store_ok'), 'result' => json_encode($result)));
     }
+
 }

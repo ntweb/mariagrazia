@@ -2,32 +2,32 @@
 
 return [
 
-	'page_show' => 'pagina/{id}/{title?}',
+    'page_show' => 'pagina/{title}/{id}',
 
-    'news' => 'notizie',
-    'news_show' => 'notizie/{id}/{title?}',
+    'news' => 'news',
+    'news_show' => 'news/{title}/{id}',
 
-    'blog' => 'diario',
-    'blog_show' => 'diario/{id}/{title?}',
+    'blog' => 'blog',
+    'blog_show' => 'blog/{title}/{id}',
 
-    'service' => 'servizi',
-    'service_show' => 'servizi/{id}/{title?}',
+    'service' => 'servizio',
+    'service_show' => 'servizio/{title}/{id}',
 
-	'staff_show' => 'staff/{id}/{title?}',    
+    'staff_show' => 'staff/{title}/{id}',
 
-    'photogallery' => 'galleria',
-    'photogallery_show' => 'galleria/{id}/{title?}',
+    'photogallery' => 'photogallery',
+    'photogallery_show' => 'photogallery/{title}/{id}',
 
-    'videogallery' => 'video',
-    'videogallery_show' => 'video/{id}/{title?}',
+    'videogallery' => 'videogallery',
+    'videogallery_show' => 'videogallery/{title}/{id}',
 
     'portfolio' => 'portfolio',
-    'portfolio_show' => 'portfolio/{id}/{title?}',
+    'portfolio_show' => 'portfolio/{title}/{id}',
 
     'category' => 's/{category}/{id}',
     'subcategory' => 's/{category}/{subcategory}/{id}',
     
     'product_show' => 's/{category}/{subcategory}/{product}/{id}',
 
-    'contact' => 'contatti',
+    'contact' => 'contact',
 ];

@@ -26,24 +26,24 @@ class PageController extends Controller
         //** view()->share('var', 'value');
         
         view()->share('review_type', 'pages');
-    }	
+    }   
 
-    public function show ($id) {
+    public function show ($foo, $id) {
 
-    	$data['page'] = page($id, '1');
-    	if (!$data['page']) abort(404);
+        $data['page'] = page($id, '1');
+        if (!$data['page']) abort(404);
 
-		//** for resource localization url **//
-		$data['route_loalization_resource'] = 'routes.page_show';
-		foreach (\LaravelLocalization::getSupportedLocales() as $localeCode => $l) {
-			$data['route_loalization_resource_param'][$localeCode] = array('id' => $id, 'title' => $data['page']->translateOrDefault($localeCode)->murl);
-		}
-		//** for resource localization url **//
+        //** for resource localization url **//
+        $data['route_loalization_resource'] = 'routes.page_show';
+        foreach (\LaravelLocalization::getSupportedLocales() as $localeCode => $l) {
+            $data['route_loalization_resource_param'][$localeCode] = array('title' => $data['page']->translateOrDefault($localeCode)->murl, 'id' => $id);
+        }
+        //** for resource localization url **//
 
-    	$data['page_images'] = $data['page']->attachments_images()->get();
-    	$data['page_docs'] = $data['page']->attachments_docs()->get();
+        $data['page_images'] = $data['page']->attachments_images()->get();
+        $data['page_docs'] = $data['page']->attachments_docs()->get();
 
-    	$data['page_reviews'] = $data['page']->reviews()->get();
+        $data['page_reviews'] = $data['page']->reviews()->get();
 
         //**** SEO ****//
         SEO::setTitle($data['page']->mtitle);
@@ -53,6 +53,6 @@ class PageController extends Controller
         if ($data['page']->img)
             SEO::opengraph()->addImage(img($data['page'], 'img'));  
         
-		return view()->make('web.page.show', $data);
+        return view()->make('web.page.show', $data);
     }    
 }

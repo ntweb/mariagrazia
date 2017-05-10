@@ -26,14 +26,14 @@ class ServiceController extends Controller
         //** view()->share('var', 'value');
         
         view()->share('review_type', 'service');
-    }	
+    }   
 
     public function index (Request $request) {
-    	$data['page'] = page('service', '1');
-    	if (!$data['page']) abort(404);
+        $data['page'] = page('service', '1');
+        if (!$data['page']) abort(404);
 
-    	//** for paging
-    	$data['arrElements'] = \App\Service::active()->type('standard')->paginate(2);
+        //** for paging
+        $data['arrElements'] = \App\Service::active()->type('standard')->paginate(2);
 
         //**** SEO ****//
         SEO::setTitle($data['page']->mtitle);
@@ -43,23 +43,23 @@ class ServiceController extends Controller
         if ($data['page']->img)
             SEO::opengraph()->addImage(img($data['page'], 'img')); 
 
-    	return view()->make('web.service.index', $data);
+        return view()->make('web.service.index', $data);
     }
 
-    public function show ($id) {
+    public function show ($title, $id) {
 
-    	$data['page'] = \App\Service::where('id', '=', $id)->active()->type('standard')->first();
-    	if (!$data['page']) abort(404);
+        $data['page'] = \App\Service::where('id', '=', $id)->active()->first();
+        if (!$data['page']) abort(404);
 
-		//** for resource localization url **//
-		$data['route_loalization_resource'] = 'routes.service_show';
-		foreach (\LaravelLocalization::getSupportedLocales() as $localeCode => $l) {
-			$data['route_loalization_resource_param'][$localeCode] = array('id' => $id, 'title' => $data['page']->translateOrDefault($localeCode)->murl);
-		}
-		//** for resource localization url **//
+        //** for resource localization url **//
+        $data['route_loalization_resource'] = 'routes.service_show';
+        foreach (\LaravelLocalization::getSupportedLocales() as $localeCode => $l) {
+            $data['route_loalization_resource_param'][$localeCode] = array('id' => $id, 'title' => $data['page']->translateOrDefault($localeCode)->murl);
+        }
+        //** for resource localization url **//
 
-    	$data['page_images'] = $data['page']->attachments_images()->get();
-    	$data['page_docs'] = $data['page']->attachments_docs()->get();
+        $data['page_images'] = $data['page']->attachments_images()->get();
+        $data['page_docs'] = $data['page']->attachments_docs()->get();
 
         //**** SEO ****//
         SEO::setTitle($data['page']->mtitle);
@@ -69,6 +69,6 @@ class ServiceController extends Controller
         if ($data['page']->img)
             SEO::opengraph()->addImage(img($data['page'], 'img')); 
 
-		return view()->make('web.service.show', $data);
+        return view()->make('web.service.show', $data);
     }    
 }

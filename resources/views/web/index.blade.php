@@ -51,6 +51,9 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <?php $rname = Route::currentRouteName(); ?>
+            <?php $type = isset($page->type) ? $page->type : null; ?>
+            <?php $module = isset($page->module) ? $page->module : null; ?>
+
             <li @if($rname == 'home') class="active" @endif><a href="{{action('Web\HomepageController@index')}}">Home</a></li>
             <li @if($rname == 'news') class="active" @endif><a href="{{action('Web\NewsController@index')}}">News</a></li>
             <li @if($rname == 'blog') class="active" @endif><a href="{{action('Web\BlogController@index')}}">Blog</a></li>
@@ -133,7 +136,7 @@
 
 		{{-- my library --}}
     @if($rname == 'contact' || $rname == 'register' || $rname == 'account' || $rname == 'cart')
-    <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_PLACE_API_KEY')}}&libraries=places" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_PLACE_API_KEY')}}&libraries=places" {{--defer--}}></script>
     @endif
     
 		<script src="{{url('js/geocomplete/jquery.geocomplete.min.js')}}"></script>

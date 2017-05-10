@@ -13,6 +13,25 @@
     </p>
 
     <p>
+        <label>{{trans('lab.code')}}</label>
+        <span class="field">
+            <input type="text" name="code" class="form-control" value="{{$el->code}}" />
+        </span>
+    </p>    
+
+    <p>
+        <label>{{trans('lab.office')}}</label>
+        <span class="field">
+            <select name="office_id" class="form-control">
+                <option value="0" >nd</option>
+                @foreach ($arrOffices as $o)
+                    <option value="{{$o->id}}" @if($o->id == $el->office_id) selected="selected" @endif >{{$o->title}}</option>
+                @endforeach
+            </select>
+        </span>
+    </p>
+
+    <p>
         <label>{{trans('lab.homepage')}}</label>
         <span class="field">
             <select name="homepage" class="uniformselect">

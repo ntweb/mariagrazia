@@ -259,4 +259,11 @@ Route::group(['middleware' => ['labenter']], function () use ($cms_folder) {
 	// Parameters
 	Route::get($cms_folder.'parameter/{module2nd}', 'Lab\ParameterController@edit');
 	Route::put($cms_folder.'parameter', 'Lab\ParameterController@update');
+
+	// Office
+	Route::resource($cms_folder.'office', 'Lab\OfficeController');
+	Route::get($cms_folder.'office/delete/img/{id}/{img}', 'Lab\OfficeController@deleteImg');
+	Route::get($cms_folder.'office/change/flag/{id}/{field}', 'Lab\OfficeController@changeFlag');
+	Route::put($cms_folder.'office/settings/{id}', 'Lab\OfficeController@settings');
+
 });

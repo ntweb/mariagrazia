@@ -2,27 +2,27 @@
 
 return [
 
-	'page_show' => 'page/{id}/{title?}',
+    'page_show' => 'page/{title}/{id}',
 
     'news' => 'news',
-    'news_show' => 'news/{id}/{title?}',
+    'news_show' => 'news/{title}/{id}',
 
     'blog' => 'blog',
-    'blog_show' => 'blog/{id}/{title?}',
+    'blog_show' => 'blog/{title}/{id}',
 
     'service' => 'service',
-    'service_show' => 'service/{id}/{title?}',
+    'service_show' => 'service/{title}/{id}',
 
-	'staff_show' => 'staff/{id}/{title?}',    
+    'staff_show' => 'staff/{title}/{id}',
 
     'photogallery' => 'photogallery',
-    'photogallery_show' => 'photogallery/{id}/{title?}',
+    'photogallery_show' => 'photogallery/{title}/{id}',
 
     'videogallery' => 'videogallery',
-    'videogallery_show' => 'videogallery/{id}/{title?}',
+    'videogallery_show' => 'videogallery/{title}/{id}',
 
     'portfolio' => 'portfolio',
-    'portfolio_show' => 'portfolio/{id}/{title?}',
+    'portfolio_show' => 'portfolio/{title}/{id}',
 
     'category' => 's/{category}/{id}',
     'subcategory' => 's/{category}/{subcategory}/{id}',
