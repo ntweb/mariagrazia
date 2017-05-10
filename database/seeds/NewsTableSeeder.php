@@ -12,31 +12,33 @@ class NewsTableSeeder extends Seeder
      */
     public function run()
     {
-    	App::setLocale('it');
-
+    	
     	$arrTip = param('news', 'value', ',');
-
     	$faker = Faker\Factory::create();
     	foreach ($arrTip as $k => $v) {
 
     		// creo 50 notizie per tipologia    		
-    		for ($i=0; $i < 50 ; $i++) { 
+    		for ($i=0; $i < 10 ; $i++) { 
     			
 	    		$n = new \App\News;
-	    		$n->type = $v;
-	    		$n->title = $faker->text($faker->numberBetween(40, 100));
-	    		$n->abstract = $faker->text(200);
-	    		$n->description = $faker->paragraph(20);
-	    		$n->mtitle = $n->title;
-	    		$n->murl = str_slug($n->title);
-	    		$n->mdescription = $faker->text(20);
-	    		$n->homepage = $faker->randomElement($array = array ('0','1'));
-	    		$n->active = '1';
 
-	    		$n->begin = $faker->dateTime();
-	    		$n->uploadfolder= 'news';
-	    		$n->id_created_by = 1;
-	    		$n->save();
+	    		foreach (\LaravelLocalization::getSupportedLocales() as $lang => $l) {
+	    			App::setLocale($lang);
+	    			$n->type = $v;
+	    			$n->title = $faker->text($faker->numberBetween(40, 100));
+	    			$n->abstract = $faker->text(200);
+	    			$n->description = $faker->paragraph(20);
+	    			$n->mtitle = $n->title;
+	    			$n->murl = str_slug($n->title);
+	    			$n->mdescription = $faker->text(20);
+	    			$n->save();
+	    		}
+
+    			$n->uploadfolder= 'news';
+    			$n->id_created_by = 1;
+    			$n->begin = $faker->dateTime();
+    			$n->homepage = $faker->randomElement($array = array ('0','1'));
+    			$n->active = '1';
 
 	    		@File::makeDirectory(public_path('media'));
 	    		@File::makeDirectory(public_path('media/news'));
