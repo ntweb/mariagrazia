@@ -109,8 +109,11 @@ function()
 	Route::get('/sended/verification', '\App\Http\Controllers\Auth\RegisterController@sendverification');
 	Route::get('/verify/{token}', '\App\Http\Controllers\Auth\RegisterController@verify');
 	Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');	
+	Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 	Route::post('/register', 'Auth\RegisterController@register');
-	Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');	
+	Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+	Route::post('/password/reset', 'Auth\ResetPasswordController@reset');
+	Route::post('/login', 'Auth\LoginController@login');
 
 });
 
