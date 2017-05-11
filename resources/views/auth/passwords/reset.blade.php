@@ -5,9 +5,10 @@
     <h2>Reset Password</h2>
 
     <div class="panel-body">
-        @if (session('status'))
+
+        @if (Session::has('status'))
             <div class="alert alert-success">
-                {{ session('status') }}
+                {{ trans('labels.reset_complete') }}
             </div>
         @endif
 

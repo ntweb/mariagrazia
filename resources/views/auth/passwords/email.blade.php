@@ -7,12 +7,20 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Reset Password</div>
                 <div class="panel-body">
-                    @if (session('status'))
+
+
+                    @if (Session::has('status'))
                         <div class="alert alert-success">
-                            {{ session('status') }}
+                            {{ trans('labels.link_send') }}
                         </div>
                     @endif
 
+                    @if (Session::has('error'))
+                        <div class="alert alert-danger">
+                            {{ trans('labels.some_error') }}
+                        </div>
+                    @endif
+                    
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('password.email') }}">
                         {{ csrf_field() }}
 

@@ -102,15 +102,19 @@ function()
 	Route::post('/account/profile', 'Web\AccountController@update')->name('account')->middleware('auth');
 	Route::post('/account/profile/credential', 'Web\AccountController@credential')->name('account')->middleware('auth');	
 
+	// Laravel Registration
+	Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+	Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+	Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+	Route::get('/sended/verification', '\App\Http\Controllers\Auth\RegisterController@sendverification');
+	Route::get('/verify/{token}', '\App\Http\Controllers\Auth\RegisterController@verify');
+	Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');	
+	Route::post('/register', 'Auth\RegisterController@register');
+	Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');	
+
 });
 
 Route::post('/review', 'Web\ReviewController@store');
-
-// Alternative Account route
-Route::get('/sended/verification', '\App\Http\Controllers\Auth\RegisterController@sendverification');
-Route::get('/verify/{token}', '\App\Http\Controllers\Auth\RegisterController@verify');
-Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
-
 
 
 // ******************************************************************************* //
