@@ -7,7 +7,7 @@
         <div class="widgetcontent nopadding">
 
 			@include('lab.banner.forms.create')
-			
+
         </div>
     </div>
 
