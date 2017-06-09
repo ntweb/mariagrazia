@@ -47,7 +47,7 @@ class ProductController extends Controller
                                                     $query->where('title', 'LIKE', '%'.$v.'%');
                                             }
                                         });
-                                    });
+                                    })->select('lab_products.*');
         }
 
         // filter type
