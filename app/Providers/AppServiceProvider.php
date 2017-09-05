@@ -24,11 +24,11 @@ class AppServiceProvider extends ServiceProvider
         View::share ('languages', \LaravelLocalization::getSupportedLocales());
 
         // // Category
-        // $query =  \App\Category::active()->whereHas('translations', function ($query) {
-        //                         $query->where('locale', App::getLocale())
-        //                         ->orderBy('title');
-        //                     });
-        // View::share ('arrCategories', $query->get());
+        $query =  \App\Category::active()->whereHas('translations', function ($query) {
+                                $query->where('locale', App::getLocale())
+                                ->orderBy('title');
+                            });
+        View::share ('arrCategories', $query->get());
 
         // forn pagination that have paramenters
         View::share ('pagination_param', array());

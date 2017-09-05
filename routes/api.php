@@ -16,3 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+// Page
+Route::resource('page', 'Api\PageController');
+
+// Flag
+Route::get('flag/change/{table}/{id}/{field}/{currentstatus}', 'Api\FlagController@change');

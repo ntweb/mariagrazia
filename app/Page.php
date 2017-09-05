@@ -40,5 +40,5 @@ class Page extends Model
 
     public function reviews() {        
         return $this->hasMany('\App\Review', 'id_el')->where('type', '=', $this->uploadfolder)->active();
-    }    
+    } 
 }
